@@ -26,5 +26,9 @@ public class InputManager : MonoBehaviour {
         return Input.GetButtonDown("ButtonA");
     }
 
+    public static bool PressedButtonA() {
+        return Input.GetButton("ButtonA");
+    }
+
 
 }

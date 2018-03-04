@@ -41,7 +41,7 @@ public class PlayerJump : MonoBehaviour {
         if(rb.velocity.y < 0) {
             rb.gravityScale = highGravity;
         }
-        else if(rb.velocity.y > 0 && !Input.GetButton("ButtonA")) {
+        else if(rb.velocity.y > 0 && !InputManager.PressedButtonA()) {
             rb.gravityScale = lowGravity;
         }
         else {
