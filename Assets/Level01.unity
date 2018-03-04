@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 1573645843}
   - component: {fileID: 1573645844}
   - component: {fileID: 1573645838}
+  - component: {fileID: 1573645845}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -245,9 +246,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grounded: 0
-  jumpForce: 500
-  lowGravity: 2
-  highGravity: 3
+  jumpForce: 2000
+  lowGravity: 3
+  highGravity: 6
 --- !u!50 &1573645839
 Rigidbody2D:
   serializedVersion: 4
@@ -259,9 +260,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_Mass: 3.1415927
+  m_LinearDrag: 2
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -367,6 +368,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   grounded: 0
+--- !u!114 &1573645845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1573645837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af01c0beae5de264c927cdab394c9b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sideSpeed: 500
 --- !u!1 &1600515919
 GameObject:
   m_ObjectHideFlags: 0
