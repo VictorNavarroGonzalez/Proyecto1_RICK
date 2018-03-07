@@ -26,7 +26,7 @@ public class PlayerJump : MonoBehaviour {
         //Player jumps when ButtonA is pressed
         if (InputManager.ButtonA()) {
             if (grounded) {
-                rb.velocity = new Vector2(rb.velocity.x, 0);
+                //rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = true;
             }
