@@ -6,13 +6,21 @@ public class PlayerJump : MonoBehaviour {
 
     private Rigidbody2D rb;
 
-    public bool grounded = false;
+    private bool grounded = false;
     private bool canDoubleJump = false;
 
-    public float jumpForce = 5f;
+    private float _jumpForce = 500f;
+    public float JumpForce {
+        get {
+            return _jumpForce;
+        }
+        set {
+            _jumpForce = value;
+        }
+    }
 
-    public float lowGravity = 1.5f;
-    public float highGravity = 2.5f;
+    private float lowGravity = 1.5f;
+    private float highGravity = 2.5f;
 
 
     void Start () {
@@ -21,18 +29,18 @@ public class PlayerJump : MonoBehaviour {
 	
 	void FixedUpdate () {
         //Check if the player is grounded
-        grounded = GetComponent<PlayerRaycast>().grounded;
+        grounded = GetComponent<PlayerGround>().Grounded;
 
         //Player jumps when ButtonA is pressed
         if (InputManager.ButtonA()) {
             if (grounded) {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * jumpForce * Time.deltaTime, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = true;
             }
             else if (canDoubleJump) {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * jumpForce * Time.deltaTime, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = false;
             }
         }
