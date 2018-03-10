@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour {
         //Player Horizontal Movement
         if (InputManager.MainHorizontal() == 0) {
             //Ease Out Movement
-            rb.velocity = Vector2.Lerp(rb.velocity, new Vector2(0, rb.velocity.y), Time.deltaTime);
+            rb.velocity = Vector2.Lerp(rb.velocity, new Vector2(0, rb.velocity.y), 0.1f);
         }
         else if (InputManager.MainHorizontal() != 0) {
             rb.velocity = new Vector2(InputManager.MainHorizontal() * _sideForce * Time.deltaTime, rb.velocity.y);

@@ -34,7 +34,6 @@ public class PlayerJump : MonoBehaviour {
         //Player jumps when ButtonA is pressed
         if (InputManager.ButtonA()) {
             if (grounded) {
-
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = true;
@@ -50,11 +49,13 @@ public class PlayerJump : MonoBehaviour {
         if(rb.velocity.y < 0) {
             rb.gravityScale = highGravity;
         }
-        else if(rb.velocity.y > 0 && !InputManager.PressedButtonA()) {
-            rb.gravityScale = lowGravity;
+        else if(rb.velocity.y > 0 && InputManager.PressedButtonA()) {
+            if(canDoubleJump) {
+                rb.gravityScale = 1f;
+            }
         }
         else {
-            rb.gravityScale = 1f;
+            rb.gravityScale = lowGravity;
         }
 	}
 }

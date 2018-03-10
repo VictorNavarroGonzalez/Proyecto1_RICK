@@ -62,7 +62,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27edb0805176c14ea3de4ad3f1815fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  square: {fileID: 0}
-  circle: {fileID: 0}
+  square: {fileID: 21300000, guid: 02a1e2315aab432478131af5d757d774, type: 3}
+  circle: {fileID: 21300000, guid: 21936f94e77aa514292a1452f8c6efc8, type: 3}
 --- !u!114 &114847105135815112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -160,7 +160,7 @@ MonoBehaviour:
   skinDepth: 0.05
   mask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!114 &114875787555832094
 MonoBehaviour:
   m_ObjectHideFlags: 1

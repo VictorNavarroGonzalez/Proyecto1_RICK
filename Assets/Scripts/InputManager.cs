@@ -30,5 +30,7 @@ public class InputManager : MonoBehaviour {
         return Input.GetButton("ButtonA");
     }
 
-
+    public static bool ButtonY() {
+        return Input.GetButtonDown("ButtonY");
+    }
 }
