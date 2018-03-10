@@ -34,12 +34,12 @@ public class PlayerChange : MonoBehaviour {
 
     void ActualizePlayer() {
         if (currentSprite.sprite == square) {
-            playerMovement.SideForce = 400f;
-            playerJump.JumpForce = 1000f;
+            playerMovement.SideForce = 150f;
+            playerJump.JumpForce = 200f;
         }
         else if (currentSprite.sprite == circle) {
-            playerMovement.SideForce = 650f;
-            playerJump.JumpForce = 2000f;
+            playerMovement.SideForce = 300f;
+            playerJump.JumpForce = 400f;
         }
     }
 

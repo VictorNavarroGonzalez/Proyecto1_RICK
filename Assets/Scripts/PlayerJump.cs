@@ -19,8 +19,8 @@ public class PlayerJump : MonoBehaviour {
         }
     }
 
-    private float lowGravity = 3f;
-    private float highGravity = 6f;
+    private float lowGravity = 2f;
+    private float highGravity = 4f;
 
 
     void Start () {
@@ -34,13 +34,9 @@ public class PlayerJump : MonoBehaviour {
         //Player jumps when ButtonA is pressed
         if (InputManager.ButtonA()) {
             if (grounded) {
-<<<<<<< HEAD
-                //rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * jumpForce * Time.deltaTime, ForceMode2D.Impulse);
-=======
+
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
->>>>>>> master
                 canDoubleJump = true;
             }
             else if (canDoubleJump) {

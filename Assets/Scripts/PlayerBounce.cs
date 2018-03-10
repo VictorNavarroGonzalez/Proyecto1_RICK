@@ -38,7 +38,7 @@ public class PlayerBounce : MonoBehaviour {
             //rb.velocity = new Vector2(0, rb.velocity.y);
             //rb.AddForce(Vector2.up * rb.velocity.y * Time.deltaTime, ForceMode2D.Impulse);
         }
-        if (GetComponent<PlayerJump>().grounded && bounce)
+        if (GetComponent<PlayerGround>().Grounded && bounce)
         {
             Debug.Log(vBounce);
             //rb.velocity = new Vector2(rb.velocity.x, InputManager.MainVertical() * vBounce * Time.deltaTime);
