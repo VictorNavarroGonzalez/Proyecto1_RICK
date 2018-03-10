@@ -19,8 +19,8 @@ public class PlayerJump : MonoBehaviour {
         }
     }
 
-    private float lowGravity = 1.5f;
-    private float highGravity = 2.5f;
+    private float lowGravity = 3f;
+    private float highGravity = 6f;
 
 
     void Start () {
