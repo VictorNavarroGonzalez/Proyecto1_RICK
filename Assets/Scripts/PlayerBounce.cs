@@ -2,51 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBounce : MonoBehaviour {
+public class PlayerBounce : MonoBehaviour
+{
 
     public bool bounce;
 
-    Vector2 playerSize;
+    Vector2 playerHeight;
     Vector2 playerPos;
 
     private Rigidbody2D rb;
-    public float vBounce;
+    private PlayerJump pj;
+    public bool boostBounce;
     private bool rebote;
-    private int e;
+    private float e;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         rb = GetComponent<Rigidbody2D>();
-        playerSize = new Vector2(GetComponent<CircleCollider2D>().radius*2, GetComponent<CircleCollider2D>().radius * 2);
-        vBounce = 0f;
-        e = 10000;
-
+        playerHeight = new Vector2(0, GetComponent<CircleCollider2D>().radius * 2);
+        e = 100f;
+        boostBounce = false;
+        bounce = false;
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
         playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
-        RaycastHit2D downHit = Physics2D.Raycast(playerPos+playerSize/2, Vector2.down);
-        if (rb.velocity.y < 0 && downHit.collider != null) {
-            bounce = true;
-            if (downHit.distance <= 1.0f && vBounce == 0f)
-            {
-                vBounce = -rb.velocity.y*e;  
-            }
-                
-            //rb.AddForce(Vector2.up * -rb.velocity.y * Time.deltaTime, ForceMode2D.Impulse);
-            //rb.velocity = new Vector2(0, rb.velocity.y);
-            //rb.AddForce(Vector2.up * rb.velocity.y * Time.deltaTime, ForceMode2D.Impulse);
-        }
-        if (GetComponent<PlayerGround>().Grounded && bounce)
+        RaycastHit2D downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);
+        if (rb.velocity.y < 0 && downHit.collider != null)
         {
-            Debug.Log(vBounce);
-            //rb.velocity = new Vector2(rb.velocity.x, InputManager.MainVertical() * vBounce * Time.deltaTime);
-            rb.AddForce(Vector2.up * vBounce * Time.deltaTime, ForceMode2D.Impulse);
-            Debug.Log(Vector2.up * vBounce * Time.deltaTime);
-            //vBounce = 0;
+            Debug.Log(downHit.distance);
+            bounce = true;
+            if (downHit.distance <= 1f && downHit.distance >= 0.05f && InputManager.ButtonA())
+            {
+                boostBounce = true;
+                Debug.Log("activo");
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+                rb.AddForce(Vector2.up * 500f * 2f * Time.deltaTime, ForceMode2D.Impulse);
+                //if (InputManager.ButtonA() && downHit.distance <= 0.1f && downHit.distance >= 0.01f)
+                //{
+                //    boostBounce = true;
+                //    Debug.Log(boostBounce);
+                //}
+
+            }
+
+            if (boostBounce)
+            {
+
+                //canDoubleJump = true;
+            }
+
+            if (GetComponent<PlayerGround>().Grounded && bounce && !boostBounce)
+            {
+                //rb.AddForce(Vector2.up * e * Time.deltaTime, ForceMode2D.Impulse);
+            }
+
+            //Debug.Log(downHit.collider);
+
         }
-            
-        
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour {
 
     private Rigidbody2D rb;
+    private PlayerBounce pb;
 
     private bool grounded = false;
     private bool canDoubleJump = false;
@@ -25,6 +26,7 @@ public class PlayerJump : MonoBehaviour {
 
     void Start () {
         rb = GetComponent<Rigidbody2D>();
+        pb = GetComponent<PlayerBounce>();
     }
 	
 	void FixedUpdate () {
@@ -33,7 +35,15 @@ public class PlayerJump : MonoBehaviour {
 
         //Player jumps when ButtonA is pressed
         if (InputManager.ButtonA()) {
-            if (grounded) {
+            if (grounded && pb.boostBounce)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+                rb.AddForce(Vector2.up * _jumpForce * 2f * Time.deltaTime, ForceMode2D.Impulse);
+                canDoubleJump = true;
+                pb.boostBounce = false;
+            }
+            else if (grounded) {
+
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = true;
