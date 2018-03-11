@@ -34,24 +34,33 @@ public class PlayerJump : MonoBehaviour {
         grounded = GetComponent<PlayerGround>().Grounded;
 
         //Player jumps when ButtonA is pressed
-        if (InputManager.ButtonA()) {
-            if (grounded && pb.boostBounce)
+        if (pb.boostBounce)
+        {
+            if (grounded)
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * _jumpForce * 2f * Time.deltaTime, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * _jumpForce * 1.5f * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = true;
                 pb.boostBounce = false;
+                Debug.Log("Boost");
             }
-            else if (grounded) {
+        }
+        else if (InputManager.ButtonA())
+        {
+            if (grounded && !pb.boostBounce)
+            {
 
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = true;
+                Debug.Log("Jump");
             }
-            else if (canDoubleJump) {
+            else if (canDoubleJump && !pb.boostBounce)
+            {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = false;
+                Debug.Log("DoubleJump");
             }
         }
 

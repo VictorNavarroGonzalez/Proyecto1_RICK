@@ -12,6 +12,7 @@ public class PlayerBounce : MonoBehaviour
 
     private Rigidbody2D rb;
     private PlayerJump pj;
+    public RaycastHit2D downHit;
     public bool boostBounce;
     private bool rebote;
     private float e;
@@ -30,31 +31,17 @@ public class PlayerBounce : MonoBehaviour
     void FixedUpdate()
     {
         playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
-        RaycastHit2D downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);
+        downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);
         if (rb.velocity.y < 0 && downHit.collider != null)
         {
-            Debug.Log(downHit.distance);
             bounce = true;
-            if (downHit.distance <= 1f && downHit.distance >= 0.05f && InputManager.ButtonA())
+            if (downHit.distance <= 2f && downHit.distance >= 0.05f && InputManager.ButtonA())
             {
                 boostBounce = true;
-                Debug.Log("activo");
-                rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * 500f * 2f * Time.deltaTime, ForceMode2D.Impulse);
-                //if (InputManager.ButtonA() && downHit.distance <= 0.1f && downHit.distance >= 0.01f)
-                //{
-                //    boostBounce = true;
-                //    Debug.Log(boostBounce);
-                //}
+                //Debug.Log(downHit.distance);
+                //Debug.Log("activo");
 
             }
-
-            if (boostBounce)
-            {
-
-                //canDoubleJump = true;
-            }
-
             if (GetComponent<PlayerGround>().Grounded && bounce && !boostBounce)
             {
                 //rb.AddForce(Vector2.up * e * Time.deltaTime, ForceMode2D.Impulse);
