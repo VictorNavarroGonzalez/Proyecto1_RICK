@@ -35,7 +35,7 @@ public class PlayerBounce : MonoBehaviour
         if (rb.velocity.y < 0 && downHit.collider != null)
         {
             bounce = true;
-            if (downHit.distance <= 2f && downHit.distance >= 0.05f && InputManager.ButtonA())
+            if (downHit.distance <= 1.6f && downHit.distance >= 0.05f && InputManager.ButtonA())
             {
                 boostBounce = true;
                 //Debug.Log(downHit.distance);
