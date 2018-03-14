@@ -57,6 +57,9 @@
      <Compile Include="Assets\Scripts\PlayerGround.cs" />
      <Compile Include="Assets\Scripts\PlayerJump.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+ <Reference Include="Facebook.Unity.Settings">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

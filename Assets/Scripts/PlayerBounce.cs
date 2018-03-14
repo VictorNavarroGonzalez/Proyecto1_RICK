@@ -21,6 +21,7 @@ public class PlayerBounce : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
         playerHeight = new Vector2(0, GetComponent<CircleCollider2D>().radius * 2);
         boostBounce = false;
         bounce = false;

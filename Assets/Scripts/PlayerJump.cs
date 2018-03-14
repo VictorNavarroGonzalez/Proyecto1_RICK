@@ -20,8 +20,8 @@ public class PlayerJump : MonoBehaviour {
         }
     }
 
-    private float lowGravity = 2f;
-    private float highGravity = 4f;
+    private float lowGravity = 4f;
+    private float highGravity = 6f;
 
 
     void Start () {
@@ -39,11 +39,9 @@ public class PlayerJump : MonoBehaviour {
             StartCoroutine(Boost());
         }
         //Player jumps when ButtonA is pressed
-        else if (InputManager.ButtonA())
-        {
+        else if (InputManager.ButtonA()) {
             if (grounded && !pb.boostBounce)                //Normal Jump
             {
-
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = true;
@@ -52,7 +50,7 @@ public class PlayerJump : MonoBehaviour {
             else if (canDoubleJump && !pb.boostBounce)          //Double Jump
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * _jumpForce * 0.8f * Time.deltaTime, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = false;
                 Debug.Log("DoubleJump");
             }
@@ -66,7 +64,7 @@ public class PlayerJump : MonoBehaviour {
             rb.gravityScale = lowGravity;
         }
         else {
-            rb.gravityScale = 1f;
+            rb.gravityScale = 2f;
         }
 	}
 
@@ -74,9 +72,8 @@ public class PlayerJump : MonoBehaviour {
     IEnumerator Boost()
     {
         yield return null;
-        yield return null;
         rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * _jumpForce * 1.5f * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * _jumpForce * 3f * Time.deltaTime, ForceMode2D.Impulse);
         canDoubleJump = true;
         pb.boostBounce = false;
         Debug.Log("BOOST");
