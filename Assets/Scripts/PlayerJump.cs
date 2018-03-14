@@ -33,14 +33,15 @@ public class PlayerJump : MonoBehaviour {
         //Check if the player is grounded
         grounded = GetComponent<PlayerGround>().Grounded;
 
-        //Player jumps when ButtonA is pressed
+        //Jump boosted by bounce
         if (pb.boostBounce && grounded)
         {
             StartCoroutine(Boost());
         }
+        //Player jumps when ButtonA is pressed
         else if (InputManager.ButtonA())
         {
-            if (grounded && !pb.boostBounce)
+            if (grounded && !pb.boostBounce)                //Normal Jump
             {
 
                 rb.velocity = new Vector2(rb.velocity.x, 0);
@@ -48,7 +49,7 @@ public class PlayerJump : MonoBehaviour {
                 canDoubleJump = true;
                 Debug.Log("Jump");
             }
-            else if (canDoubleJump && !pb.boostBounce)
+            else if (canDoubleJump && !pb.boostBounce && pb.downHit.distance >= 1.6f)          //Double Jump
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
@@ -71,15 +72,15 @@ public class PlayerJump : MonoBehaviour {
         }
 	}
 
+    //Boosted jump
     IEnumerator Boost()
     {
-        Debug.Log("Boost");
         yield return null;
         yield return null;
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * _jumpForce * 1.5f * Time.deltaTime, ForceMode2D.Impulse);
         canDoubleJump = true;
         pb.boostBounce = false;
-        Debug.Log("Boost");
+        Debug.Log("BOOST");
     }
 }
