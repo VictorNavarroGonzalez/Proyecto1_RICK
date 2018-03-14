@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
 
-    private float _sideForce = 1000f;
+    public float MAX_VEL = 10f;
+
+    private float _sideForce = 5f;
     public float SideForce {
         get {
             return _sideForce;
@@ -22,13 +24,19 @@ public class PlayerMovement : MonoBehaviour {
 
     void FixedUpdate() {
         //Player Horizontal Movement
-        if (InputManager.MainHorizontal() == 0) {
-            //Ease Out Movement
-            rb.velocity = Vector2.Lerp(rb.velocity, new Vector2(0, rb.velocity.y), 0.1f);
+        if (InputManager.MainHorizontal() < 0.0f) {
+            if(rb.velocity.x > -10f)
+            {
+                rb.AddForce(Vector2.left * _sideForce, ForceMode2D.Force);
+            }
+                
         }
-        else if (InputManager.MainHorizontal() != 0) {
-            rb.velocity = new Vector2(InputManager.MainHorizontal() * _sideForce * Time.deltaTime, rb.velocity.y);
+        else if (InputManager.MainHorizontal() > 0.0f) {
+            if (rb.velocity.x < 10f)
+                rb.AddForce(Vector2.right * _sideForce, ForceMode2D.Force);
         }
+
+            
     }
 
 }

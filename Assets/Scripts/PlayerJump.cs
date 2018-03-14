@@ -49,10 +49,10 @@ public class PlayerJump : MonoBehaviour {
                 canDoubleJump = true;
                 Debug.Log("Jump");
             }
-            else if (canDoubleJump && !pb.boostBounce && pb.downHit.distance >= 1.6f)          //Double Jump
+            else if (canDoubleJump && !pb.boostBounce)          //Double Jump
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * _jumpForce * 0.8f * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = false;
                 Debug.Log("DoubleJump");
             }
@@ -62,13 +62,11 @@ public class PlayerJump : MonoBehaviour {
         if(rb.velocity.y < 0) {
             rb.gravityScale = highGravity;
         }
-        else if(rb.velocity.y > 0 && InputManager.PressedButtonA()) {
-            if(canDoubleJump) {
-                rb.gravityScale = 1f;
-            }
+        else if(rb.velocity.y > 0 && !InputManager.PressedButtonA()) {
+            rb.gravityScale = lowGravity;
         }
         else {
-            rb.gravityScale = lowGravity;
+            rb.gravityScale = 1f;
         }
 	}
 
