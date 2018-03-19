@@ -43,7 +43,7 @@ public class PlayerJump : MonoBehaviour {
             if (grounded && !pb.boostBounce)                //Normal Jump
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * _jumpForce * 3 * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = true;
                 Debug.Log("Jump");
             }
@@ -75,6 +75,7 @@ public class PlayerJump : MonoBehaviour {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * _jumpForce * 3f * Time.deltaTime, ForceMode2D.Impulse);
         canDoubleJump = true;
+        pb.bounce = false;
         pb.boostBounce = false;
         Debug.Log("BOOST");
     }

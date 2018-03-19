@@ -15,7 +15,6 @@ public class PlayerBounce : MonoBehaviour
     public RaycastHit2D downHit;
     public bool boostBounce;
     private bool rebote;
-    private float e;
 
     // Use this for initialization
     void Start()
@@ -30,24 +29,35 @@ public class PlayerBounce : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //Debug.Log(boostBounce);
         //Raycast under the player
         playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
         downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);
         //Detect if Player is falling
         if (rb.velocity.y < 0 && downHit.collider != null)
         {
+            Debug.Log("PASO 1");
             bounce = true;
-            if (downHit.distance <= 1.2f && downHit.distance >= 0.05f && InputManager.ButtonA())        //Active boostBounce
-            {
-                boostBounce = true;
-            }
+        }
+        if (bounce == true && GetComponent<PlayerGround>().Grounded == true)
+        {
+            Debug.Log("PASO 2");
+            StartCoroutine(disable());
+        }
+        if (bounce && InputManager.ButtonA())
+        {
+            Debug.Log("PASO 3");
+            boostBounce = true;
+        }
+    }
 
-            //TO DO
-
-            //if (GetComponent<PlayerGround>().Grounded && bounce && !boostBounce)                //Normal bounce
-            //{
-            //    //rb.AddForce(Vector2.up * e * Time.deltaTime, ForceMode2D.Impulse);
-            //}
+    IEnumerator disable()
+    {
+        if (GetComponent<PlayerGround>().Grounded == true)
+        {
+            Debug.Log("entra en desactivar");
+            yield return new WaitForSeconds(5);
+            bounce = false;
         }
     }
 }
