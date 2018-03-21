@@ -45,14 +45,14 @@ public class PlayerJump : MonoBehaviour {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = true;
-                Debug.Log("Jump");
+                //Debug.Log("Jump");
             }
             else if (canDoubleJump && !pb.boostBounce)          //Double Jump
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
                 canDoubleJump = false;
-                Debug.Log("DoubleJump");
+                //Debug.Log("DoubleJump");
             }
         }
 
@@ -77,6 +77,6 @@ public class PlayerJump : MonoBehaviour {
         canDoubleJump = true;
         pb.bounce = false;
         pb.boostBounce = false;
-        Debug.Log("BOOST");
+        //Debug.Log("BOOST");
     }
 }

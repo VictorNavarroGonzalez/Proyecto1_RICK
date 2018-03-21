@@ -36,17 +36,17 @@ public class PlayerBounce : MonoBehaviour
         //Detect if Player is falling
         if (rb.velocity.y < 0 && downHit.collider != null)
         {
-            Debug.Log("PASO 1");
+            //Debug.Log("PASO 1");
             bounce = true;
         }
         if (bounce == true && GetComponent<PlayerGround>().Grounded == true)
         {
-            Debug.Log("PASO 2");
+            //Debug.Log("PASO 2");
             StartCoroutine(disable());
         }
         if (bounce && InputManager.ButtonA() && downHit.distance < 1.2f)
         {
-            Debug.Log("PASO 3");
+            //Debug.Log("PASO 3");
             boostBounce = true;
         }
     }
@@ -55,8 +55,8 @@ public class PlayerBounce : MonoBehaviour
     {
         if (GetComponent<PlayerGround>().Grounded == true)
         {
-            Debug.Log("entra en desactivar");
-            yield return new WaitForSeconds(1);
+            //Debug.Log("entra en desactivar");
+            yield return new WaitForSeconds(0.4f);
             bounce = false;
         }
     }
