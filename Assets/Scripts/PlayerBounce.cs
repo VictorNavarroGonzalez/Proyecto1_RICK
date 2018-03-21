@@ -44,7 +44,7 @@ public class PlayerBounce : MonoBehaviour
             Debug.Log("PASO 2");
             StartCoroutine(disable());
         }
-        if (bounce && InputManager.ButtonA())
+        if (bounce && InputManager.ButtonA() && downHit.distance < 1.2f)
         {
             Debug.Log("PASO 3");
             boostBounce = true;
@@ -56,7 +56,7 @@ public class PlayerBounce : MonoBehaviour
         if (GetComponent<PlayerGround>().Grounded == true)
         {
             Debug.Log("entra en desactivar");
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(1);
             bounce = false;
         }
     }
