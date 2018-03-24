@@ -36,26 +36,16 @@ public class PlayerBounce : MonoBehaviour
         //Detect if Player is falling
         if (rb.velocity.y < 0 && downHit.collider != null)
         {
-<<<<<<< Updated upstream
-            //Debug.Log("PASO 1");
-=======
->>>>>>> Stashed changes
+
             bounce = true;
         }
         if (bounce == true && GetComponent<PlayerGround>().Grounded == true)
         {
-<<<<<<< Updated upstream
-            //Debug.Log("PASO 2");
-=======
->>>>>>> Stashed changes
+
             StartCoroutine(disable());
         }
         if (bounce && InputManager.ButtonA() && downHit.distance < 1.2f)
         {
-<<<<<<< Updated upstream
-            //Debug.Log("PASO 3");
-=======
->>>>>>> Stashed changes
             boostBounce = true;
         }
     }
@@ -64,12 +54,9 @@ public class PlayerBounce : MonoBehaviour
     {
         if (GetComponent<PlayerGround>().Grounded == true)
         {
-<<<<<<< Updated upstream
-            //Debug.Log("entra en desactivar");
+
             yield return new WaitForSeconds(0.4f);
-=======
             yield return new WaitForSeconds(5);
->>>>>>> Stashed changes
             bounce = false;
         }
     }

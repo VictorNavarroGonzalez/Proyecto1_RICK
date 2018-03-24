@@ -5,35 +5,32 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour {
 
-    public Transform player;
-    public new Transform camera;
+    public GameObject player;
 
-    public AnimationCurve curve;
+    public Transform end;
+    public Vector3 offset;
 
-    public Rigidbody2D rb;
+    public float duration;
+    private float t;
 
     void Awake() {
-        transform.position = player.position;
+        end = player.GetComponent<Transform>();
     }
 
     void FixedUpdate() {
-        transform.DOLocalMoveX(player.position.x, 0f);
-        
+        // Normal Horizontal CameraMovement
+        transform.position = new Vector3(end.position.x, transform.position.y, end.position.z) + offset;
 
-
-        if (rb.velocity.y < 0f)
-        {
-            transform.DOLocalMoveY(player.position.y, 1f).SetEase(curve);
-            //StartCoroutine(CameraJump());
-            
+        // Jumping CameraMovement
+        if (!player.GetComponent<PlayerGround>().Grounded) {
+            t = Easing.Elastic.Out(Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, end.position + offset, t);
+        }
+        else {
+            t = Easing.Exponential.Out(Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, end.position + offset, t);
         }
     }
 
-    IEnumerator CameraJump()
-    {
-        
-        
-        yield return null;
-    }
 
 }
