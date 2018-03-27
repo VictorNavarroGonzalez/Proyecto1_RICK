@@ -7,6 +7,9 @@ public class PlayerGround : MonoBehaviour {
     public float skinDepth = 0.05f;
     public LayerMask mask;
 
+    private PlayerState.MyState state;
+
+
     private bool _grounded;
     private bool _leftHit;
     private bool _rightHit;
@@ -19,7 +22,6 @@ public class PlayerGround : MonoBehaviour {
             _grounded = value;
         }
     }
-
     public bool LeftHit
     {
         get
@@ -31,7 +33,6 @@ public class PlayerGround : MonoBehaviour {
             _leftHit = value;
         }
     }
-
     public bool RightHit {
         get {
             return _rightHit;
@@ -57,7 +58,15 @@ public class PlayerGround : MonoBehaviour {
         Vector2 boxCenter_R = (Vector2)transform.position + Vector2.right * (playerSize.y + boxSize.y) * 0.5f;
         _grounded = (Physics2D.OverlapBox(boxCenter, boxSize, 0, mask) != null);
         _leftHit = (Physics2D.OverlapBox(boxCenter_L, boxSize_L, 0, mask) != null);
-        _rightHit = (Physics2D.OverlapBox(boxCenter_R, boxSize_L, 0, mask) != null);
+        _rightHit = (Physics2D.OverlapBox(boxCenter_R, boxSize_L, 0, mask) != null); 
+    }
+
+    public IEnumerator CheckGround() {
+        if (_grounded) {
+            PlayerState.State = PlayerState.MyState.Grounding;
+        }
+
+        yield return new WaitForSeconds(0.5f);
     }
 
 }

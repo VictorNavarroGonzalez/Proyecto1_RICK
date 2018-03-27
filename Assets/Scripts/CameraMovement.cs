@@ -22,7 +22,7 @@ public class CameraMovement : MonoBehaviour {
         transform.position = new Vector3(end.position.x, transform.position.y, end.position.z) + offset;
 
         // Jumping CameraMovement
-        if (!player.GetComponent<PlayerGround>().Grounded) {
+        if (PlayerState.State == PlayerState.MyState.Jumping) {
             t = Easing.Elastic.Out(Time.deltaTime);
             transform.position = Vector3.Lerp(transform.position, end.position + offset, t);
         }
