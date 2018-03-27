@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour {
@@ -31,6 +30,4 @@ public class CameraMovement : MonoBehaviour {
             transform.position = Vector3.Lerp(transform.position, end.position + offset, t);
         }
     }
-
-
 }

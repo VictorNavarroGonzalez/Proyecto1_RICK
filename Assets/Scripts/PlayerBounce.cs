@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerBounce : MonoBehaviour
 {
 
-    public bool bounce;
+    public bool canBounce;
 
     Vector2 playerHeight;
     Vector2 playerPos;
@@ -23,41 +23,47 @@ public class PlayerBounce : MonoBehaviour
 
         playerHeight = new Vector2(0, GetComponent<CircleCollider2D>().radius * 2);
         boostBounce = false;
-        bounce = false;
+        canBounce = false;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
-        //Debug.Log(boostBounce);
+
+
+
+
+    public bool checkBounce() {
         //Raycast under the player
         playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
         downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);
         //Detect if Player is falling
-        if (rb.velocity.y < 0 && downHit.collider != null)
-        {
+        return (rb.velocity.y < -0.1f && downHit.distance < 8.2f);
+ 
+        //if (canBounce == true && GetComponent<PlayerGround>().Grounded == true)
+        //{
+        //    StartCoroutine(disable());
+        //}
 
-            bounce = true;
-        }
-        if (bounce == true && GetComponent<PlayerGround>().Grounded == true)
-        {
+    }
 
-            StartCoroutine(disable());
-        }
-        if (bounce && InputManager.ButtonA() && downHit.distance < 1.2f)
+    public IEnumerator bounce()
+    {
+        //yield return new WaitForEndOfFrame();
+        while()
+        if (GetComponent<PlayerGround>().Grounded)
         {
-            boostBounce = true;
+            PlayerState.State = PlayerState.MyState.Bouncing;
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * 2000 * Time.deltaTime, ForceMode2D.Impulse);
         }
+        yield return null;
     }
 
     IEnumerator disable()
     {
         if (GetComponent<PlayerGround>().Grounded == true)
         {
-
-            yield return new WaitForSeconds(0.4f);
-            yield return new WaitForSeconds(5);
-            bounce = false;
+            yield return new WaitForSeconds(1f);
+            canBounce = false;
         }
     }
 }

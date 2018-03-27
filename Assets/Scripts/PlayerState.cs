@@ -35,8 +35,8 @@ public class PlayerState : MonoBehaviour {
         if (InputManager.ButtonA()) {
             StartCoroutine(GetComponent<PlayerGround>().CheckGround());
 
-            if (GetComponent<PlayerBounce>().CheckBounce()) {
-                GetComponent<PlayerBounce>().Bounce();
+            if (GetComponent<PlayerBounce>().checkBounce()) {
+                StartCoroutine(GetComponent<PlayerBounce>().bounce());
             }
             else {
                 switch (_state) {
