@@ -17,7 +17,7 @@ public class PlayerBounce : MonoBehaviour
     private bool rebote;
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
@@ -26,39 +26,21 @@ public class PlayerBounce : MonoBehaviour
         canBounce = false;
     }
 
-    // Update is called once per frame
-
-
-
 
     public bool CheckBounce() {
-        //Raycast under the player
+        // Raycast under the player
         playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
         downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);
-        //Detect if Player is falling
+        
+        // Detect if Player is falling
         return (rb.velocity.y < 0 && downHit.distance < 2f);
- 
-        //if (canBounce == true && GetComponent<PlayerGround>().Grounded == true)
-        //{
-        //    StartCoroutine(disable());
-        //}
 
     }
 
-    public IEnumerator Bounce()
-    {
+    public IEnumerator Bounce() {
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));
         PlayerState.State = PlayerState.MyState.Bouncing;
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * 2000 * Time.deltaTime, ForceMode2D.Impulse);
-    }
-
-    IEnumerator disable()
-    {
-        if (GetComponent<PlayerGround>().Grounded)
-        {
-            yield return new WaitForSeconds(1f);
-            canBounce = false;
-        }
     }
 }

@@ -23,32 +23,9 @@ public class PlayerJump : MonoBehaviour {
 
     void Awake () {
         rb = GetComponent<Rigidbody2D>();
-        pb = GetComponent<PlayerBounce>();
     }
 	
-	void FixedUpdate () {
-
-
-        ////Jump boosted by bounce
-        //if (pb.boostBounce && PlayerState.State == PlayerState.MyState.Grounding)
-        //{
-        //    StartCoroutine(Boost());
-        //}
-        ////Player jumps when ButtonA is pressed
-        //else if (InputManager.ButtonA()) {
-        //    if (PlayerState.State == PlayerState.MyState.Grounding && !pb.boostBounce)                //Normal Jump
-        //    {
-        //        PlayerState.State = PlayerState.MyState.Jumping;
-        //    }
-        //    else if (PlayerState.State == PlayerState.MyState.Jumping && !pb.boostBounce)          //Double Jump
-        //    {
-        //        PlayerState.State = PlayerState.MyState.DoubleJumping;
-        //        rb.velocity = new Vector2(rb.velocity.x, 0);
-        //        rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
-        //    }
-        //}
-
-
+	void FixedUpdate () { 
         //Better jump feel modifying gravityScale
         if(rb.velocity.y < 0) {
             //state = PlayerState.State.IsFalling;
@@ -73,29 +50,4 @@ public class PlayerJump : MonoBehaviour {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
     }
-
-    //public IEnumerator Jump() {
-    //    PlayerState.State = PlayerState.MyState.Jumping;
-    //    rb.velocity = new Vector2(rb.velocity.x, 0);
-    //    rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
-    //    //yield return new WaitForSeconds(2);
-    //}
-
-    //public IEnumerator DoubleJump() {
-    //    PlayerState.State = PlayerState.MyState.DoubleJumping;
-    //    rb.velocity = new Vector2(rb.velocity.x, 0);
-    //    rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
-    //    yield return null;
-    //}
-
-    ////Boosted jump
-    //public IEnumerator Boost() {
-    //    yield return null;
-    //    rb.velocity = new Vector2(rb.velocity.x, 0);
-    //    rb.AddForce(Vector2.up * _jumpForce * 2f * Time.deltaTime, ForceMode2D.Impulse);
-    //    canDoubleJump = true;
-    //    pb.bounce = false;
-    //    pb.boostBounce = false;
-    //    //Debug.Log("BOOST");
-    //}
 }
