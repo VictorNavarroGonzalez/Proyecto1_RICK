@@ -31,12 +31,12 @@ public class PlayerBounce : MonoBehaviour
 
 
 
-    public bool checkBounce() {
+    public bool CheckBounce() {
         //Raycast under the player
         playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
         downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);
         //Detect if Player is falling
-        return (rb.velocity.y < -0.1f && downHit.distance < 8.2f);
+        return (rb.velocity.y < 0 && downHit.distance < 2f);
  
         //if (canBounce == true && GetComponent<PlayerGround>().Grounded == true)
         //{
@@ -45,22 +45,17 @@ public class PlayerBounce : MonoBehaviour
 
     }
 
-    public IEnumerator bounce()
+    public IEnumerator Bounce()
     {
-        //yield return new WaitForEndOfFrame();
-        while()
-        if (GetComponent<PlayerGround>().Grounded)
-        {
-            PlayerState.State = PlayerState.MyState.Bouncing;
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(Vector2.up * 2000 * Time.deltaTime, ForceMode2D.Impulse);
-        }
-        yield return null;
+        yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));
+        PlayerState.State = PlayerState.MyState.Bouncing;
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(Vector2.up * 2000 * Time.deltaTime, ForceMode2D.Impulse);
     }
 
     IEnumerator disable()
     {
-        if (GetComponent<PlayerGround>().Grounded == true)
+        if (GetComponent<PlayerGround>().Grounded)
         {
             yield return new WaitForSeconds(1f);
             canBounce = false;

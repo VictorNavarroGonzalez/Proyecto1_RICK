@@ -28,15 +28,16 @@ public class PlayerState : MonoBehaviour {
     }
 
     void FixedUpdate () {
-        Debug.Log(_state);
+        //Debug.Log(_state);
         
 
         // CIRCLE RICK
         if (InputManager.ButtonA()) {
             StartCoroutine(GetComponent<PlayerGround>().CheckGround());
 
-            if (GetComponent<PlayerBounce>().checkBounce()) {
-                StartCoroutine(GetComponent<PlayerBounce>().bounce());
+            if (GetComponent<PlayerBounce>().CheckBounce()) {
+                Debug.Log("Can Bounce");
+                StartCoroutine(GetComponent<PlayerBounce>().Bounce());
             }
             else {
                 switch (_state) {
