@@ -10,7 +10,6 @@ public class CameraMovement : MonoBehaviour {
     public Vector3 offset;
 
     public float duration;
-    private float t;
 
     void Awake() {
         end = player.GetComponent<Transform>();
@@ -21,13 +20,22 @@ public class CameraMovement : MonoBehaviour {
         transform.position = new Vector3(end.position.x, transform.position.y, end.position.z) + offset;
 
         // Jumping CameraMovement
-        if (PlayerState.State == PlayerState.MyState.Jumping) {
-            t = Easing.Elastic.Out(Time.deltaTime);
-            transform.position = Vector3.Lerp(transform.position, end.position + offset, t);
-        }
-        else {
-            t = Easing.Exponential.Out(Time.deltaTime);
-            transform.position = Vector3.Lerp(transform.position, end.position + offset, t);
+        switch (PlayerState.State) {
+            case PlayerState.MyState.Jumping:
+                float d = end.position.y - transform.position.y;
+                transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d*d * Time.deltaTime);
+                break;
+
+            case PlayerState.MyState.DoubleJumping:
+                //t = Easing.Elastic.Out(Time.deltaTime);
+                //transform.position = Vector3.Lerp(transform.position, end.position + offset, t);
+                break;
+
+            case PlayerState.MyState.Bouncing:
+                //t += Time.deltaTime;
+                //transform.position = Vector3.Lerp(transform.position, end.position + offset, t);
+                break;
+
         }
     }
 }

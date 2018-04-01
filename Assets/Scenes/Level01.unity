@@ -214,7 +214,7 @@ MonoBehaviour:
   player: {fileID: 2102744601}
   end: {fileID: 358757956}
   offset: {x: 0, y: 0, z: -10}
-  duration: 1
+  duration: 2
 --- !u!1001 &1025471313
 Prefab:
   m_ObjectHideFlags: 0
@@ -222,6 +222,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114057809930271938, guid: 9ac8a1c5191373245a395199f3987413,
+        type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4183115198715342, guid: 9ac8a1c5191373245a395199f3987413, type: 2}
       propertyPath: m_LocalPosition.x
       value: -27.01
@@ -273,6 +278,41 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114057809930271938, guid: 9ac8a1c5191373245a395199f3987413,
+        type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114057809930271938, guid: 9ac8a1c5191373245a395199f3987413,
+        type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[0].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114057809930271938, guid: 9ac8a1c5191373245a395199f3987413,
+        type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114057809930271938, guid: 9ac8a1c5191373245a395199f3987413,
+        type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114057809930271938, guid: 9ac8a1c5191373245a395199f3987413,
+        type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].inSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114057809930271938, guid: 9ac8a1c5191373245a395199f3987413,
+        type: 2}
+      propertyPath: jumpCurve.m_Curve.Array.data[1].outSlope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114057809930271938, guid: 9ac8a1c5191373245a395199f3987413,
+        type: 2}
+      propertyPath: jumpCurve.m_RotationOrder
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ac8a1c5191373245a395199f3987413, type: 2}

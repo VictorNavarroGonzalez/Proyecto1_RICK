@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerState : MonoBehaviour {
 
     private GameObject player;
+    private float t = 0.0f;
 
     public enum MyState { Jumping, DoubleJumping, Dashing, Bouncing, Grounding, Falling };
     public static MyState _state;

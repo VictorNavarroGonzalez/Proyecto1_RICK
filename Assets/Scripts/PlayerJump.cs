@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour {
 
     private Rigidbody2D rb;
-    private PlayerBounce pb;
+    public AnimationCurve jumpCurve;
 
     private float _jumpForce = 500f;
     public float JumpForce {
@@ -42,8 +42,9 @@ public class PlayerJump : MonoBehaviour {
     public void Jump() {
         PlayerState.State = PlayerState.MyState.Jumping;
         rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * 700f * Time.deltaTime, ForceMode2D.Impulse);
     }
+
 
     public void DoubleJump() {
         PlayerState.State = PlayerState.MyState.DoubleJumping;

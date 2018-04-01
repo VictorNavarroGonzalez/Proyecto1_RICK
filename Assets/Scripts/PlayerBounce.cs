@@ -41,6 +41,6 @@ public class PlayerBounce : MonoBehaviour
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));
         PlayerState.State = PlayerState.MyState.Bouncing;
         rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * 2000 * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * 1500 * Time.deltaTime, ForceMode2D.Impulse);
     }
 }
