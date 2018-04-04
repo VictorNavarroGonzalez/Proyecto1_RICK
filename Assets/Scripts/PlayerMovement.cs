@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 
-    public void moveRight()
+    public void MoveRight()
     {
         if (rb.velocity.x < _maxSpeed * Mathf.Abs(InputManager.MainHorizontal()))
         {
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public void stop()
+    public void Stop()
     {
         if (rb.velocity.x < 0.0f)
         {
@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    public void moveLeft()
+    public void MoveLeft()
     {
         if (rb.velocity.x > -_maxSpeed * Mathf.Abs(InputManager.MainHorizontal()))
         {

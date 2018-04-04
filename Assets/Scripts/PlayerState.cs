@@ -30,26 +30,19 @@ public class PlayerState : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        //Debug.Log(_state);
-
-<<<<<<< Updated upstream
-        if (InputManager.MainHorizontal() > 0.0f)
-        {
-            GetComponent<PlayerMovement>().moveRight();
+        // RICK HORIZONTAL MOVEMENT
+        if (InputManager.MainHorizontal() > 0.0f) {
+            GetComponent<PlayerMovement>().MoveRight();
         }
-        else if (InputManager.MainHorizontal() == 0.0f)
-        {
-            GetComponent<PlayerMovement>().stop();
+        else if (InputManager.MainHorizontal() == 0.0f) {
+            GetComponent<PlayerMovement>().Stop();
         }
-        else if (InputManager.MainHorizontal() < 0.0f)
-        {
-            GetComponent<PlayerMovement>().moveLeft();
+        else if (InputManager.MainHorizontal() < 0.0f) {
+            GetComponent<PlayerMovement>().MoveLeft();
         }
 
-=======
         if (GetComponent<Rigidbody2D>().velocity.y < 0)
             State = MyState.Falling;
->>>>>>> Stashed changes
 
         // CIRCLE RICK
         if (InputManager.ButtonA()) {
@@ -60,7 +53,7 @@ public class PlayerState : MonoBehaviour {
                 StartCoroutine(GetComponent<PlayerBounce>().Bounce());       
             }
             else {
-                switch (_state) {
+                switch (State) {
                     case MyState.Grounding:
                         GetComponent<PlayerJump>().Jump();
                         State = MyState.Jumping;
@@ -79,17 +72,10 @@ public class PlayerState : MonoBehaviour {
             if (InputManager.ButtonRT()) GetComponent<PlayerDash>().RightDash();
             if (InputManager.ButtonLT()) GetComponent<PlayerDash>().LeftDash();
         }
-        
 
-<<<<<<< Updated upstream
-            // RICK CHANGE CHARACTER
-            if (InputManager.ButtonY()) {
-            // RICK Character State
-=======
 
         // RICK CHANGE CHARACTER
         if (InputManager.ButtonY()) {
->>>>>>> Stashed changes
             GetComponent<PlayerChange>().Change();
             GetComponent<PlayerChange>().Actualize();
         }
