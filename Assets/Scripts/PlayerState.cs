@@ -28,9 +28,22 @@ public class PlayerState : MonoBehaviour {
         GetComponent<PlayerChange>().Actualize();
     }
 
-    void FixedUpdate () {
+    void FixedUpdate() {
         //Debug.Log(_state);
-        
+
+        if (InputManager.MainHorizontal() > 0.0f)
+        {
+            GetComponent<PlayerMovement>().moveRight();
+        }
+        else if (InputManager.MainHorizontal() == 0.0f)
+        {
+            GetComponent<PlayerMovement>().stop();
+        }
+        else if (InputManager.MainHorizontal() < 0.0f)
+        {
+            GetComponent<PlayerMovement>().moveLeft();
+        }
+
 
         // CIRCLE RICK
         if (InputManager.ButtonA()) {
@@ -54,9 +67,8 @@ public class PlayerState : MonoBehaviour {
         }
 
 
-
-        // RICK CHANGE CHARACTER
-        if (InputManager.ButtonY()) {
+            // RICK CHANGE CHARACTER
+            if (InputManager.ButtonY()) {
             // RICK Character State
             GetComponent<PlayerChange>().Change();
 
