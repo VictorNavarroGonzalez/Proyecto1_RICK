@@ -22,15 +22,17 @@ public class PlayerState : MonoBehaviour {
     }
 
     void Awake() {
-        _state = MyState.Falling;
+        State = MyState.Falling;
 
-        _character = MyCharacter.CIRCLE;
+        // Initialize RICK into a Circle
+        Character = MyCharacter.CIRCLE;
         GetComponent<PlayerChange>().Actualize();
     }
 
     void FixedUpdate() {
         //Debug.Log(_state);
 
+<<<<<<< Updated upstream
         if (InputManager.MainHorizontal() > 0.0f)
         {
             GetComponent<PlayerMovement>().moveRight();
@@ -44,40 +46,52 @@ public class PlayerState : MonoBehaviour {
             GetComponent<PlayerMovement>().moveLeft();
         }
 
+=======
+        if (GetComponent<Rigidbody2D>().velocity.y < 0)
+            State = MyState.Falling;
+>>>>>>> Stashed changes
 
         // CIRCLE RICK
         if (InputManager.ButtonA()) {
             StartCoroutine(GetComponent<PlayerGround>().CheckGround());
 
             if (GetComponent<PlayerBounce>().CheckBounce()) {
-                Debug.Log("Can Bounce");
-                StartCoroutine(GetComponent<PlayerBounce>().Bounce());
+                State = MyState.Bouncing;
+                StartCoroutine(GetComponent<PlayerBounce>().Bounce());       
             }
             else {
                 switch (_state) {
                     case MyState.Grounding:
                         GetComponent<PlayerJump>().Jump();
+                        State = MyState.Jumping;
                         break;
 
                     case MyState.Jumping:
                         GetComponent<PlayerJump>().DoubleJump();
+                        State = MyState.DoubleJumping;
                         break;
                 }
             }
         }
 
+        // RICK DASH
+        if (GetComponent<PlayerDash>().CheckDash()) {
+            if (InputManager.ButtonRT()) GetComponent<PlayerDash>().RightDash();
+            if (InputManager.ButtonLT()) GetComponent<PlayerDash>().LeftDash();
+        }
+        
 
+<<<<<<< Updated upstream
             // RICK CHANGE CHARACTER
             if (InputManager.ButtonY()) {
             // RICK Character State
+=======
+
+        // RICK CHANGE CHARACTER
+        if (InputManager.ButtonY()) {
+>>>>>>> Stashed changes
             GetComponent<PlayerChange>().Change();
-
-            // RICK Properties
             GetComponent<PlayerChange>().Actualize();
-
-            Debug.Log(_character);
         }
-
-
     }
 }

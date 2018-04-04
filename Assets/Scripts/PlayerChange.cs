@@ -39,6 +39,7 @@ public class PlayerChange : MonoBehaviour {
                 // Change RICK Properties
                 GetComponent<PlayerMovement>().SideForce = 100f;
                 GetComponent<PlayerJump>().JumpForce = 500f;
+                GetComponent<PlayerBounce>().BounceForce = 1500f;    
 
                 // Change RICK Scripts
                 GetComponent<CircleCollider2D>().enabled = true;

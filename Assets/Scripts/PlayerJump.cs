@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour {
 
     private Rigidbody2D rb;
-    public AnimationCurve jumpCurve;
 
     private float _jumpForce = 500f;
     public float JumpForce {
@@ -28,7 +27,6 @@ public class PlayerJump : MonoBehaviour {
 	void FixedUpdate () { 
         //Better jump feel modifying gravityScale
         if(rb.velocity.y < 0) {
-            //state = PlayerState.State.IsFalling;
             rb.gravityScale = highGravity;
         }
         else if(rb.velocity.y > 0 && !InputManager.PressedButtonA()) {
@@ -40,14 +38,11 @@ public class PlayerJump : MonoBehaviour {
 	}
 
     public void Jump() {
-        PlayerState.State = PlayerState.MyState.Jumping;
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * 700f * Time.deltaTime, ForceMode2D.Impulse);
     }
 
-
     public void DoubleJump() {
-        PlayerState.State = PlayerState.MyState.DoubleJumping;
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
     }

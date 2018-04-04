@@ -5,20 +5,23 @@ using UnityEngine;
 public class PlayerBounce : MonoBehaviour
 {
 
+    private Rigidbody2D rb;
+    public RaycastHit2D downHit;
+
     public bool canBounce;
+    public bool boostBounce;
 
     Vector2 playerHeight;
     Vector2 playerPos;
 
-    private Rigidbody2D rb;
-    private PlayerJump pj;
-    public RaycastHit2D downHit;
-    public bool boostBounce;
-    private bool rebote;
+    private float _bounceForce;
+    public float BounceForce {
+        get { return _bounceForce; }
+        set { _bounceForce = value; }
+    }
 
-    // Use this for initialization
-    void Awake()
-    {
+
+    void Awake() {
         rb = GetComponent<Rigidbody2D>();
 
         playerHeight = new Vector2(0, GetComponent<CircleCollider2D>().radius * 2);
@@ -34,13 +37,11 @@ public class PlayerBounce : MonoBehaviour
         
         // Detect if Player is falling
         return (rb.velocity.y < 0 && downHit.distance < 2f);
-
     }
 
     public IEnumerator Bounce() {
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));
-        PlayerState.State = PlayerState.MyState.Bouncing;
         rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * 1500 * Time.deltaTime, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * BounceForce * Time.deltaTime, ForceMode2D.Impulse);
     }
 }
