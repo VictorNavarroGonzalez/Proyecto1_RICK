@@ -45,14 +45,20 @@ public class PlayerBounce : MonoBehaviour
         rb.AddForce(Vector2.up * BounceForce * Time.deltaTime, ForceMode2D.Impulse);
     }
 
-    public IEnumerator Atenuation() {
-        yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * 250f * Time.deltaTime, ForceMode2D.Impulse);
+    public IEnumerator Atenuation(float value) {
+        for (int i = 0; i < 1; i++)
+        {
+            yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * value * Time.deltaTime, ForceMode2D.Impulse);
+            value = value / 2;
+            Debug.Log("bote");
+        }
     }
 
     public IEnumerator LeftBounce() {
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().LeftHit));
+        StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
         rb.velocity = new Vector2(0, rb.velocity.y);
         rb.AddForce(Vector2.right * 600 * Time.deltaTime, ForceMode2D.Impulse);
     }
@@ -60,6 +66,7 @@ public class PlayerBounce : MonoBehaviour
     public IEnumerator RightBounce()
     {
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().RightHit));
+        StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
         rb.velocity = new Vector2(0, rb.velocity.y);
         rb.AddForce(Vector2.left * 600 * Time.deltaTime, ForceMode2D.Impulse);
     }

@@ -6,6 +6,7 @@ public class PlayerState : MonoBehaviour {
 
     private GameObject player;
     private float t = 0.0f;
+    private bool stop;
 
     public enum MyState { Jumping, DoubleJumping, Dashing, Bouncing, Grounding, Falling };
     public static MyState _state;
@@ -30,7 +31,7 @@ public class PlayerState : MonoBehaviour {
     void Awake() {
         State = MyState.Falling;
         LastState = State;
-
+        stop = false;
         // Initialize RICK into a Circle
         Character = MyCharacter.CIRCLE;
         GetComponent<PlayerChange>().Actualize();
@@ -38,13 +39,13 @@ public class PlayerState : MonoBehaviour {
 
     void FixedUpdate() {
         // RICK HORIZONTAL MOVEMENT
-        if (InputManager.MainHorizontal() > 0.0f) {
+        if (InputManager.MainHorizontal() > 0.0f && !stop) {
             GetComponent<PlayerMovement>().MoveRight();
         }
-        else if (InputManager.MainHorizontal() == 0.0f) {
+        else if (InputManager.MainHorizontal() == 0.0f && !stop) {
             GetComponent<PlayerMovement>().Stop();
         }
-        else if (InputManager.MainHorizontal() < 0.0f) {
+        else if (InputManager.MainHorizontal() < 0.0f && !stop) {
             GetComponent<PlayerMovement>().MoveLeft();
         }
 
@@ -53,16 +54,20 @@ public class PlayerState : MonoBehaviour {
 
         //StartCoroutine(GetComponent<PlayerGround>().CheckGround());
         // CIRCLE RICK
-        if (InputManager.ButtonA()) {
+        if (InputManager.ButtonA())
+        {
 
-            if (PlayerState.State != MyState.Grounding && GetComponent<PlayerBounce>().CheckBounce()) {       
+            if (State != MyState.Grounding && GetComponent<PlayerBounce>().CheckBounce())
+            {
                 StartCoroutine(GetComponent<PlayerBounce>().Bounce());
                 LastState = State;
                 State = MyState.Bouncing;
                 Debug.Log(State);
             }
-            else {
-                switch (State) {
+            else
+            {
+                switch (State)
+                {
                     case MyState.Grounding:
                         GetComponent<PlayerJump>().Jump();
                         LastState = State;
@@ -77,7 +82,8 @@ public class PlayerState : MonoBehaviour {
                 }
             }
 
-            if (GetComponent<PlayerGround>().LeftHit) {
+            if (GetComponent<PlayerGround>().LeftHit)
+            {
                 StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
             }
             else if (GetComponent<PlayerGround>().RightHit)
@@ -85,7 +91,14 @@ public class PlayerState : MonoBehaviour {
                 StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
             }
         }
-        //else if () StartCoroutine(Atenuation());
+        //else if (LastState == MyState.Bouncing && State == MyState.Grounding)
+        //{
+        //    LastState = MyState.Grounding;
+        //    float value = 300f;
+        //    StartCoroutine(GetComponent<PlayerBounce>().Atenuation(value));
+        //}
+            
+            
 
         // RICK DASH
         if (GetComponent<PlayerDash>().CheckDash()) {
@@ -101,5 +114,11 @@ public class PlayerState : MonoBehaviour {
         }
 
         //Debug.Log(State);
+    }
+
+    public IEnumerator Stopping(float value) {
+        stop = true;
+        yield return new WaitForSeconds(value);
+        stop = false;
     }
 }
