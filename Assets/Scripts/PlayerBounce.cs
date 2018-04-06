@@ -45,6 +45,12 @@ public class PlayerBounce : MonoBehaviour
         rb.AddForce(Vector2.up * BounceForce * Time.deltaTime, ForceMode2D.Impulse);
     }
 
+    public IEnumerator Atenuation() {
+        yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(Vector2.up * 250f * Time.deltaTime, ForceMode2D.Impulse);
+    }
+
     public IEnumerator LeftBounce() {
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().LeftHit));
         rb.velocity = new Vector2(0, rb.velocity.y);

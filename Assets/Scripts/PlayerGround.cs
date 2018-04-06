@@ -9,7 +9,6 @@ public class PlayerGround : MonoBehaviour {
 
     private PlayerState.MyState state;
 
-
     private bool _grounded;
     private bool _leftHit;
     private bool _rightHit;
@@ -52,21 +51,33 @@ public class PlayerGround : MonoBehaviour {
         invertedBox = new Vector2(skinDepth, playerSize.x * 0.5f);
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         Vector2 boxCenter = (Vector2)transform.position + Vector2.down * (playerSize.y + boxSize.y) * 0.5f;
-        Vector2 rigthCenter = (Vector2)(transform.position) + Vector2.right * ((playerSize.x*0.7f) * 0.5f);
+        Vector2 rigthCenter = (Vector2)(transform.position) + Vector2.right * ((playerSize.x * 0.7f) * 0.5f);
         Vector2 leftCenter = (Vector2)(transform.position) + Vector2.left * ((playerSize.x * 0.7f) * 0.5f);
         _grounded = (Physics2D.OverlapBox(boxCenter, boxSize, 0, mask) != null);
         _leftHit = (Physics2D.OverlapBox(leftCenter, invertedBox, 0, mask) != null);
         _rightHit = (Physics2D.OverlapBox(rigthCenter, invertedBox, 0, mask) != null);
-    }
-
-    public IEnumerator CheckGround() {
-        if (_grounded) {
+        if (_grounded && PlayerState.State == PlayerState.MyState.Bouncing)
+        {
+            StartCoroutine(CheckGround());
+        }
+         else if (PlayerState.State != PlayerState.MyState.Grounding && _grounded)
+        {
+            PlayerState.LastState = PlayerState.State;
             PlayerState.State = PlayerState.MyState.Grounding;
         }
+    }
 
-        yield return new WaitForSeconds(0.5f);
+    public IEnumerator CheckGround()
+    {
+        yield return new WaitForSeconds(0.3f);
+        if (PlayerState.State != PlayerState.MyState.Grounding && _grounded)
+        {
+            PlayerState.LastState = PlayerState.State;
+            PlayerState.State = PlayerState.MyState.Grounding;
+        }
     }
 
 }

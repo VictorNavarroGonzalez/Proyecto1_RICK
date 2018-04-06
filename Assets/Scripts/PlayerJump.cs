@@ -6,7 +6,7 @@ public class PlayerJump : MonoBehaviour {
 
     private Rigidbody2D rb;
 
-    private float _jumpForce = 500f;
+    private float _jumpForce = 600f;
     public float JumpForce {
         get {
             return _jumpForce;

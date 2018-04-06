@@ -48,26 +48,30 @@ public class PlayerState : MonoBehaviour {
             GetComponent<PlayerMovement>().MoveLeft();
         }
 
-        if (GetComponent<Rigidbody2D>().velocity.y < 0)
-            State = MyState.Falling;
+        //if (GetComponent<Rigidbody2D>().velocity.y < 0)
+        //    State = MyState.Falling;
 
+        //StartCoroutine(GetComponent<PlayerGround>().CheckGround());
         // CIRCLE RICK
         if (InputManager.ButtonA()) {
-            StartCoroutine(GetComponent<PlayerGround>().CheckGround());
 
-            if (GetComponent<PlayerBounce>().CheckBounce()) {
+            if (PlayerState.State != MyState.Grounding && GetComponent<PlayerBounce>().CheckBounce()) {       
+                StartCoroutine(GetComponent<PlayerBounce>().Bounce());
+                LastState = State;
                 State = MyState.Bouncing;
-                StartCoroutine(GetComponent<PlayerBounce>().Bounce());       
+                Debug.Log(State);
             }
             else {
                 switch (State) {
                     case MyState.Grounding:
                         GetComponent<PlayerJump>().Jump();
+                        LastState = State;
                         State = MyState.Jumping;
                         break;
 
                     case MyState.Jumping:
                         GetComponent<PlayerJump>().DoubleJump();
+                        LastState = State;
                         State = MyState.DoubleJumping;
                         break;
                 }
@@ -81,6 +85,7 @@ public class PlayerState : MonoBehaviour {
                 StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
             }
         }
+        //else if () StartCoroutine(Atenuation());
 
         // RICK DASH
         if (GetComponent<PlayerDash>().CheckDash()) {
@@ -94,5 +99,7 @@ public class PlayerState : MonoBehaviour {
             GetComponent<PlayerChange>().Change();
             GetComponent<PlayerChange>().Actualize();
         }
+
+        //Debug.Log(State);
     }
 }
