@@ -57,4 +57,28 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
+    public void MoveUp()
+    {
+        if (rb.velocity.y < _maxSpeed * Mathf.Abs(InputManager.MainVertical()))
+        {
+            rb.AddForce(Vector2.up * _sideForce * Mathf.Abs(InputManager.MainVertical()), ForceMode2D.Force);
+        }
+    }
+
+    public void MoveDown()
+    {
+        if (rb.velocity.y > -_maxSpeed * Mathf.Abs(InputManager.MainVertical()))
+        {
+            rb.AddForce(Vector2.down * _sideForce * Mathf.Abs(InputManager.MainVertical()), ForceMode2D.Force);
+        }
+    }
+
+    public void StopY()
+    {
+        if (rb.velocity.y < 0.0f)
+        {
+            rb.AddForce(Vector2.up * 35, ForceMode2D.Force);
+        }
+    }
+
 }

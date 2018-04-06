@@ -53,52 +53,75 @@ public class PlayerState : MonoBehaviour {
         //    State = MyState.Falling;
 
         //StartCoroutine(GetComponent<PlayerGround>().CheckGround());
+
         // CIRCLE RICK
-        if (InputManager.ButtonA())
+        if (Character == MyCharacter.CIRCLE)
         {
+            if (InputManager.ButtonA())
+            {
 
-            if (State != MyState.Grounding && GetComponent<PlayerBounce>().CheckBounce())
-            {
-                StartCoroutine(GetComponent<PlayerBounce>().Bounce());
-                LastState = State;
-                State = MyState.Bouncing;
-                Debug.Log(State);
-            }
-            else
-            {
-                switch (State)
+                if (State != MyState.Grounding && GetComponent<PlayerBounce>().CheckBounce())
                 {
-                    case MyState.Grounding:
-                        GetComponent<PlayerJump>().Jump();
-                        LastState = State;
-                        State = MyState.Jumping;
-                        break;
+                    StartCoroutine(GetComponent<PlayerBounce>().Bounce());
+                    LastState = State;
+                    State = MyState.Bouncing;
+                    Debug.Log(State);
+                }
+                else
+                {
+                    switch (State)
+                    {
+                        case MyState.Grounding:
+                            GetComponent<PlayerJump>().Jump();
+                            LastState = State;
+                            State = MyState.Jumping;
+                            break;
 
-                    case MyState.Jumping:
-                        GetComponent<PlayerJump>().DoubleJump();
-                        LastState = State;
-                        State = MyState.DoubleJumping;
-                        break;
+                        case MyState.Jumping:
+                            GetComponent<PlayerJump>().DoubleJump();
+                            LastState = State;
+                            State = MyState.DoubleJumping;
+                            break;
+                    }
+                }
+
+                if (GetComponent<PlayerGround>().LeftHit)
+                {
+                    StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
+                }
+                else if (GetComponent<PlayerGround>().RightHit)
+                {
+                    StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
                 }
             }
-
-            if (GetComponent<PlayerGround>().LeftHit)
-            {
-                StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
-            }
-            else if (GetComponent<PlayerGround>().RightHit)
-            {
-                StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
-            }
         }
+
         //else if (LastState == MyState.Bouncing && State == MyState.Grounding)
         //{
         //    LastState = MyState.Grounding;
         //    float value = 300f;
         //    StartCoroutine(GetComponent<PlayerBounce>().Atenuation(value));
         //}
-            
-            
+
+        //RICK SQUARE
+        else if (Character == MyCharacter.SQUARE)
+        {
+            if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit)
+            {
+                if (InputManager.MainHorizontal() > 0.0f && !stop)
+                {
+                    GetComponent<PlayerMovement>().MoveUp();
+                }
+                else if (InputManager.MainHorizontal() == 0.0f && !stop)
+                {
+                    GetComponent<PlayerMovement>().StopY();
+                }
+                else if (InputManager.MainHorizontal() < 0.0f && !stop)
+                {
+                    GetComponent<PlayerMovement>().MoveDown();
+                }
+            }
+        }
 
         // RICK DASH
         if (GetComponent<PlayerDash>().CheckDash()) {
