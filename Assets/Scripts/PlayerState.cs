@@ -14,6 +14,12 @@ public class PlayerState : MonoBehaviour {
         set { _state = value; }
     }
 
+    public static MyState _lastState;
+    public static MyState LastState {
+        get { return _lastState; }
+        set { _lastState = value; }
+    }
+
     public enum MyCharacter { SQUARE, CIRCLE }
     public static MyCharacter _character;
     public static MyCharacter Character {
@@ -23,6 +29,7 @@ public class PlayerState : MonoBehaviour {
 
     void Awake() {
         State = MyState.Falling;
+        LastState = State;
 
         // Initialize RICK into a Circle
         Character = MyCharacter.CIRCLE;
@@ -64,6 +71,14 @@ public class PlayerState : MonoBehaviour {
                         State = MyState.DoubleJumping;
                         break;
                 }
+            }
+
+            if (GetComponent<PlayerGround>().LeftHit) {
+                StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
+            }
+            else if (GetComponent<PlayerGround>().RightHit)
+            {
+                StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
             }
         }
 

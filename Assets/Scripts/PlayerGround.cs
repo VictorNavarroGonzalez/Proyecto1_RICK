@@ -44,21 +44,21 @@ public class PlayerGround : MonoBehaviour {
 
     private Vector2 playerSize;
     private Vector2 boxSize;
-    private Vector2 boxSize_L;
+    private Vector2 invertedBox;
 
     void Awake() {
         playerSize = GetComponent<BoxCollider2D>().size;
         boxSize = new Vector2(playerSize.x * 0.9f, skinDepth);
-        boxSize_L = new Vector2(playerSize.y * 0.7f, skinDepth);
+        invertedBox = new Vector2(skinDepth, playerSize.x * 0.5f);
     }
 
     void FixedUpdate() {
         Vector2 boxCenter = (Vector2)transform.position + Vector2.down * (playerSize.y + boxSize.y) * 0.5f;
-        Vector2 boxCenter_L = (Vector2)transform.position + Vector2.left * (playerSize.y + boxSize.y) * 0.5f;
-        Vector2 boxCenter_R = (Vector2)transform.position + Vector2.right * (playerSize.y + boxSize.y) * 0.5f;
+        Vector2 rigthCenter = (Vector2)(transform.position) + Vector2.right * ((playerSize.x*0.7f) * 0.5f);
+        Vector2 leftCenter = (Vector2)(transform.position) + Vector2.left * ((playerSize.x * 0.7f) * 0.5f);
         _grounded = (Physics2D.OverlapBox(boxCenter, boxSize, 0, mask) != null);
-        _leftHit = (Physics2D.OverlapBox(boxCenter_L, boxSize_L, 0, mask) != null);
-        _rightHit = (Physics2D.OverlapBox(boxCenter_R, boxSize_L, 0, mask) != null); 
+        _leftHit = (Physics2D.OverlapBox(leftCenter, invertedBox, 0, mask) != null);
+        _rightHit = (Physics2D.OverlapBox(rigthCenter, invertedBox, 0, mask) != null);
     }
 
     public IEnumerator CheckGround() {
