@@ -108,15 +108,15 @@ public class PlayerState : MonoBehaviour {
         {
             if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit)
             {
-                if (InputManager.MainHorizontal() > 0.0f && !stop)
+                if (InputManager.MainVertical() < 0.0f && !stop)
                 {
                     GetComponent<PlayerMovement>().MoveUp();
                 }
-                else if (InputManager.MainHorizontal() == 0.0f && !stop)
+                else if (InputManager.MainVertical() == 0.0f && !stop)
                 {
                     GetComponent<PlayerMovement>().StopY();
                 }
-                else if (InputManager.MainHorizontal() < 0.0f && !stop)
+                else if (InputManager.MainVertical() > 0.0f && !stop)
                 {
                     GetComponent<PlayerMovement>().MoveDown();
                 }

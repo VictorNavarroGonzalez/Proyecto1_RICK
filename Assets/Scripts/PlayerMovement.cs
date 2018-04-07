@@ -60,6 +60,7 @@ public class PlayerMovement : MonoBehaviour {
     public void MoveUp()
     {
         if (rb.velocity.y < _maxSpeed * Mathf.Abs(InputManager.MainVertical()))
+            if(rb.velocity.y < 0f) rb.velocity = new Vector2(rb.velocity.x, 0);
         {
             rb.AddForce(Vector2.up * _sideForce * Mathf.Abs(InputManager.MainVertical()), ForceMode2D.Force);
         }
