@@ -38,6 +38,8 @@ public class PlayerState : MonoBehaviour {
     }
 
     void FixedUpdate() {
+        Debug.Log(_state);
+
         // RICK HORIZONTAL MOVEMENT
         if (InputManager.MainHorizontal() > 0.0f && !stop) {
             GetComponent<PlayerMovement>().MoveRight();
@@ -139,9 +141,10 @@ public class PlayerState : MonoBehaviour {
         //Debug.Log(State);
     }
 
-    public IEnumerator Stopping(float value) {
+    // Stop certain action on a specified time
+    public IEnumerator Stopping(float time) {
         stop = true;
-        yield return new WaitForSeconds(value);
+        yield return new WaitForSeconds(time);
         stop = false;
     }
 }

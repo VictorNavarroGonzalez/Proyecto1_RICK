@@ -51,12 +51,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\InputManager.cs" />
      <Compile Include="Assets\Scripts\PlayerBounce.cs" />
      <Compile Include="Assets\Scripts\PlayerChange.cs" />
+     <Compile Include="Assets\Scripts\PlayerDash.cs" />
      <Compile Include="Assets\Scripts\PlayerGround.cs" />
      <Compile Include="Assets\Scripts\PlayerJump.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\PlayerState.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>D:/UNITY/Proyecto1_RICK/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>

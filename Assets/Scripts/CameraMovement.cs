@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour {
                 transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d*d * Time.deltaTime);
                 break;
 
-            case PlayerState.MyState.Falling:
+            case PlayerState.MyState.Grounding:
                 d = Mathf.Abs(end.position.y - transform.position.y);
                 transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d*d * Time.deltaTime);
                 break;
