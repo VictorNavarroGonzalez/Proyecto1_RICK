@@ -4,59 +4,44 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-
-    public static float MainHorizontal()
-    {
+    // JOYSTICK INPUT
+    public static float MainHorizontal() {
         float r = 0.0f;
         r += Input.GetAxis("J_Horizontal");
         r += Input.GetAxis("K_Horizontal");
         return Mathf.Clamp(r, -1.0f, 1.0f);
     }
-
-    public static float MainVertical()
-    {
+    public static float MainVertical() {
         float r = 0.0f;
         r += Input.GetAxis("J_Vertical");
         r += Input.GetAxis("K_Vertical");
         return Mathf.Clamp(r, -1.0f, 1.0f);
     }
-
-    public static Vector2 MainJoystick()
-    {
+    public static Vector2 MainJoystick() {
         return new Vector2(MainHorizontal(), MainVertical());
     }
 
-    public static bool ButtonA()
-    {
+    // JUMP INPUTS
+    public static bool ButtonA(){
         return Input.GetButtonDown("ButtonA");
     }
-
-    public static bool PressedButtonA()
-    {
+    public static bool ButtonDownA() {
         return Input.GetButton("ButtonA");
     }
 
-    public static bool ButtonY()
-    {
+    // CHANGE INPUT
+    public static bool ButtonY() {
         return Input.GetButtonDown("ButtonY");
     }
 
-    public static bool ButtonRT()
-    {
-        return Input.GetButtonDown("ButtonRT");
+
+    // DASH INPUTS
+    public static bool ButtonRT() {
+        if (Input.GetButtonDown("KeyRT")) return true;
+        return Input.GetAxis("ButtonRT") < 0;
     }
-    public static bool ButtonLT()
-    {
-        return Input.GetButtonDown("ButtonLT");
+    public static bool ButtonLT() {
+        if (Input.GetButtonDown("KeyLT")) return true;
+        return Input.GetAxis("ButtonLT") > 0;
     }
 }
-//    public static bool ButtonRT(){
-//        Debug.Log("pillao l");
-//        return Input.GetAxis("ButtonRT")>0;
-//    }
-
-//    public static bool ButtonLT(){
-//        Debug.Log("pillao k");
-//        return Input.GetAxis("ButtonLT")>0;
-//    }
-//}

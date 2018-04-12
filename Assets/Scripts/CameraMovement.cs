@@ -19,17 +19,18 @@ public class CameraMovement : MonoBehaviour {
             case PlayerState.MyState.Bouncing:
                 float d = Mathf.Abs(end.position.y - transform.position.y);
                 transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d*d * Time.deltaTime);
-                break;
+                break;              
 
-            case PlayerState.MyState.Grounding:
+            case PlayerState.MyState.Falling:
                 d = Mathf.Abs(end.position.y - transform.position.y);
-                transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d*d * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d*d*d * Time.deltaTime);
                 break;
 
-            //case PlayerState.MyState.Smashing:
-                //    d = Mathf.Abs(end.position.y - transform.position.y);
-                //    transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d*d*d * Time.deltaTime);
-                //    break;
+            default:
+                // Temporal for grounding case
+                d = Mathf.Abs(end.position.y - transform.position.y);
+                transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d * d * Time.deltaTime);
+                break;
         }
     }
 }
