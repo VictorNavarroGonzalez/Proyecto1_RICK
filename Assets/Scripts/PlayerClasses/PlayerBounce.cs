@@ -2,64 +2,85 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBounce : MonoBehaviour {
+public class PlayerBounce : MonoBehaviour
+{
 
     private Rigidbody2D rb;
     public RaycastHit2D downHit;
 
     public bool canBounce;
-    public bool boostBounce;
 
     Vector2 playerHeight;
     Vector2 playerPos;
 
     private float _bounceForce;
-    public float BounceForce {
+    public float BounceForce
+    {
         get { return _bounceForce; }
         set { _bounceForce = value; }
     }
 
-    void Awake() {
+    void Awake()
+    {
         rb = GetComponent<Rigidbody2D>();
 
         playerHeight = new Vector2(0, GetComponent<CircleCollider2D>().radius * 2);
-        boostBounce = false;
         canBounce = false;
     }
 
-    public float DistGround() {
+    private void FixedUpdate()
+    {
+        CheckBounce();
+    }
+
+    public float DistGround()
+    {
         playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
         downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);
 
         return downHit.distance;
     }
 
-    public bool CheckBounce() {
-        // Raycast under the player
-        playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
-        downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);
+    public bool CheckBounce()
+    {
+        // Detect if Player is falling from enough heigh
+        if (DistGround() > 10f) canBounce = true;
+        else if (GetComponent<PlayerGround>().Grounded) canBounce = false;
 
-        // Detect if Player is falling
-        return (rb.velocity.y < 0 && downHit.distance < 2f);
+        return canBounce;
     }
 
-    public IEnumerator Bounce() {
+    public IEnumerator Bounce()
+    {
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * BounceForce * Time.deltaTime, ForceMode2D.Impulse);
+        if (InputManager.ButtonDownA())
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * BounceForce * Time.deltaTime, ForceMode2D.Impulse);
+        }
+        canBounce = false;
     }
 
-    public IEnumerator LeftBounce() {
+    public IEnumerator LeftBounce()
+    {
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().LeftHit));
-        StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
-        rb.velocity = new Vector2(0, rb.velocity.y);
-        rb.AddForce(Vector2.right * BounceForce * 0.5f * Time.deltaTime, ForceMode2D.Impulse);
+        if (InputManager.ButtonDownA())
+        {
+            StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            rb.AddForce(Vector2.right * BounceForce * 0.5f * Time.deltaTime, ForceMode2D.Impulse);
+        }
     }
 
-    public IEnumerator RightBounce() {
+    public IEnumerator RightBounce()
+    {
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().RightHit));
-        StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
-        rb.velocity = new Vector2(0, rb.velocity.y);
-        rb.AddForce(Vector2.left * BounceForce * 0.5f * Time.deltaTime, ForceMode2D.Impulse);
+        if (InputManager.ButtonDownA())
+        {
+            StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
+            rb.velocity = new Vector2(0, rb.velocity.y);
+            rb.AddForce(Vector2.left * BounceForce * 0.5f * Time.deltaTime, ForceMode2D.Impulse);
+        }
     }
+
 }

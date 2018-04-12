@@ -53,6 +53,16 @@ public class PlayerState : MonoBehaviour {
         }
         #endregion
 
+        if (State != MyState.Grounding && GetComponent<PlayerGround>().CheckGround()) {
+            StartCoroutine(ActiveGrounding());
+        }
+
+        if(GetComponent<PlayerBounce>().CheckBounce()) {
+            StartCoroutine(GetComponent<PlayerBounce>().Bounce());
+            LastState = State;
+            State = MyState.Bouncing;
+        }
+
         #region RICK DASH 
         if (InputManager.ButtonRT()) {
             if (GetComponent<PlayerGround>().CheckGround()) State = MyState.Grounding;
@@ -174,5 +184,14 @@ public class PlayerState : MonoBehaviour {
         stop = true;
         yield return new WaitForSeconds(time);
         stop = false;
+    }
+
+    public IEnumerator ActiveGrounding() {
+        yield return new WaitForSeconds(0.01f);
+        if (GetComponent<PlayerGround>().CheckGround())
+        {
+            LastState = State;
+            State = MyState.Grounding;
+        }
     }
 }
