@@ -21,7 +21,8 @@ GameObject:
   - component: {fileID: 4122140365658598}
   - component: {fileID: 212468026330849202}
   - component: {fileID: 61586063499354672}
-  m_Layer: 8
+  - component: {fileID: 114186328419741698}
+  m_Layer: 9
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1549974578476628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.39, y: -3.8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 15, y: 6.5, z: 0}
+  m_LocalScale: {x: 0.9006041, y: 0.2310006, z: 29.612843}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -66,6 +67,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 8.34, y: 8.34}
   m_EdgeRadius: 0
+--- !u!114 &114186328419741698
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1549974578476628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce56005f84bc24bd4b5dfd672a1db5fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStatic: 0
+  offScreenDistance: 3
 --- !u!212 &212468026330849202
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -97,8 +111,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 2009886745
+  m_SortingLayer: -1
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3077d56a04cd7f440a9328e519930e77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

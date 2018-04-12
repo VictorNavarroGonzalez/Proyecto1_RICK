@@ -39,7 +39,7 @@ public class PlayerState : MonoBehaviour {
     void FixedUpdate() {
         Debug.Log(State);
 
-        // RICK HORIZONTAL MOVEMENT
+        #region RICK HORIZONTAL MOVEMENT
         if (!stop) {
             if (InputManager.MainHorizontal() > 0.0f) {
                 GetComponent<PlayerMovement>().MoveRight();
@@ -51,25 +51,43 @@ public class PlayerState : MonoBehaviour {
                 GetComponent<PlayerMovement>().MoveLeft();
             }
         }
+        #endregion
 
+        #region RICK DASH 
+        if (InputManager.ButtonRT()) {
+            if (GetComponent<PlayerGround>().CheckGround()) State = MyState.Grounding;
 
+            if (GetComponent<PlayerDash>().CheckDash()) {
+                GetComponent<PlayerDash>().RightDash();
+                LastState = State;
+                State = MyState.Dashing;
+            }
+        }
 
-        //if (GetComponent<Rigidbody2D>().velocity.y < 0)
-        //    State = MyState.Falling;
+        if (InputManager.ButtonLT()) {
+            if (GetComponent<PlayerGround>().CheckGround()) State = MyState.Grounding;
 
-        //StartCoroutine(GetComponent<PlayerGround>().CheckGround());
+            if (GetComponent<PlayerDash>().CheckDash()) {
+                GetComponent<PlayerDash>().LeftDash();
+                LastState = State;
+                State = MyState.Dashing;
+            }
+        }
+        #endregion
 
-        //if (GetComponent<PlayerGround>().CheckGround()) {
-        //    if (State != MyState.Grounding) {
-        //        LastState = State;
-        //        State = MyState.Grounding;
-        //    }
-        //}
+        #region RICK CHANGE CHARACTER
+        if (InputManager.ButtonY()) {
+            GetComponent<PlayerChange>().Change();
+            GetComponent<PlayerChange>().Actualize();
+        }
+        #endregion
 
-        // CIRCLE RICK
-        if (Character == MyCharacter.CIRCLE) {
+        #region CIRCLE BEHAVIOR
+        if (Character == MyCharacter.CIRCLE) { 
+            
             if (InputManager.ButtonA()) {
 
+                #region Jumping & Bouncing
                 if (GetComponent<PlayerGround>().CheckGround()) State = MyState.Grounding;
 
                 if (State != MyState.Grounding && GetComponent<PlayerBounce>().CheckBounce()) {
@@ -92,40 +110,27 @@ public class PlayerState : MonoBehaviour {
                             break;
                     }
                 }
+                #endregion
 
-
-                
+                #region Wall Bouncing
                 if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f) {
                     StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
                 }
                 else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f) {
                     StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
                 }
+                #endregion
+
             }
+
         }
+        #endregion
 
-        //else if (LastState == MyState.Bouncing && State == MyState.Grounding)
-        //{
-        //    LastState = MyState.Grounding;
-        //    float value = 300f;
-        //    StartCoroutine(GetComponent<PlayerBounce>().Atenuation(value));
-        //}
-
-        //RICK SQUARE
+        #region SQUARE BEHAVIOR
         else if (Character == MyCharacter.SQUARE) {
-            if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit) {
-                if (InputManager.MainVertical() < 0.0f && !stop) {
-                    GetComponent<PlayerMovement>().MoveUp();
-                }
-                else if (InputManager.MainVertical() == 0.0f && !stop) {
-                    GetComponent<PlayerMovement>().StopY();
-                }
-                else if (InputManager.MainVertical() > 0.0f && !stop) {
-                    GetComponent<PlayerMovement>().MoveDown();
-                }
-            }
 
-            if (InputManager.ButtonA())
+            #region Jumping & Falling
+            if (InputManager.ButtonA()) {
                 switch (State) {
                     case MyState.Grounding:
                         GetComponent<PlayerJump>().Jump();
@@ -141,35 +146,27 @@ public class PlayerState : MonoBehaviour {
                         State = MyState.Falling;
                         break;
                 }
-        }
-
-        // RICK DASH  
-        if (InputManager.ButtonRT()) {
-            if (GetComponent<PlayerGround>().CheckGround()) State = MyState.Grounding;
-
-            if (GetComponent<PlayerDash>().CheckDash()) {
-                GetComponent<PlayerDash>().RightDash();
-                LastState = State;
-                State = MyState.Dashing;
-            } 
-        }
-
-        if (InputManager.ButtonLT()) {
-            if (GetComponent<PlayerGround>().CheckGround()) State = MyState.Grounding;
-
-            if (GetComponent<PlayerDash>().CheckDash()) {
-                GetComponent<PlayerDash>().LeftDash();
-                LastState = State;
-                State = MyState.Dashing;
             }
-        }
+            #endregion
+
+            #region Wall Climbing
+            if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit) {
+                if (InputManager.MainVertical() < 0.0f && !stop) {
+                    GetComponent<PlayerMovement>().MoveUp();
+                }
+                else if (InputManager.MainVertical() == 0.0f && !stop) {
+                    GetComponent<PlayerMovement>().StopY();
+                }
+                else if (InputManager.MainVertical() > 0.0f && !stop) {
+                    GetComponent<PlayerMovement>().MoveDown();
+                }
+            }
+            #endregion
 
 
-        // RICK CHANGE CHARACTER
-        if (InputManager.ButtonY()) {
-            GetComponent<PlayerChange>().Change();
-            GetComponent<PlayerChange>().Actualize();
         }
+        #endregion
+
     }
 
     // Stop certain action on a specified time

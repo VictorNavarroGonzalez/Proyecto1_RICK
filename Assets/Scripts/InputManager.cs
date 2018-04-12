@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
-{
-    // JOYSTICK INPUT
+public class InputManager : MonoBehaviour{
+    
+    #region JOYSTICK INPUT
     public static float MainHorizontal() {
         float r = 0.0f;
         r += Input.GetAxis("J_Horizontal");
@@ -20,22 +20,24 @@ public class InputManager : MonoBehaviour
     public static Vector2 MainJoystick() {
         return new Vector2(MainHorizontal(), MainVertical());
     }
+    #endregion
 
-    // JUMP INPUTS
+    #region JUMP INPUTS
     public static bool ButtonA(){
         return Input.GetButtonDown("ButtonA");
     }
     public static bool ButtonDownA() {
         return Input.GetButton("ButtonA");
     }
+    #endregion
 
-    // CHANGE INPUT
+    #region CHANGE INPUT
     public static bool ButtonY() {
         return Input.GetButtonDown("ButtonY");
     }
+    #endregion
 
-
-    // DASH INPUTS
+    #region DASH INPUTS
     public static bool ButtonRT() {
         if (Input.GetButtonDown("KeyRT")) return true;
         return Input.GetAxis("ButtonRT") < 0;
@@ -44,4 +46,6 @@ public class InputManager : MonoBehaviour
         if (Input.GetButtonDown("KeyLT")) return true;
         return Input.GetAxis("ButtonLT") > 0;
     }
+    #endregion
+
 }
