@@ -53,19 +53,15 @@ public class PlayerState : MonoBehaviour {
         }
         #endregion
 
+        
         if (State != MyState.Grounding && GetComponent<PlayerGround>().CheckGround()) {
             StartCoroutine(ActiveGrounding());
         }
 
-        if(GetComponent<PlayerBounce>().CheckBounce()) {
-            StartCoroutine(GetComponent<PlayerBounce>().Bounce());
-            LastState = State;
-            State = MyState.Bouncing;
-        }
+       
 
         #region RICK DASH 
         if (InputManager.ButtonRT()) {
-            if (GetComponent<PlayerGround>().CheckGround()) State = MyState.Grounding;
 
             if (GetComponent<PlayerDash>().CheckDash()) {
                 GetComponent<PlayerDash>().RightDash();
@@ -75,7 +71,6 @@ public class PlayerState : MonoBehaviour {
         }
 
         if (InputManager.ButtonLT()) {
-            if (GetComponent<PlayerGround>().CheckGround()) State = MyState.Grounding;
 
             if (GetComponent<PlayerDash>().CheckDash()) {
                 GetComponent<PlayerDash>().LeftDash();
@@ -93,55 +88,66 @@ public class PlayerState : MonoBehaviour {
         #endregion
 
         #region CIRCLE BEHAVIOR
-        if (Character == MyCharacter.CIRCLE) { 
-            
-            if (InputManager.ButtonA()) {
+        if (Character == MyCharacter.CIRCLE)
+        {
 
-                #region Jumping & Bouncing
-                if (GetComponent<PlayerGround>().CheckGround()) State = MyState.Grounding;
+            #region Bouncing
+            if (GetComponent<PlayerBounce>().CheckBounce())
+            {
+                StartCoroutine(GetComponent<PlayerBounce>().Bounce());
+                LastState = State;
+                State = MyState.Bouncing;
+            }
+            #endregion
 
-                if (State != MyState.Grounding && GetComponent<PlayerBounce>().CheckBounce()) {
-                    StartCoroutine(GetComponent<PlayerBounce>().Bounce());
-                    LastState = State;
-                    State = MyState.Bouncing;
-                }
-                else {
-                    switch (State) {
-                        case MyState.Grounding:
-                            GetComponent<PlayerJump>().Jump();
-                            LastState = State;
-                            State = MyState.Jumping;
-                            break;
+            #region Wall Bouncing
+            if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f)
+            {
+                StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
+            }
+            else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f)
+            {
+                StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
+            }
+            #endregion
 
-                        case MyState.Jumping:
-                            GetComponent<PlayerJump>().DoubleJump();
-                            LastState = State;
-                            State = MyState.DoubleJumping;
-                            break;
-                    }
-                }
-                #endregion
 
-                #region Wall Bouncing
-                if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f) {
-                    StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
-                }
-                else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f) {
-                    StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
+            if (InputManager.ButtonA())
+            {
+
+                #region Jumping
+
+                switch (State)
+                {
+                    case MyState.Grounding:
+                        GetComponent<PlayerJump>().Jump();
+                        LastState = State;
+                        State = MyState.Jumping;
+                        break;
+
+                    case MyState.Jumping:
+                        GetComponent<PlayerJump>().DoubleJump();
+                        LastState = State;
+                        State = MyState.DoubleJumping;
+                        break;
+
                 }
                 #endregion
 
             }
-
+            #endregion
         }
-        #endregion
+
 
         #region SQUARE BEHAVIOR
-        else if (Character == MyCharacter.SQUARE) {
+        else if (Character == MyCharacter.SQUARE)
+        {
 
             #region Jumping & Falling
-            if (InputManager.ButtonA()) {
-                switch (State) {
+            if (InputManager.ButtonA())
+            {
+                switch (State)
+                {
                     case MyState.Grounding:
                         GetComponent<PlayerJump>().Jump();
                         LastState = State;
@@ -160,14 +166,18 @@ public class PlayerState : MonoBehaviour {
             #endregion
 
             #region Wall Climbing
-            if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit) {
-                if (InputManager.MainVertical() < 0.0f && !stop) {
+            if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit)
+            {
+                if (InputManager.MainVertical() < 0.0f && !stop)
+                {
                     GetComponent<PlayerMovement>().MoveUp();
                 }
-                else if (InputManager.MainVertical() == 0.0f && !stop) {
+                else if (InputManager.MainVertical() == 0.0f && !stop)
+                {
                     GetComponent<PlayerMovement>().StopY();
                 }
-                else if (InputManager.MainVertical() > 0.0f && !stop) {
+                else if (InputManager.MainVertical() > 0.0f && !stop)
+                {
                     GetComponent<PlayerMovement>().MoveDown();
                 }
             }
