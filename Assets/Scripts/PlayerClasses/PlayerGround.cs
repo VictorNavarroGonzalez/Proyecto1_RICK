@@ -45,7 +45,7 @@ public class PlayerGround : MonoBehaviour {
 
     void Awake() {
         playerSize = GetComponent<BoxCollider2D>().size;
-        boxSize = new Vector2(playerSize.x * 0.9f, skinDepth);
+        boxSize = new Vector2(playerSize.x * 0.6f, skinDepth);
         invertedBox = new Vector2(skinDepth, playerSize.x * 0.5f);
     }
 

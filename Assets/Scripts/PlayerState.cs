@@ -13,7 +13,7 @@ public class PlayerState : MonoBehaviour {
         get { return _state; }
         set { _state = value; }
     }
-
+    private static MyState temp;
     public static MyState _lastState;
     public static MyState LastState {
         get { return _lastState; }
@@ -34,10 +34,15 @@ public class PlayerState : MonoBehaviour {
         // Initialize RICK into a Circle
         Character = MyCharacter.CIRCLE;
         GetComponent<PlayerChange>().Actualize();
+        temp = MyState.Bouncing;
     }
 
     void FixedUpdate() {
-        Debug.Log(State);
+        if (temp != State)
+        {
+            Debug.Log(State);
+            temp = State;
+        }
 
         #region RICK HORIZONTAL MOVEMENT
         if (!stop) {
@@ -101,11 +106,11 @@ public class PlayerState : MonoBehaviour {
             #endregion
 
             #region Wall Bouncing
-            if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f)
+            if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce)
             {
                 StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
             }
-            else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f)
+            else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce)
             {
                 StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
             }
@@ -120,6 +125,7 @@ public class PlayerState : MonoBehaviour {
                 switch (State)
                 {
                     case MyState.Grounding:
+                        StartCoroutine(GetComponent<PlayerBounce>().CheckWallBounce());
                         GetComponent<PlayerJump>().Jump();
                         LastState = State;
                         State = MyState.Jumping;

@@ -9,6 +9,7 @@ public class PlayerBounce : MonoBehaviour
     public RaycastHit2D downHit;
 
     public bool canBounce;
+    public bool canWBounce;
 
     Vector2 playerHeight;
     Vector2 playerPos;
@@ -26,6 +27,8 @@ public class PlayerBounce : MonoBehaviour
 
         playerHeight = new Vector2(0, GetComponent<CircleCollider2D>().radius * 2);
         canBounce = false;
+        canWBounce = true;
+
     }
 
     private void FixedUpdate()
@@ -83,6 +86,18 @@ public class PlayerBounce : MonoBehaviour
             rb.AddForce(Vector2.left * BounceForce * 0.5f * Time.deltaTime, ForceMode2D.Impulse);
             rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * Time.deltaTime, ForceMode2D.Impulse);
         }
+    }
+
+    public IEnumerator CheckWallBounce()
+    {
+        if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit)
+        {
+            Debug.Log("Activado");
+            canWBounce = false;
+            yield return new WaitForSeconds(0.6f);
+            canWBounce = true;
+        }
+      
     }
 
 }
