@@ -15,7 +15,7 @@ TagManager:
   - 
   - Player
   - Ground
-  - 
+  - Cliff
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Obstacle
     uniqueID: 2009886745
+    locked: 0
+  - name: Cliff
+    uniqueID: 4138469663
     locked: 0
   - name: Player
     uniqueID: 1851918699

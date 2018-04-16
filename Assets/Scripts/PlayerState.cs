@@ -31,6 +31,7 @@ public class PlayerState : MonoBehaviour {
         State = MyState.Jumping;
         LastState = State;
         stop = false;
+
         // Initialize RICK into a Circle
         Character = MyCharacter.CIRCLE;
         GetComponent<PlayerChange>().Actualize();
@@ -58,12 +59,11 @@ public class PlayerState : MonoBehaviour {
         }
         #endregion
 
-        
+        #region RICK GROUNDING
         if (State != MyState.Grounding && GetComponent<PlayerGround>().CheckGround()) {
             StartCoroutine(ActiveGrounding());
         }
-
-       
+        #endregion
 
         #region RICK DASH 
         if (InputManager.ButtonRT()) {
@@ -92,6 +92,7 @@ public class PlayerState : MonoBehaviour {
         }
         #endregion
 
+
         #region CIRCLE BEHAVIOR
         if (Character == MyCharacter.CIRCLE)
         {
@@ -116,11 +117,11 @@ public class PlayerState : MonoBehaviour {
             }
             #endregion
 
-
+            #region Jumping
             if (InputManager.ButtonA())
             {
 
-                #region Jumping
+                
 
                 switch (State)
                 {
@@ -138,12 +139,12 @@ public class PlayerState : MonoBehaviour {
                         break;
 
                 }
-                #endregion
 
             }
             #endregion
-        }
 
+        }
+        #endregion
 
         #region SQUARE BEHAVIOR
         else if (Character == MyCharacter.SQUARE)

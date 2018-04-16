@@ -92,7 +92,6 @@ public class PlayerBounce : MonoBehaviour
     {
         if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit)
         {
-            Debug.Log("Activado");
             canWBounce = false;
             yield return new WaitForSeconds(0.6f);
             canWBounce = true;
