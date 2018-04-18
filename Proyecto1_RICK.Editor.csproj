@@ -145,6 +145,21 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/15.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="DOTween">
+      <HintPath>Assets/Addons/Demigiant/DOTween/DOTween.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTweenEditor">
+      <HintPath>Assets/Addons/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween50">
+      <HintPath>Assets/Addons/Demigiant/DOTween/DOTween50.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween46">
+      <HintPath>Assets/Addons/Demigiant/DOTween/DOTween46.dll</HintPath>
+    </Reference>
+    <Reference Include="DOTween43">
+      <HintPath>Assets/Addons/Demigiant/DOTween/DOTween43.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>
     </Reference>
@@ -177,6 +192,12 @@
     <Compile Include="Assets\Addons\ProCore\ProGrids\Editor\pg_ToggleContent.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Addons\Demigiant\DOTween\DOTween.XML" />
+    <None Include="Assets\Addons\Demigiant\DOTween\DOTween43.xml" />
+    <None Include="Assets\Addons\Demigiant\DOTween\DOTween46.xml" />
+    <None Include="Assets\Addons\Demigiant\DOTween\DOTween50.xml" />
+    <None Include="Assets\Addons\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
+    <None Include="Assets\Addons\Demigiant\DOTween\readme.txt" />
     <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\Basic.shader" />
     <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\GreyscaleBackground.shader" />
     <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\GreyscaleForeground.shader" />

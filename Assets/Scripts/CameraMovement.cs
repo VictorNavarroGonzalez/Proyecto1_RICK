@@ -1,40 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class CameraMovement : MonoBehaviour {
 
-    public Transform end;
+    public Transform player;
     public Vector3 offset;
 
+    void Awake() {
+        DOTween.Init();
+    }
 
     void FixedUpdate() {
+
+        Tween flying = transform.DOLocalMoveY(player.position.y, 1f, false).SetEase(Ease.OutExpo);
+
         // Normal Horizontal CameraMovement
-        transform.position = new Vector3(end.position.x, transform.position.y, end.position.z) + offset;
+        transform.DOMoveX(player.position.x, 0f, false);
 
         // Camera Movement
         switch (PlayerState.State) {
+
             case PlayerState.MyState.Jumping:
             case PlayerState.MyState.DoubleJumping:
             case PlayerState.MyState.Bouncing:
-                float d = Mathf.Abs(end.position.y - transform.position.y);
-                transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d*d * Time.deltaTime);
-                break;              
+                if(flying.IsComplete()) flying.Play();
+                break;
 
             case PlayerState.MyState.Falling:
-                d = Mathf.Abs(end.position.y - transform.position.y);
-                transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d*d*d * Time.deltaTime);
-                break;
+                transform.DOMoveY(player.position.y, 2f, false);
+                break; 
 
             case PlayerState.MyState.Grounding:
-                transform.position = Vector3.MoveTowards(transform.position, end.position, 2.5f) + offset;
+                transform.DOMoveY(player.position.y, 2f, false);
                 break;
 
-            default:
-                // Temporal for grounding case
-                d = Mathf.Abs(end.position.y - transform.position.y);
-                transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d * d * Time.deltaTime);
-                break;
         }
     }
 }
