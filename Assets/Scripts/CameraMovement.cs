@@ -26,6 +26,10 @@ public class CameraMovement : MonoBehaviour {
                 transform.position = Vector3.MoveTowards(transform.position, end.position + offset, d*d*d * Time.deltaTime);
                 break;
 
+            case PlayerState.MyState.Grounding:
+                transform.position = Vector3.MoveTowards(transform.position, end.position, 2.5f) + offset;
+                break;
+
             default:
                 // Temporal for grounding case
                 d = Mathf.Abs(end.position.y - transform.position.y);
