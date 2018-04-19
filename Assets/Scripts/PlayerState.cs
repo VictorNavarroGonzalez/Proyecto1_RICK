@@ -47,13 +47,13 @@ public class PlayerState : MonoBehaviour {
 
         #region RICK HORIZONTAL MOVEMENT
         if (!stop) {
-            if (InputManager.MainHorizontal() > 0.0f) {
+            if (InputManager.MainHorizontal() > 0.0f && !GetComponent<PlayerGround>().RightHit) {
                 GetComponent<PlayerMovement>().MoveRight();
             }
             else if (InputManager.MainHorizontal() == 0.0f) {
                 GetComponent<PlayerMovement>().Stop();
             }
-            else if (InputManager.MainHorizontal() < 0.0f) {
+            else if (InputManager.MainHorizontal() < 0.0f & !GetComponent<PlayerGround>().LeftHit) {
                 GetComponent<PlayerMovement>().MoveLeft();
             }
         }
