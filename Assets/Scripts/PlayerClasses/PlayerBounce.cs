@@ -35,13 +35,14 @@ public class PlayerBounce : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {       
-        if (rb.velocity.y < 0 && !reading)
+    {
+        if (rb.velocity.y > 0) reading = false;
+        else if (rb.velocity.y < 0 && !reading)
         {
             tempY = rb.transform.position.y;
             Debug.Log(tempY);
             reading = true;
-            
+
         }
         CheckBounce();
     }
