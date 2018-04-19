@@ -2,32 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerState : MonoBehaviour {
+public class PlayerState : MonoBehaviour
+{
 
     private GameObject player;
     private bool stop;
 
     public enum MyState { Jumping, DoubleJumping, Dashing, Bouncing, Grounding, Falling };
     public static MyState _state;
-    public static MyState State {
+    public static MyState State
+    {
         get { return _state; }
         set { _state = value; }
     }
     private static MyState temp;
     public static MyState _lastState;
-    public static MyState LastState {
+    public static MyState LastState
+    {
         get { return _lastState; }
         set { _lastState = value; }
     }
 
     public enum MyCharacter { SQUARE, CIRCLE }
     public static MyCharacter _character;
-    public static MyCharacter Character {
+    public static MyCharacter Character
+    {
         get { return _character; }
         set { _character = value; }
     }
 
-    void Awake() {
+    void Awake()
+    {
         State = MyState.Jumping;
         LastState = State;
         stop = false;
@@ -38,7 +43,8 @@ public class PlayerState : MonoBehaviour {
         temp = MyState.Bouncing;
     }
 
-    void FixedUpdate() {
+    void FixedUpdate()
+    {
         if (temp != State)
         {
             Debug.Log(State);
@@ -46,38 +52,47 @@ public class PlayerState : MonoBehaviour {
         }
 
         #region RICK HORIZONTAL MOVEMENT
-        if (!stop) {
-            if (InputManager.MainHorizontal() > 0.0f && !GetComponent<PlayerGround>().RightHit) {
+        if (!stop)
+        {
+            if (InputManager.MainHorizontal() > 0.0f && !GetComponent<PlayerGround>().RightHit)
+            {
                 GetComponent<PlayerMovement>().MoveRight();
             }
-            else if (InputManager.MainHorizontal() == 0.0f) {
+            else if (InputManager.MainHorizontal() == 0.0f)
+            {
                 GetComponent<PlayerMovement>().Stop();
             }
-            else if (InputManager.MainHorizontal() < 0.0f & !GetComponent<PlayerGround>().LeftHit) {
+            else if (InputManager.MainHorizontal() < 0.0f & !GetComponent<PlayerGround>().LeftHit)
+            {
                 GetComponent<PlayerMovement>().MoveLeft();
             }
         }
         #endregion
 
         #region RICK GROUNDING
-        if (State != MyState.Grounding && GetComponent<PlayerGround>().CheckGround()) {
+        if (State != MyState.Grounding && GetComponent<PlayerGround>().CheckGround())
+        {
             StartCoroutine(ActiveGrounding());
         }
         #endregion
 
         #region RICK DASH 
-        if (InputManager.ButtonRT()) {
+        if (InputManager.ButtonRT())
+        {
 
-            if (GetComponent<PlayerDash>().CheckDash()) {
+            if (GetComponent<PlayerDash>().CheckDash())
+            {
                 GetComponent<PlayerDash>().RightDash();
                 LastState = State;
                 State = MyState.Dashing;
             }
         }
 
-        if (InputManager.ButtonLT()) {
+        if (InputManager.ButtonLT())
+        {
 
-            if (GetComponent<PlayerDash>().CheckDash()) {
+            if (GetComponent<PlayerDash>().CheckDash())
+            {
                 GetComponent<PlayerDash>().LeftDash();
                 LastState = State;
                 State = MyState.Dashing;
@@ -86,7 +101,8 @@ public class PlayerState : MonoBehaviour {
         #endregion
 
         #region RICK CHANGE CHARACTER
-        if (InputManager.ButtonY()) {
+        if (InputManager.ButtonY())
+        {
             GetComponent<PlayerChange>().Change();
             GetComponent<PlayerChange>().Actualize();
         }
@@ -121,7 +137,7 @@ public class PlayerState : MonoBehaviour {
             if (InputManager.ButtonA())
             {
 
-                
+
 
                 switch (State)
                 {
@@ -197,14 +213,17 @@ public class PlayerState : MonoBehaviour {
     }
 
     // Stop certain action on a specified time
-    public IEnumerator Stopping(float time) {
+    public IEnumerator Stopping(float time)
+    {
         stop = true;
         yield return new WaitForSeconds(time);
         stop = false;
     }
 
-    public IEnumerator ActiveGrounding() {
-        yield return new WaitForSeconds(0.01f);
+    public IEnumerator ActiveGrounding()
+    {
+        if (Character == MyCharacter.CIRCLE) yield return new WaitForSeconds(0.01f);
+        else if (Character == MyCharacter.SQUARE) yield return new WaitForSeconds(0.05f);
         if (GetComponent<PlayerGround>().CheckGround())
         {
             LastState = State;
