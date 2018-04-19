@@ -10,10 +10,13 @@ public class PlayerBounce : MonoBehaviour
 
     public bool canBounce;
     public bool canWBounce;
+    public bool reading;
+    public bool canChange;
 
     Vector2 playerHeight;
     Vector2 playerPos;
 
+    private float tempY;
     private float _bounceForce;
     public float BounceForce
     {
@@ -28,11 +31,19 @@ public class PlayerBounce : MonoBehaviour
         playerHeight = new Vector2(0, GetComponent<CircleCollider2D>().radius * 2);
         canBounce = false;
         canWBounce = true;
+        reading = false;
 
     }
 
     private void FixedUpdate()
     {
+        if (rb.velocity.y > 0) reading = false;
+        else if (rb.velocity.y < 0 && !reading)
+        {
+            tempY = rb.transform.position.y;
+            reading = true;
+
+        }
         CheckBounce();
     }
 
@@ -47,19 +58,28 @@ public class PlayerBounce : MonoBehaviour
     public bool CheckBounce()
     {
         // Detect if Player is falling from enough heigh
-        if (DistGround() > 10f) canBounce = true;
-        else if (GetComponent<PlayerGround>().Grounded) canBounce = false;
+        if (GetComponent<PlayerGround>().Grounded && reading)
+        {
+            if (Mathf.Abs(tempY - rb.transform.position.y) > 9f) canBounce = true;
+            else canBounce = false;
+            reading = false;
+        }
 
         return canBounce;
     }
 
     public IEnumerator Bounce()
     {
+        float multiplier;
+        if (PlayerState.State != PlayerState.MyState.Bouncing)
+            multiplier = Mathf.Abs(tempY - rb.transform.position.y);
+        else multiplier = Mathf.Abs(tempY - rb.transform.position.y)/2;
+        if (multiplier > 15) multiplier = 15.5f;
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));
         if (InputManager.ButtonDownA())
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(Vector2.up * BounceForce * Time.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * BounceForce * multiplier * Time.deltaTime, ForceMode2D.Impulse);
         }
         canBounce = false;
     }
@@ -71,7 +91,7 @@ public class PlayerBounce : MonoBehaviour
         {
             StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
             rb.velocity = new Vector2(0, 0);
-            rb.AddForce(Vector2.right * BounceForce * 0.5f * Time.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.right * BounceForce * 7f * Time.deltaTime, ForceMode2D.Impulse);
             rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
@@ -83,7 +103,7 @@ public class PlayerBounce : MonoBehaviour
         {
             StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
             rb.velocity = new Vector2(0, 0);
-            rb.AddForce(Vector2.left * BounceForce * 0.5f * Time.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.left * BounceForce* 7f * Time.deltaTime, ForceMode2D.Impulse);
             rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
