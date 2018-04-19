@@ -25,20 +25,15 @@ public class PlayerDash : MonoBehaviour
 
     public bool CheckDash() {
         if (PlayerState.State != PlayerState.MyState.Grounding && canDash) return true;
-        return false; ;
+        return false; 
     }
 
-    public void RightDash() {
+    public void Dash() {
         canDash = false;
         StartCoroutine(GetComponent<PlayerState>().Stopping(0.1f));
-        rb.velocity = new Vector2(0, rb.velocity.y);
-        rb.AddForce(Vector2.right * DashForce * Time.deltaTime, ForceMode2D.Impulse);
+        rb.velocity = new Vector2(rb.velocity.x, 0);
+        rb.AddForce(rb.velocity* DashForce* Time.deltaTime , ForceMode2D.Impulse);
     }
 
-    public void LeftDash() {
-        canDash = false;
-        StartCoroutine(GetComponent<PlayerState>().Stopping(0.1f));
-        rb.velocity = new Vector2(0, rb.velocity.y);
-        rb.AddForce(Vector2.left * DashForce * Time.deltaTime, ForceMode2D.Impulse);
-    }
+   
 }

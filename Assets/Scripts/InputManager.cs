@@ -38,13 +38,13 @@ public class InputManager : MonoBehaviour{
     #endregion
 
     #region DASH INPUTS
-    public static bool ButtonRT() {
-        if (Input.GetButtonDown("KeyRT")) return true;
-        return Input.GetAxis("ButtonRT") < 0;
+    public static bool ButtonX()
+    {
+        return Input.GetButtonDown("ButtonX");
     }
-    public static bool ButtonLT() {
-        if (Input.GetButtonDown("KeyLT")) return true;
-        return Input.GetAxis("ButtonLT") > 0;
+    public static bool ButtonDownX()
+    {
+        return Input.GetButton("ButtonX");
     }
     #endregion
 
