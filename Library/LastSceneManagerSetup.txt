@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/C02.unity
+=======
+- path: Assets/Scenes/C01.unity
+>>>>>>> master
   isLoaded: 1
   isActive: 1
