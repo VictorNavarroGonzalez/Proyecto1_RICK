@@ -118,7 +118,7 @@ public class PlayerState : MonoBehaviour
             {
                 StartCoroutine(GetComponent<PlayerBounce>().Bounce());
                 LastState = State;
-                State = MyState.Bouncing;
+                StartCoroutine(ActiveBouncing());
             }
             #endregion
 
@@ -222,12 +222,17 @@ public class PlayerState : MonoBehaviour
 
     public IEnumerator ActiveGrounding()
     {
-        if (Character == MyCharacter.CIRCLE) yield return new WaitForSeconds(0.01f);
+        if (Character == MyCharacter.CIRCLE) yield return new WaitForSeconds(0.03f);
         else if (Character == MyCharacter.SQUARE) yield return new WaitForSeconds(0.05f);
         if (GetComponent<PlayerGround>().CheckGround())
         {
             LastState = State;
             State = MyState.Grounding;
         }
+    }
+    public IEnumerator ActiveBouncing()
+    {
+        yield return new WaitForSeconds(0.2f);
+        State = MyState.Bouncing;
     }
 }
