@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Addons\Demigiant\DOTween\Examples\Basics.cs" />
+     <Compile Include="Assets\Addons\Demigiant\DOTween\Examples\Sequences.cs" />
      <Compile Include="Assets\Addons\LOS 2D Lighting\Core\Event\LOSEventManager.cs" />
      <Compile Include="Assets\Addons\LOS 2D Lighting\Core\Event\LOSEventSource.cs" />
      <Compile Include="Assets\Addons\LOS 2D Lighting\Core\Event\LOSEventTrigger.cs" />
@@ -90,9 +92,15 @@
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerJump.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\PlayerState.cs" />
+     <Compile Include="Assets\Scripts\SpawnCollider.cs" />
+     <Compile Include="Assets\Scripts\SpawnPoint.cs" />
+     <None Include="Assets\Addons\Demigiant\DOTween\readme.txt" />
      <None Include="Assets\Addons\ProCore\ProGrids\Shader\pg_GridShader.shader" />
      <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\Basic.shader" />
+     <None Include="Assets\Addons\Demigiant\DOTween\DOTween50.xml" />
+     <None Include="Assets\Addons\Demigiant\DOTween\DOTween46.xml" />
      <None Include="Assets\Addons\ProCore\ProGrids\About\pc_AboutEntry_ProGrids.txt" />
+     <None Include="Assets\Addons\Demigiant\DOTween\DOTween43.xml" />
      <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\GreyscaleBackground.shader" />
      <None Include="Assets\Addons\ProCore\ProGrids\About\changelog.txt" />
      <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\RadialLightPlus.shader" />
@@ -163,6 +171,21 @@
  </Reference>
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Assets/Addons/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Assets/Addons/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Assets/Addons/Demigiant/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Assets/Addons/Demigiant/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Assets/Addons/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/vinag/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>

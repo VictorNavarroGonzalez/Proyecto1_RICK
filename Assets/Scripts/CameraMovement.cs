@@ -8,34 +8,70 @@ public class CameraMovement : MonoBehaviour {
     public Transform player;
     public Vector3 offset;
 
+    Sequence grounding;
+    Sequence jumping;
+    Sequence bouncing;
+    Sequence falling;
+
     void Awake() {
+
         DOTween.Init();
+
+        grounding = DOTween.Sequence();
+        jumping = DOTween.Sequence();
+        bouncing = DOTween.Sequence();
+        falling = DOTween.Sequence();
+
     }
 
     void FixedUpdate() {
 
-        Tween flying = transform.DOLocalMoveY(player.position.y, 1f, false).SetEase(Ease.OutExpo);
-
-        // Normal Horizontal CameraMovement
-        transform.DOMoveX(player.position.x, 0f, false);
-
-        // Camera Movement
+        #region CAMERA MOVEMENT
         switch (PlayerState.State) {
 
             case PlayerState.MyState.Jumping:
             case PlayerState.MyState.DoubleJumping:
+                #region Jumping Tween
+                jumping.Insert(1, transform.DOMoveX(player.position.x, 0f));
+                jumping.Insert(1, transform.DOMoveY(player.position.y, 2f));
+                jumping.SetUpdate(UpdateType.Fixed, false);
+                #endregion
+                break;
+
             case PlayerState.MyState.Bouncing:
-                if(flying.IsComplete()) flying.Play();
+                #region Bouncing Tween
+                bouncing.Insert(2, transform.DOMoveX(player.position.x, 0f));
+                bouncing.Insert(2, transform.DOMoveY(player.position.y, 2f));
+                bouncing.Insert(2, transform.DOMoveZ(player.position.z - 20f, 3f));
+                bouncing.SetUpdate(UpdateType.Fixed, false);
+                #endregion
                 break;
 
             case PlayerState.MyState.Falling:
-                transform.DOMoveY(player.position.y, 2f, false);
+                #region Falling Tween
+                falling.Insert(3, transform.DOMoveX(player.position.x, 0f));
+                falling.Insert(3, transform.DOMoveY(player.position.y, 1f));
+                falling.Insert(3, transform.DOShakePosition(1.5f));
+                falling.Insert(3, transform.DOShakeRotation(1.5f, new Vector3(0, 0, 90), 1, 90, true));
+                falling.SetUpdate(UpdateType.Fixed, false);
+                #endregion
                 break; 
 
             case PlayerState.MyState.Grounding:
-                transform.DOMoveY(player.position.y, 2f, false);
+                #region Grounding Tween
+                grounding.Insert(4, transform.DOMoveX(player.position.x, 0f));
+                grounding.Insert(4, transform.DOMoveY(player.position.y, 2f)).SetEase(Ease.OutCubic);
+                grounding.Insert(4, transform.DOMoveZ(player.position.z + offset.z, 3f));
+                grounding.Insert(4, transform.DORotate(player.rotation.eulerAngles, 1f));
+                grounding.SetUpdate(UpdateType.Fixed, false);
+                #endregion
                 break;
 
         }
+        #endregion
+    }
+
+    public void Pause() {
+        DOTween.PauseAll();
     }
 }

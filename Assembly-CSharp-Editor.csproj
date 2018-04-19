@@ -127,6 +127,21 @@
  <Reference Include="UnityEditor.WindowsStandalone.Extensions">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
  </Reference>
+ <Reference Include="DOTween">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Assets/Addons/Demigiant/DOTween/DOTween.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween43">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Assets/Addons/Demigiant/DOTween/DOTween43.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween46">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Assets/Addons/Demigiant/DOTween/DOTween46.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTween50">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Assets/Addons/Demigiant/DOTween/DOTween50.dll</HintPath>
+ </Reference>
+ <Reference Include="DOTweenEditor">
+ <HintPath>D:/UNITY/Proyecto1_RICK/Assets/Addons/Demigiant/DOTween/Editor/DOTweenEditor.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.Advertisements">
  <HintPath>C:/Users/vinag/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.3/UnityEngine.Advertisements.dll</HintPath>
  </Reference>
