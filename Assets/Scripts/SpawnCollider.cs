@@ -9,18 +9,37 @@ public class SpawnCollider : MonoBehaviour {
     public GameObject spawn;
     new public Camera camera;
 
+    public bool discrete;
+    public bool delayed;
+    public float time;
+
     private void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject == player) {
-            //Vector3 pos = (player.transform.position - transform.position);
-            //player.transform.position = spawn.transform.position + pos;
+        if (collision.gameObject == player) {
 
-            Vector3 offset = new Vector3(0, 0, 2);
-            player.transform.position = spawn.transform.position;
+            if (!delayed) time = 0f;
 
-            camera.GetComponent<CameraMovement>().Pause();
-            camera.transform.position = player.transform.position - offset;
-            //camera.transform.position = new Vector3(player.transform.position.x, player.transform.position.y, camera.transform.position.z);
+            if (discrete) StartCoroutine(Teleport());
+            else StartCoroutine(Respawn());
+
         }
     }
 
+    private IEnumerator Respawn() {
+        yield return new WaitForSeconds(time);
+        player.transform.position = spawn.transform.position;
+
+        camera.GetComponent<CameraMovement>().Pause();
+        Vector3 offset = new Vector3(0, 0, 2);
+        camera.transform.position = player.transform.position - offset;
+    }
+
+    private IEnumerator Teleport() {
+        yield return new WaitForSeconds(time);
+        Vector3 pos = (player.transform.position - transform.position);
+        player.transform.position = spawn.transform.position + pos;
+        camera.GetComponent<CameraMovement>().Pause();
+
+        Vector3 offset = camera.GetComponent<CameraMovement>().offset;
+        camera.transform.position = player.transform.position - offset;
+    }
 }

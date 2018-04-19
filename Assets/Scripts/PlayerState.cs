@@ -206,7 +206,6 @@ public class PlayerState : MonoBehaviour
             }
             #endregion
 
-
         }
         #endregion
 
@@ -230,6 +229,7 @@ public class PlayerState : MonoBehaviour
             State = MyState.Grounding;
         }
     }
+
     public IEnumerator ActiveBouncing()
     {
         yield return new WaitForSeconds(0.2f);
