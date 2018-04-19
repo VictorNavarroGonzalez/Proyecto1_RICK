@@ -79,3 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   spawn: {fileID: 0}
+  camera: {fileID: 0}
+  discrete: 0
+  delayed: 0
+  time: 0
