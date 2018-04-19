@@ -51,10 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Editor\LOSFullScreenLightEditor.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Editor\LOSLightBaseEditor.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Editor\LOSMenu.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Editor\LOSRadialLightEditor.cs" />
      <Compile Include="Assets\Addons\ProCore\ProGrids\About\Editor\pg_AboutWindow.cs" />
      <Compile Include="Assets\Addons\ProCore\ProGrids\Editor\pg_Editor.cs" />
      <Compile Include="Assets\Addons\ProCore\ProGrids\Editor\pg_GridRenderer.cs" />

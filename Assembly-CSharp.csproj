@@ -53,28 +53,6 @@
   <ItemGroup>
      <Compile Include="Assets\Addons\Demigiant\DOTween\Examples\Basics.cs" />
      <Compile Include="Assets\Addons\Demigiant\DOTween\Examples\Sequences.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Core\Event\LOSEventManager.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Core\Event\LOSEventSource.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Core\Event\LOSEventTrigger.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Core\LOSCamera.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Core\LOSFullScreenLight.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Core\LOSLightBase.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Core\LOSManager.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Core\LOSObjectBase.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Core\LOSObstacle.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Core\LOSRadialLight.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Examples\Scripts\ChangeColorOnLOSEvent.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Examples\Scripts\ChangeTextColorOnLOSEvent.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Examples\Scripts\FlipX.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Examples\Scripts\Flowing.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Examples\Scripts\Follow.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Examples\Scripts\Move.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Examples\Scripts\MoveAccordingToDirection.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Examples\Scripts\MovePhysics.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Examples\Scripts\Rotate.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Examples\Scripts\RotateLight.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Utilities\SHelper.cs" />
-     <Compile Include="Assets\Addons\LOS 2D Lighting\Utilities\SMath.cs" />
      <Compile Include="Assets\Addons\ProCore\ProGrids\Classes\pg_Constant.cs" />
      <Compile Include="Assets\Addons\ProCore\ProGrids\Classes\pg_Enum.cs" />
      <Compile Include="Assets\Addons\ProCore\ProGrids\Classes\pg_IconUtility.cs" />
@@ -97,16 +75,11 @@
      <Compile Include="Assets\Scripts\SpawnPoint.cs" />
      <None Include="Assets\Addons\Demigiant\DOTween\readme.txt" />
      <None Include="Assets\Addons\ProCore\ProGrids\Shader\pg_GridShader.shader" />
-     <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\Basic.shader" />
      <None Include="Assets\Addons\Demigiant\DOTween\DOTween50.xml" />
      <None Include="Assets\Addons\Demigiant\DOTween\DOTween46.xml" />
      <None Include="Assets\Addons\ProCore\ProGrids\About\pc_AboutEntry_ProGrids.txt" />
      <None Include="Assets\Addons\Demigiant\DOTween\DOTween43.xml" />
-     <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\GreyscaleBackground.shader" />
      <None Include="Assets\Addons\ProCore\ProGrids\About\changelog.txt" />
-     <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\RadialLightPlus.shader" />
-     <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\GreyscaleForeground.shader" />
-     <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\RadialLight.shader" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>D:/UNITY/Proyecto1_RICK/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
