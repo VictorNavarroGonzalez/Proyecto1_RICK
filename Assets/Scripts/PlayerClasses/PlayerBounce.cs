@@ -10,10 +10,12 @@ public class PlayerBounce : MonoBehaviour
 
     public bool canBounce;
     public bool canWBounce;
+    public bool reading;
 
     Vector2 playerHeight;
     Vector2 playerPos;
 
+    private float tempY;
     private float _bounceForce;
     public float BounceForce
     {
@@ -28,11 +30,19 @@ public class PlayerBounce : MonoBehaviour
         playerHeight = new Vector2(0, GetComponent<CircleCollider2D>().radius * 2);
         canBounce = false;
         canWBounce = true;
+        reading = false;
 
     }
 
     private void FixedUpdate()
-    {
+    {       
+        if (rb.velocity.y < 0 && !reading)
+        {
+            tempY = rb.transform.position.y;
+            Debug.Log(tempY);
+            reading = true;
+            
+        }
         CheckBounce();
     }
 
@@ -47,8 +57,12 @@ public class PlayerBounce : MonoBehaviour
     public bool CheckBounce()
     {
         // Detect if Player is falling from enough heigh
-        if (DistGround() > 10f) canBounce = true;
-        else if (GetComponent<PlayerGround>().Grounded) canBounce = false;
+        if (GetComponent<PlayerGround>().Grounded && reading)
+        {
+            if (Mathf.Abs(tempY - rb.transform.position.y) > 10f) canBounce = true;
+            else canBounce = false;
+            reading = false;
+        }
 
         return canBounce;
     }
