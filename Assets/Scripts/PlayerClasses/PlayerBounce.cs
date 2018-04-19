@@ -71,9 +71,9 @@ public class PlayerBounce : MonoBehaviour
     public IEnumerator Bounce()
     {
         float multiplier;
-        if (PlayerState.State != PlayerState.MyState.Bouncing)
-            multiplier = Mathf.Abs(tempY - rb.transform.position.y);
-        else multiplier = Mathf.Abs(tempY - rb.transform.position.y)/2;
+        if (PlayerState.State == PlayerState.MyState.Bouncing || (PlayerState.State == PlayerState.MyState.Dashing && PlayerState.LastState == PlayerState.MyState.Bouncing))
+            multiplier = Mathf.Abs(tempY - rb.transform.position.y) / 2;
+        else multiplier = Mathf.Abs(tempY - rb.transform.position.y);
         if (multiplier > 15) multiplier = 15.5f;
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));
         if (InputManager.ButtonDownA())
@@ -91,8 +91,15 @@ public class PlayerBounce : MonoBehaviour
         {
             StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
             rb.velocity = new Vector2(0, 0);
-            rb.AddForce(Vector2.right * BounceForce * 7f * Time.deltaTime, ForceMode2D.Impulse);
-            rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * Time.deltaTime, ForceMode2D.Impulse);
+            if(PlayerState.State == PlayerState.MyState.Dashing) {
+                rb.AddForce(Vector2.right * BounceForce * 11f * Time.deltaTime, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce *1.2f* Time.deltaTime, ForceMode2D.Impulse);
+            }
+            else {
+                rb.AddForce(Vector2.right * BounceForce * 7f * Time.deltaTime, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * Time.deltaTime, ForceMode2D.Impulse);
+            }
+           
         }
     }
 

@@ -35,11 +35,12 @@ public class SpawnCollider : MonoBehaviour {
 
     private IEnumerator Teleport() {
         yield return new WaitForSeconds(time);
-        Vector3 pos = (player.transform.position - transform.position);
-        player.transform.position = spawn.transform.position + pos;
+        float distY = player.GetComponent<PlayerBounce>().DistGround();
+        Debug.Log(player.GetComponent<PlayerBounce>().DistGround());
+        player.transform.position = spawn.transform.position + new Vector3(0,Mathf.Abs(distY) + 0.6436337f , 0);
         camera.GetComponent<CameraMovement>().Pause();
 
         Vector3 offset = camera.GetComponent<CameraMovement>().offset;
-        camera.transform.position = player.transform.position - offset;
+        camera.transform.position = player.transform.position + offset;
     }
 }
