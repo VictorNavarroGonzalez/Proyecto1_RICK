@@ -77,28 +77,18 @@ public class PlayerState : MonoBehaviour
         #endregion
 
         #region RICK DASH 
-        if (InputManager.ButtonRT())
+        if (InputManager.ButtonX())
         {
 
             if (GetComponent<PlayerDash>().CheckDash())
             {
-                GetComponent<PlayerDash>().RightDash();
+                GetComponent<PlayerDash>().Dash();
                 LastState = State;
                 State = MyState.Dashing;
             }
         }
 
-        if (InputManager.ButtonLT())
-        {
-
-            if (GetComponent<PlayerDash>().CheckDash())
-            {
-                GetComponent<PlayerDash>().LeftDash();
-                LastState = State;
-                State = MyState.Dashing;
-            }
-        }
-        #endregion
+       #endregion
 
         #region RICK CHANGE CHARACTER
         if (InputManager.ButtonY())

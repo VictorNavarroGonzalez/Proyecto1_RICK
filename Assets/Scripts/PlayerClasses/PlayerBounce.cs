@@ -41,6 +41,7 @@ public class PlayerBounce : MonoBehaviour
         else if (rb.velocity.y < 0 && !reading)
         {
             tempY = rb.transform.position.y;
+
             reading = true;
 
         }
