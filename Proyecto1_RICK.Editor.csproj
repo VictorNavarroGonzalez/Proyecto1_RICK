@@ -306,10 +306,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Addons\LOS 2D Lighting\Editor\LOSFullScreenLightEditor.cs" />
-    <Compile Include="Assets\Addons\LOS 2D Lighting\Editor\LOSLightBaseEditor.cs" />
-    <Compile Include="Assets\Addons\LOS 2D Lighting\Editor\LOSMenu.cs" />
-    <Compile Include="Assets\Addons\LOS 2D Lighting\Editor\LOSRadialLightEditor.cs" />
     <Compile Include="Assets\Addons\ProCore\ProGrids\About\Editor\pg_AboutWindow.cs" />
     <Compile Include="Assets\Addons\ProCore\ProGrids\Editor\pg_Editor.cs" />
     <Compile Include="Assets\Addons\ProCore\ProGrids\Editor\pg_GridRenderer.cs" />
@@ -324,11 +320,6 @@
     <None Include="Assets\Addons\Demigiant\DOTween\DOTween50.xml" />
     <None Include="Assets\Addons\Demigiant\DOTween\Editor\DOTweenEditor.XML" />
     <None Include="Assets\Addons\Demigiant\DOTween\readme.txt" />
-    <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\Basic.shader" />
-    <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\GreyscaleBackground.shader" />
-    <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\GreyscaleForeground.shader" />
-    <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\RadialLight.shader" />
-    <None Include="Assets\Addons\LOS 2D Lighting\Resources\Shaders\RadialLightPlus.shader" />
     <None Include="Assets\Addons\ProCore\ProGrids\About\changelog.txt" />
     <None Include="Assets\Addons\ProCore\ProGrids\About\pc_AboutEntry_ProGrids.txt" />
     <None Include="Assets\Addons\ProCore\ProGrids\Shader\pg_GridShader.shader" />

@@ -23,29 +23,34 @@ public class InputManager : MonoBehaviour{
     #endregion
 
     #region JUMP INPUTS
-    public static bool ButtonA(){
-        return Input.GetButtonDown("ButtonA");
-    }
+    public static bool ButtonA;
+  
     public static bool ButtonDownA() {
         return Input.GetButton("ButtonA");
     }
     #endregion
 
     #region CHANGE INPUT
-    public static bool ButtonY() {
-        return Input.GetButtonDown("ButtonY");
-    }
+    public static bool ButtonY;
+    
     #endregion
 
     #region DASH INPUTS
-    public static bool ButtonX()
-    {
-        return Input.GetButtonDown("ButtonX");
-    }
+    public static bool ButtonX;
+    
     public static bool ButtonDownX()
     {
         return Input.GetButton("ButtonX");
     }
     #endregion
 
+    private void Update()
+    {
+        if (!ButtonA)
+            ButtonA = Input.GetButtonDown("ButtonA");
+        if (!ButtonX)
+            ButtonX = Input.GetButtonDown("ButtonX");
+        if (!ButtonY)
+            ButtonY = Input.GetButtonDown("ButtonY");
+    }
 }

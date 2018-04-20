@@ -77,8 +77,9 @@ public class PlayerState : MonoBehaviour
         #endregion
 
         #region RICK DASH 
-        if (InputManager.ButtonX())
+        if (InputManager.ButtonX)
         {
+            InputManager.ButtonX = false;
 
             if (GetComponent<PlayerDash>().CheckDash())
             {
@@ -91,8 +92,10 @@ public class PlayerState : MonoBehaviour
        #endregion
 
         #region RICK CHANGE CHARACTER
-        if (InputManager.ButtonY())
+        if (InputManager.ButtonY)
         {
+            InputManager.ButtonY = false;
+
             GetComponent<PlayerChange>().Change();
             GetComponent<PlayerChange>().Actualize();
         }
@@ -124,9 +127,9 @@ public class PlayerState : MonoBehaviour
             #endregion
 
             #region Jumping
-            if (InputManager.ButtonA())
+            if (InputManager.ButtonA)
             {
-
+                InputManager.ButtonA = false;
 
 
                 switch (State)
@@ -157,8 +160,10 @@ public class PlayerState : MonoBehaviour
         {
 
             #region Jumping & Falling
-            if (InputManager.ButtonA())
+            if (InputManager.ButtonA)
             {
+                InputManager.ButtonA = false;
+
                 switch (State)
                 {
                     case MyState.Grounding:
