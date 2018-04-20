@@ -67,6 +67,14 @@ public class CameraMovement : MonoBehaviour {
                 #endregion
                 break;
 
+            default:
+                #region Grounding Tween
+                grounding.Insert(4, transform.DOMoveX(player.position.x, 0f));
+                grounding.Insert(4, transform.DOMoveY(player.position.y, 2f)).SetEase(Ease.OutCubic);
+                grounding.SetUpdate(UpdateType.Fixed, false);
+                #endregion
+                break;
+
         }
         #endregion
     }
