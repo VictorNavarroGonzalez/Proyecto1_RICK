@@ -62,7 +62,7 @@ public class CameraMovement : MonoBehaviour {
                 grounding.Insert(4, transform.DOMoveX(player.position.x, 0f));
                 grounding.Insert(4, transform.DOMoveY(player.position.y, 2f)).SetEase(Ease.OutCubic);
                 grounding.Insert(4, transform.DOMoveZ(player.position.z + offset.z, 3f));
-                grounding.Insert(4, transform.DORotate(player.rotation.eulerAngles, 1f));
+                //grounding.Insert(4, transform.DORotate(player.rotation.eulerAngles, 1f));
                 grounding.SetUpdate(UpdateType.Fixed, false);
                 #endregion
                 break;
