@@ -32,7 +32,7 @@ public class InputManager : MonoBehaviour{
 
     #region CHANGE INPUT
     public static bool ButtonY;
-    
+    public static bool ButtonB;
     #endregion
 
     #region DASH INPUTS
@@ -52,5 +52,7 @@ public class InputManager : MonoBehaviour{
             ButtonX = Input.GetButtonDown("ButtonX");
         if (!ButtonY)
             ButtonY = Input.GetButtonDown("ButtonY");
+        if (!ButtonB)
+            ButtonB = Input.GetButtonDown("ButtonB");
     }
 }

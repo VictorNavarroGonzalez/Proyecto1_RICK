@@ -101,6 +101,17 @@ public class PlayerState : MonoBehaviour
         }
         #endregion
 
+        #region RICK GHOST
+        if (InputManager.ButtonB) {
+
+            InputManager.ButtonB = false;
+            if(GetComponent<PlayerGhost>().CheckGhost())
+                GetComponent<PlayerGhost>().Teleport();
+            else
+                GetComponent<PlayerGhost>().Create();
+
+        }
+        #endregion
 
         #region CIRCLE BEHAVIOR
         if (Character == MyCharacter.CIRCLE)

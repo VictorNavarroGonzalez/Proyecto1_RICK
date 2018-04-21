@@ -66,11 +66,13 @@
      <Compile Include="Assets\Scripts\Colliders\Spawn\SpawnPoint.cs" />
      <Compile Include="Assets\Scripts\Colliders\Text\TextDestroy.cs" />
      <Compile Include="Assets\Scripts\Colliders\Text\TextSpawn.cs" />
+     <Compile Include="Assets\Scripts\GhostCollider.cs" />
      <Compile Include="Assets\Scripts\InputManager.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerBounce.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerChange.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerDash.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerFall.cs" />
+     <Compile Include="Assets\Scripts\PlayerClasses\PlayerGhost.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerGround.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerJump.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerMovement.cs" />
