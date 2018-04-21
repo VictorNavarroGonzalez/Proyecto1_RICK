@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 
+
     public void MoveRight()
     {
         if (rb.velocity.x < _maxSpeed * Mathf.Abs(InputManager.MainHorizontal()))
