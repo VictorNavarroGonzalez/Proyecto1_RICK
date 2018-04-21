@@ -310,6 +310,7 @@
     <Compile Include="Assets\Addons\ProCore\ProGrids\Classes\pg_Util.cs" />
     <Compile Include="Assets\Addons\ProCore\ProGrids\MonoBehaviour\pg_IgnoreSnap.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Colliders\GhostCollider.cs" />
     <Compile Include="Assets\Scripts\Colliders\SceneCollider.cs" />
     <Compile Include="Assets\Scripts\Colliders\Spawn\SpawnCollider.cs" />
     <Compile Include="Assets\Scripts\Colliders\Spawn\SpawnPoint.cs" />
@@ -321,6 +322,7 @@
     <Compile Include="Assets\Scripts\PlayerClasses\PlayerChange.cs" />
     <Compile Include="Assets\Scripts\PlayerClasses\PlayerDash.cs" />
     <Compile Include="Assets\Scripts\PlayerClasses\PlayerFall.cs" />
+    <Compile Include="Assets\Scripts\PlayerClasses\PlayerGhost.cs" />
     <Compile Include="Assets\Scripts\PlayerClasses\PlayerGround.cs" />
     <Compile Include="Assets\Scripts\PlayerClasses\PlayerJump.cs" />
     <Compile Include="Assets\Scripts\PlayerClasses\PlayerMovement.cs" />
