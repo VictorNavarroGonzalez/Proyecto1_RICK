@@ -9,6 +9,8 @@ public class SpawnCollider : MonoBehaviour {
     private GameObject player;
     new private GameObject camera;
 
+    private bool isActive;
+
     public bool discrete;
     public bool delayed;
     public float time;
@@ -16,11 +18,12 @@ public class SpawnCollider : MonoBehaviour {
     void Start() {
         player = GameObject.Find("Player");
         camera = GameObject.Find("Camera");
+        isActive = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject == player) {
-
+        if (collision.gameObject == player && isActive) {
+            isActive = false;
             if (!delayed) time = 0f;
 
             if (discrete) StartCoroutine(Teleport());
@@ -36,6 +39,8 @@ public class SpawnCollider : MonoBehaviour {
         camera.GetComponent<CameraMovement>().Pause();
         Vector3 offset = new Vector3(0, 0, 2);
         camera.transform.position = player.transform.position - offset;
+
+        isActive = true;
     }
 
     private IEnumerator Teleport() {
@@ -47,5 +52,7 @@ public class SpawnCollider : MonoBehaviour {
 
         Vector3 offset = camera.GetComponent<CameraMovement>().offset;
         camera.transform.position = player.transform.position + offset;
+
+        isActive = true;
     }
 }

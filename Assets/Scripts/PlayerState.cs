@@ -227,7 +227,7 @@ public class PlayerState : MonoBehaviour
 
     public IEnumerator ActiveGrounding()
     {
-        if (Character == MyCharacter.CIRCLE) yield return new WaitForSeconds(0.03f);
+        if (Character == MyCharacter.CIRCLE) yield return new WaitForSeconds(0.05f);
         else if (Character == MyCharacter.SQUARE) yield return new WaitForSeconds(0.05f);
         if (GetComponent<PlayerGround>().CheckGround())
         {
@@ -238,7 +238,7 @@ public class PlayerState : MonoBehaviour
 
     public IEnumerator ActiveBouncing()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.3f);
         State = MyState.Bouncing;
     }
 }
