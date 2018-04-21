@@ -310,6 +310,11 @@
     <Compile Include="Assets\Addons\ProCore\ProGrids\Classes\pg_Util.cs" />
     <Compile Include="Assets\Addons\ProCore\ProGrids\MonoBehaviour\pg_IgnoreSnap.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Colliders\SceneCollider.cs" />
+    <Compile Include="Assets\Scripts\Colliders\Spawn\SpawnCollider.cs" />
+    <Compile Include="Assets\Scripts\Colliders\Spawn\SpawnPoint.cs" />
+    <Compile Include="Assets\Scripts\Colliders\Text\TextDestroy.cs" />
+    <Compile Include="Assets\Scripts\Colliders\Text\TextSpawn.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\PlayerClasses\PlayerBounce.cs" />
     <Compile Include="Assets\Scripts\PlayerClasses\PlayerChange.cs" />
@@ -319,9 +324,6 @@
     <Compile Include="Assets\Scripts\PlayerClasses\PlayerJump.cs" />
     <Compile Include="Assets\Scripts\PlayerClasses\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerState.cs" />
-    <Compile Include="Assets\Scripts\SceneCollider.cs" />
-    <Compile Include="Assets\Scripts\SpawnCollider.cs" />
-    <Compile Include="Assets\Scripts\SpawnPoint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Addons\Demigiant\DOTween\DOTween.XML" />

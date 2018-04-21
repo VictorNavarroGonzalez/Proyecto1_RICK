@@ -98,7 +98,7 @@ public class PlayerBounce : MonoBehaviour
             }
             else {
                 rb.AddForce(Vector2.right * BounceForce * 7f * Time.deltaTime, ForceMode2D.Impulse);
-                rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * Time.deltaTime, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
             }
            
         }
@@ -112,7 +112,7 @@ public class PlayerBounce : MonoBehaviour
             StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
             rb.velocity = new Vector2(0, 0);
             rb.AddForce(Vector2.left * BounceForce* 7f * Time.deltaTime, ForceMode2D.Impulse);
-            rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * Time.deltaTime, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce* 1.3f * Time.deltaTime, ForceMode2D.Impulse);
         }
     }
 
