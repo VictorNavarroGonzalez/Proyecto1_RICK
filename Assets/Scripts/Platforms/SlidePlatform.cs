@@ -9,7 +9,10 @@ public class SlidePlatform : MonoBehaviour {
     public float timeX;
     public float distY;
     public float timeY;
+
     public bool hasTrigger;
+    public bool horizontal;
+    public bool vertical;
 
     private float moveX;
     private float moveY;
@@ -26,20 +29,25 @@ public class SlidePlatform : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
+
         rb = GetComponent<Rigidbody2D>();
-        moveX = this.transform.position.x + distX;
-        moveY = this.transform.position.y + distY;
+
+        moveX = transform.position.x + distX;
+        moveY = transform.position.y + distY;
+
         velX = distX / timeX;
         velY = distY / timeY;
+
         backX = false;
         backY = false;
+
         goX = true;
         goY = true;
+
         if (distX > 0) startRight = true;
         else startRight = false;
         if (distY > 0) startUp = true;
         else startUp = false;
-
 
     }
 	
@@ -47,45 +55,57 @@ public class SlidePlatform : MonoBehaviour {
 	void FixedUpdate () {
         if (!hasTrigger) {
             CheckDirection();
-            if (goX) this.rb.velocity = new Vector2(velX, this.rb.velocity.y);
-            else if (backX) this.rb.velocity = new Vector2(-velX, this.rb.velocity.y);
-            if (goY) this.rb.velocity = new Vector2(this.rb.velocity.x, velY);
-            else if (backY) this.rb.velocity = new Vector2(this.rb.velocity.x, -velY);
+
+            if (horizontal) {
+                if (goX) rb.velocity = new Vector2(velX, rb.velocity.y);
+                else if (backX) rb.velocity = new Vector2(-velX, rb.velocity.y);
+            }
+
+            if (vertical) {
+                if (goY) rb.velocity = new Vector2(rb.velocity.x, velY);
+                else if (backY) rb.velocity = new Vector2(rb.velocity.x, -velY);
+            }
+            
         }
         
     }
 
     void CheckDirection()
     {
-        if (startRight) {
-            if (this.transform.position.x < moveX && !backX) goX = true;
-            else goX = false;
+        if (horizontal) {
+            if (startRight) {
+                if (transform.position.x < moveX && !backX) goX = true;
+                else goX = false;
 
-            if (this.transform.position.x < moveX - distX) backX = false;
-            else if (!goX) backX = true;
+                if (transform.position.x < moveX - distX) backX = false;
+                else if (!goX) backX = true;
+            }
+            else {
+                if (transform.position.x > moveX && !backX) goX = true;
+                else goX = false;
+
+                if (transform.position.x > moveX - distX) backX = false;
+                else if (!goX) backX = true;
+            }
         }
-        else {
-            if (this.transform.position.x > moveX && !backX) goX = true;
-            else goX = false;
 
-            if (this.transform.position.x > moveX - distX) backX = false;
-            else if (!goX) backX = true;
+        if (vertical) {
+            if (startUp) {
+                if (transform.position.y < moveY && !backY) goY = true;
+                else goY = false;
+
+                if (transform.position.y < moveY - distY) backY = false;
+                else if (!goY) backY = true;
+            }
+            else {
+                if (transform.position.y > moveY && !backY) goY = true;
+                else goY = false;
+
+                if (this.transform.position.y > moveY - distY) backY = false;
+                else if (!goY) backY = true;
+            }
         }
-
-        if(startUp) {
-            if (this.transform.position.y < moveY && !backY) goY = true;
-            else goY = false;
-
-            if (this.transform.position.y < moveY - distY) backY = false;
-            else if (!goY) backY = true;
-        }
-        else {
-            if (this.transform.position.y > moveY && !backY) goY = true;
-            else goY = false;
-
-            if (this.transform.position.y > moveY - distY) backY = false;
-            else if (!goY) backY = true;
-        }
+        
     }
 
     void OnTriggerEnter2D(Collider2D collision)

@@ -68,6 +68,7 @@
      <Compile Include="Assets\Scripts\Colliders\Text\TextDestroy.cs" />
      <Compile Include="Assets\Scripts\Colliders\Text\TextSpawn.cs" />
      <Compile Include="Assets\Scripts\InputManager.cs" />
+     <Compile Include="Assets\Scripts\Platforms\SlidePlatform.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerBounce.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerChange.cs" />
      <Compile Include="Assets\Scripts\PlayerClasses\PlayerDash.cs" />
