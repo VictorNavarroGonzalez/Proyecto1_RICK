@@ -217,27 +217,26 @@ public class PlayerState : MonoBehaviour
 
     }
 
+
     // Stop certain action on a specified time
-    public IEnumerator Stopping(float time)
-    {
+    public IEnumerator Stopping(float time) {
         stop = true;
         yield return new WaitForSeconds(time);
         stop = false;
     }
 
-    public IEnumerator ActiveGrounding()
-    {
+    //Change the state to Grounding with some delay (0.05 seconds) to have time to do the checks
+    public IEnumerator ActiveGrounding() {
         if (Character == MyCharacter.CIRCLE) yield return new WaitForSeconds(0.05f);
         else if (Character == MyCharacter.SQUARE) yield return new WaitForSeconds(0.05f);
-        if (GetComponent<PlayerGround>().CheckGround())
-        {
+        if (GetComponent<PlayerGround>().CheckGround()) {
             LastState = State;
             State = MyState.Grounding;
         }
     }
 
-    public IEnumerator ActiveBouncing()
-    {
+    //Change the state to Bouncing with some delay (0.3 seconds) to have time to do the checks
+    public IEnumerator ActiveBouncing() {         
         yield return new WaitForSeconds(0.3f);
         State = MyState.Bouncing;
     }

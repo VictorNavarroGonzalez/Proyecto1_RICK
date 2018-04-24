@@ -29,58 +29,70 @@ public class PlayerMovement : MonoBehaviour {
     }
 
 
+    #region X axis
 
-    public void MoveRight()
-    {
-        if (rb.velocity.x < _maxSpeed * Mathf.Abs(InputManager.MainHorizontal()))
-        {
-            rb.AddForce(Vector2.right * _sideForce * Mathf.Abs(InputManager.MainHorizontal()), ForceMode2D.Force);
+    #region Right
+    public void MoveRight() {
+        //If the joystick moves right 
+        if (rb.velocity.x < _maxSpeed * Mathf.Abs(InputManager.MainHorizontal())) {
+            rb.AddForce(Vector2.right * _sideForce * Mathf.Abs(InputManager.MainHorizontal()), ForceMode2D.Force);      //Set the velocity to the max velocity / joystick percentage of inclination
         }
     }
+    #endregion
 
-    public void Stop()
-    {
-        if (rb.velocity.x < 0.0f)
-        {
+    #region StopX
+    //Drag force to stop the Player
+    public void Stop() {        
+        if (rb.velocity.x < 0.0f) {
             rb.AddForce(Vector2.right * _friction, ForceMode2D.Force);
         }
-        else if (rb.velocity.x > 0.0f)
-        {
+        else if (rb.velocity.x > 0.0f) {
             rb.AddForce(Vector2.left * _friction, ForceMode2D.Force);
         }
     }
+#endregion
 
-    public void MoveLeft()
-    {
-        if (rb.velocity.x > -_maxSpeed * Mathf.Abs(InputManager.MainHorizontal()))
-        {
-            rb.AddForce(Vector2.left * _sideForce * Mathf.Abs(InputManager.MainHorizontal()), ForceMode2D.Force);
+    #region Left
+    public void MoveLeft() {
+        //If the joystick moves left 
+        if (rb.velocity.x > -_maxSpeed * Mathf.Abs(InputManager.MainHorizontal())) {
+            rb.AddForce(Vector2.left * _sideForce * Mathf.Abs(InputManager.MainHorizontal()), ForceMode2D.Force);       // Set the velocity to the max velocity / joystick percentage of inclination
         }
     }
+    #endregion
 
-    public void MoveUp()
-    {
+    #endregion
+
+    #region Y axis
+
+    #region Up
+    public void MoveUp() {
+        //If the joystick moves up 
         if (rb.velocity.y < _maxSpeed * Mathf.Abs(InputManager.MainVertical()))
-            if(rb.velocity.y < 0f) rb.velocity = new Vector2(rb.velocity.x, 0);
-        {
-            rb.AddForce(Vector2.up * _sideForce * Mathf.Abs(InputManager.MainVertical()), ForceMode2D.Force);
+            if(rb.velocity.y < 0f) rb.velocity = new Vector2(rb.velocity.x, 0); {
+            rb.AddForce(Vector2.up * _sideForce * Mathf.Abs(InputManager.MainVertical()), ForceMode2D.Force);           // Set the velocity to the max velocity / joystick percentage of inclination
         }
     }
+    #endregion
 
-    public void MoveDown()
-    {
-        if (rb.velocity.y > -_maxSpeed * Mathf.Abs(InputManager.MainVertical()))
-        {
-            rb.AddForce(Vector2.down * _sideForce * Mathf.Abs(InputManager.MainVertical()), ForceMode2D.Force);
+    #region Down
+    public void MoveDown() {
+        //If the joystick moves down 
+        if (rb.velocity.y > -_maxSpeed * Mathf.Abs(InputManager.MainVertical())) {
+            rb.AddForce(Vector2.down * _sideForce * Mathf.Abs(InputManager.MainVertical()), ForceMode2D.Force);         // Set the velocity to the max velocity / joystick percentage of inclination
         }
     }
+    #endregion
 
-    public void StopY()
-    {
-        if (rb.velocity.y < 0.0f)
-        {
+    #region StopY
+    //Drag force vertical to improve the feeling climbing
+    public void StopY() {      
+        if (rb.velocity.y < 0.0f) {
             rb.AddForce(Vector2.up * 35, ForceMode2D.Force);
         }
     }
+    #endregion
+
+    #endregion
 
 }
