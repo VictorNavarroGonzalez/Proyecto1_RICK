@@ -5,12 +5,17 @@ using DG.Tweening;
 
 public class SlidePlatform : MonoBehaviour {
 
+    //Distance to move
     public float distX;
     public float timeX;
+
+    //Velocity
     public float distY;
     public float timeY;
 
     public bool hasTrigger;
+
+    //Direction selector
     public bool horizontal;
     public bool vertical;
 
@@ -40,12 +45,14 @@ public class SlidePlatform : MonoBehaviour {
 
         backX = false;
         backY = false;
-
         goX = true;
         goY = true;
 
+        //Detect if platform starts moves right or left
         if (distX > 0) startRight = true;
         else startRight = false;
+
+        //Detect if platform starts moves up or down
         if (distY > 0) startUp = true;
         else startUp = false;
 
@@ -54,7 +61,7 @@ public class SlidePlatform : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         if (!hasTrigger) {
-            CheckDirection();
+            CheckDirection();   
 
             if (horizontal) {
                 if (goX) rb.velocity = new Vector2(velX, rb.velocity.y);
