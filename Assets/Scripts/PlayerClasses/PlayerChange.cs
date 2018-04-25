@@ -7,6 +7,8 @@ public class PlayerChange : MonoBehaviour {
     public Sprite square;
     public Sprite circle;
 
+
+    // This function changes the player character to the other one.
     public void Change() {
         if (PlayerState.Character == PlayerState.MyCharacter.CIRCLE) {
             PlayerState.Character = PlayerState.MyCharacter.SQUARE;
@@ -17,6 +19,8 @@ public class PlayerChange : MonoBehaviour {
 
     }
 
+    // This functions actualizes the player properties and habilities
+    // according to her actual character (Square or Circle)
     public void Actualize() {
         switch (PlayerState.Character) {
             case PlayerState.MyCharacter.SQUARE:

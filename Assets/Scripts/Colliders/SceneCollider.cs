@@ -9,6 +9,8 @@ public class SceneCollider : MonoBehaviour {
     public GameObject player;
     new public Camera camera;
 
+    // If the player collides with the collider it will be loaded to
+    // the next scene, moreover, the camera will be paused for ones seconds
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject == player) {
             Debug.Log("Next Scene: " + next.name);

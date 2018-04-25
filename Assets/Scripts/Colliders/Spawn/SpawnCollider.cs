@@ -9,7 +9,7 @@ public class SpawnCollider : MonoBehaviour {
     private GameObject player;
     new private GameObject camera;
 
-    private bool isActive;
+    private bool isActive; // To avoid multiple teleport at the same time.
 
     public bool discrete;
     public bool delayed;
@@ -21,6 +21,9 @@ public class SpawnCollider : MonoBehaviour {
         isActive = true;
     }
 
+    // When the player collides with the collider, her and the camera will
+    // be teleported according to the specified setting in the inspector.
+    // If the bool delayed is false, the time will be setted to 0.
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject == player && isActive) {
             isActive = false;
@@ -32,6 +35,9 @@ public class SpawnCollider : MonoBehaviour {
         }
     }
 
+
+    // According to the specified time the player and the camera
+    // will be teleported in a 'no discrete' way to the SpawnPoint gameobject.
     private IEnumerator Respawn() {
         yield return new WaitForSeconds(time);
         player.transform.position = spawn.transform.position;
@@ -43,6 +49,9 @@ public class SpawnCollider : MonoBehaviour {
         isActive = true;
     }
 
+
+    // According to the specified time the player and the camera
+    // will be teleported in a 'discrete' way to the SpawnPoint gameobject.
     private IEnumerator Teleport() {
         yield return new WaitForSeconds(time);
         float distY = player.GetComponent<PlayerBounce>().DistGround();

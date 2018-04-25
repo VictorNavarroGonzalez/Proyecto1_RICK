@@ -11,6 +11,8 @@ public class TextDestroy : MonoBehaviour {
         player = GameObject.Find("Player");
     }
 
+    // Sets the prompter object to inactive for optimizing memmory
+    // and to avoid repetition of the same instruction.
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject == player) {
 

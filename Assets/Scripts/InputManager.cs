@@ -50,9 +50,9 @@ public class InputManager : MonoBehaviour{
             ButtonA = Input.GetButtonDown("ButtonA");
         if (!ButtonX)
             ButtonX = Input.GetButtonDown("ButtonX");
-        //if (!ButtonY)
-        //    ButtonY = Input.GetButtonDown("ButtonY");
-        //if (!ButtonB)
-        //    ButtonB = Input.GetButtonDown("ButtonB");
+        if (!ButtonY)
+            ButtonY = Input.GetButtonDown("ButtonY");
+        if (!ButtonB)
+            ButtonB = Input.GetButtonDown("ButtonB");
     }
 }

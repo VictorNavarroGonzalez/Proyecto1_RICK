@@ -33,9 +33,10 @@ public class PlayerMovement : MonoBehaviour {
 
     #region Right
     public void MoveRight() {
-        //If the joystick moves right 
+        // If the joystick moves right set the velocity to 
+        // the max velocity / joystick percentage of inclination
         if (rb.velocity.x < _maxSpeed * Mathf.Abs(InputManager.MainHorizontal())) {
-            rb.AddForce(Vector2.right * _sideForce * Mathf.Abs(InputManager.MainHorizontal()), ForceMode2D.Force);      //Set the velocity to the max velocity / joystick percentage of inclination
+            rb.AddForce(Vector2.right * _sideForce * Mathf.Abs(InputManager.MainHorizontal()), ForceMode2D.Force);     
         }
     }
     #endregion
