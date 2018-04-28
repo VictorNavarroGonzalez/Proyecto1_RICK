@@ -2,33 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovePlatform : MonoBehaviour {
+public class MovePlatform : MonoBehaviour
+{
 
-    public Rigidbody2D target;
-    public Transform Area;
-    public bool inverted;
+   
+    public bool inverted;           //Moves upside down that the player
+    public bool active;             //Always is active (don't need trigger)
+    public Transform Area;          //Area of action for the platform
+    private GameObject target;      //Target to copy (Player)
+  
     private Rigidbody2D rb;
 
-    void Awake () {
+    void Awake()
+    {
         rb = GetComponent<Rigidbody2D>();
+        target = GameObject.Find("Player");
     }
-	
-
-	void FixedUpdate () {
 
 
-        // Read the target velocity and move the platform with the same vel
+    void FixedUpdate()
+    {
+        //Reads the trigger to know if player is in the Area
+        active = Area.GetComponent<PlatformTrigger>().active;
+        // Reads the target velocity and move the platform with the same vel
         // Bool inverted decide if platform moves like the target or oposite direction
-        if (!inverted) rb.velocity = new Vector2(target.velocity.x, 0);
-        else rb.velocity = new Vector2(target.velocity.x * -1, 0);
-
-    }
-
-    private void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject == Area) {
-            if (!inverted) rb.velocity = new Vector2(target.velocity.x, 0);
-            else rb.velocity = new Vector2(target.velocity.x * -1, 0);
-            Debug.Log("entrando");
+        if (active)
+        {
+            if (!inverted) rb.velocity = new Vector2(target.GetComponent<Rigidbody2D>().velocity.x, 0);
+            else rb.velocity = new Vector2(target.GetComponent<Rigidbody2D>().velocity.x * -1, 0);
         }
+        //Stops the platform when player leaves the area
+        else rb.velocity = new Vector2(0, 0);
     }
 }
