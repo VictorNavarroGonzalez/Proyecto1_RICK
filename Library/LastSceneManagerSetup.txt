@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/CIRCLE.unity
+=======
+- path: Assets/Scenes/Circle Levels/C01.unity
+>>>>>>> master
   isLoaded: 1
   isActive: 1

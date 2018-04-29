@@ -10,6 +10,12 @@ public class PlayerMovement : MonoBehaviour {
         set { _maxSpeed = value; }
     }
 
+    private float _maxClimb = 15f;
+    public float MaxClimb {
+        get { return _maxClimb; }
+        set { _maxClimb = value; }
+    }
+
     private float _friction = 15f;
     public float Friction {
         get { return _friction; }
@@ -69,9 +75,10 @@ public class PlayerMovement : MonoBehaviour {
     #region Up
     public void MoveUp() {
         //If the joystick moves up 
-        if (rb.velocity.y < _maxSpeed * Mathf.Abs(InputManager.MainVertical()))
-            if(rb.velocity.y < 0f) rb.velocity = new Vector2(rb.velocity.x, 0); {
-            rb.AddForce(Vector2.up * _sideForce * Mathf.Abs(InputManager.MainVertical()), ForceMode2D.Force);           // Set the velocity to the max velocity / joystick percentage of inclination
+        if (rb.velocity.y < _maxClimb * Mathf.Abs(InputManager.MainVertical())) {
+            if (rb.velocity.y < 0f) rb.velocity = new Vector2(rb.velocity.x, 0); {
+                rb.AddForce(Vector2.up * _sideForce * Mathf.Abs(InputManager.MainVertical()), ForceMode2D.Force);           // Set the velocity to the max velocity / joystick percentage of inclination
+            }
         }
     }
     #endregion
@@ -79,7 +86,7 @@ public class PlayerMovement : MonoBehaviour {
     #region Down
     public void MoveDown() {
         //If the joystick moves down 
-        if (rb.velocity.y > -_maxSpeed * Mathf.Abs(InputManager.MainVertical())) {
+        if (rb.velocity.y > -_maxClimb * Mathf.Abs(InputManager.MainVertical())) {
             rb.AddForce(Vector2.down * _sideForce * Mathf.Abs(InputManager.MainVertical()), ForceMode2D.Force);         // Set the velocity to the max velocity / joystick percentage of inclination
         }
     }
@@ -89,7 +96,7 @@ public class PlayerMovement : MonoBehaviour {
     //Drag force vertical to improve the feeling climbing
     public void StopY() {      
         if (rb.velocity.y < 0.0f) {
-            rb.AddForce(Vector2.up * 35, ForceMode2D.Force);
+            rb.AddForce(Vector2.up * 40, ForceMode2D.Force);
         }
     }
     #endregion

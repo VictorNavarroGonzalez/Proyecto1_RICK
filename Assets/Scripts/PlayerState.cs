@@ -45,43 +45,37 @@ public class PlayerState : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (temp != State) {
+        if (temp != State)
+        {
             Debug.Log(State);
             temp = State;
         }
 
         #region RICK HORIZONTAL MOVEMENT
-        if (!stop)
-        {
-            if (InputManager.MainHorizontal() > 0.0f && !GetComponent<PlayerGround>().RightHit)
-            {
+        if (!stop) {
+            if (InputManager.MainHorizontal() > 0.0f && !GetComponent<PlayerGround>().RightHit) {
                 GetComponent<PlayerMovement>().MoveRight();
             }
-            else if (InputManager.MainHorizontal() == 0.0f)
-            {
+            else if (InputManager.MainHorizontal() == 0.0f) {
                 GetComponent<PlayerMovement>().Stop();
             }
-            else if (InputManager.MainHorizontal() < 0.0f & !GetComponent<PlayerGround>().LeftHit)
-            {
+            else if (InputManager.MainHorizontal() < 0.0f & !GetComponent<PlayerGround>().LeftHit) {
                 GetComponent<PlayerMovement>().MoveLeft();
             }
         }
         #endregion
 
         #region RICK GROUNDING
-        if (State != MyState.Grounding && GetComponent<PlayerGround>().CheckGround())
-        {
+        if (State != MyState.Grounding && GetComponent<PlayerGround>().CheckGround()) {
             StartCoroutine(ActiveGrounding());
         }
         #endregion
 
         #region RICK DASH 
-        if (InputManager.ButtonX)
-        {
+        if (InputManager.ButtonX) {
             InputManager.ButtonX = false;
 
-            if (GetComponent<PlayerDash>().CheckDash())
-            {
+            if (GetComponent<PlayerDash>().CheckDash()) {
                 GetComponent<PlayerDash>().Dash();
                 LastState = State;
                 State = MyState.Dashing;
@@ -91,8 +85,7 @@ public class PlayerState : MonoBehaviour
        #endregion
 
         #region RICK CHANGE CHARACTER
-        if (InputManager.ButtonY)
-        {
+        if (InputManager.ButtonY) {
             InputManager.ButtonY = false;
 
             GetComponent<PlayerChange>().Change();
@@ -108,7 +101,6 @@ public class PlayerState : MonoBehaviour
                 GetComponent<PlayerGhost>().Teleport();
             else
                 GetComponent<PlayerGhost>().Create();
-
         }
         #endregion
 
@@ -166,16 +158,13 @@ public class PlayerState : MonoBehaviour
         #endregion
 
         #region SQUARE BEHAVIOR
-        else if (Character == MyCharacter.SQUARE)
-        {
+        else if (Character == MyCharacter.SQUARE) {
 
             #region Jumping & Falling
-            if (InputManager.ButtonA)
-            {
+            if (InputManager.ButtonA) {
                 InputManager.ButtonA = false;
 
-                switch (State)
-                {
+                switch (State) {
                     case MyState.Grounding:
                         GetComponent<PlayerJump>().Jump();
                         LastState = State;
@@ -194,18 +183,14 @@ public class PlayerState : MonoBehaviour
             #endregion
 
             #region Wall Climbing
-            if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit)
-            {
-                if (InputManager.MainVertical() < 0.0f && !stop)
-                {
+            if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit) {
+                if (InputManager.MainVertical() < 0.0f && !stop) {
                     GetComponent<PlayerMovement>().MoveUp();
                 }
-                else if (InputManager.MainVertical() == 0.0f && !stop)
-                {
+                else if (InputManager.MainVertical() == 0.0f && !stop) {
                     GetComponent<PlayerMovement>().StopY();
                 }
-                else if (InputManager.MainVertical() > 0.0f && !stop)
-                {
+                else if (InputManager.MainVertical() > 0.0f && !stop) {
                     GetComponent<PlayerMovement>().MoveDown();
                 }
             }
