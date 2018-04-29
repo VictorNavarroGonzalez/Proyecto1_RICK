@@ -57,7 +57,6 @@ public class SmackPlatform : MonoBehaviour {
 
         // Collision Reaction
         if (collision && PlayerState.State == PlayerState.MyState.Falling) {
-            Debug.Log("LOL");
             if(!active) StartCoroutine(Decrease());
         }
     }
