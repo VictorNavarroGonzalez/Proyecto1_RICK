@@ -7,6 +7,7 @@ public class PlayerChange : MonoBehaviour {
     public Sprite square;
     public Sprite circle;
 
+    public PlayerState.MyCharacter initial;
 
     // This function changes the player character to the other one.
     public void Change() {

@@ -47,7 +47,7 @@ public class PlayerBounce : MonoBehaviour
         CheckBounce();      // Detect if Player is falling from enough heigh
     }
 
-    #region Chechkers
+    #region Checkers
 
     #region Dist to Ground
     public float DistGround()
@@ -89,13 +89,16 @@ public class PlayerBounce : MonoBehaviour
     #endregion
 
     #region Normal Bounce
-    public IEnumerator Bounce()
-    {
+    public IEnumerator Bounce() {
+
         float multiplier;           //Part of force that depends on fall height
+
         if (PlayerState.State == PlayerState.MyState.Bouncing || (PlayerState.State == PlayerState.MyState.Dashing && PlayerState.LastState == PlayerState.MyState.Bouncing))       //If player has bounce before: 
             multiplier = Mathf.Abs(tempY - rb.transform.position.y) / 2;        //Set bounce force only a half of normal bounce
-        else multiplier = Mathf.Abs(tempY - rb.transform.position.y);           //Set normal bounce force
+        else multiplier = Mathf.Abs(tempY - rb.transform.position.y);  //Set normal bounce force
+
         if (multiplier > 15.3f) multiplier = 15.3f;                 // Set a maximum bounce force for a fall
+
         yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));          //Wait until Player touch ground
         if (InputManager.ButtonDownA())         //If button A is pressed:
         {
@@ -103,6 +106,7 @@ public class PlayerBounce : MonoBehaviour
             rb.AddForce(Vector2.up * BounceForce * multiplier * Time.deltaTime, ForceMode2D.Impulse);           //Bounce
         }
         canBounce = false;
+
     }
     #endregion
 

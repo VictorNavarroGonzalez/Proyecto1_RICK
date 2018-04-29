@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerState : MonoBehaviour
-{
+public class PlayerState : MonoBehaviour {
 
     private GameObject player;
     private bool stop;
@@ -25,31 +24,30 @@ public class PlayerState : MonoBehaviour
 
     public enum MyCharacter { SQUARE, CIRCLE }
     public static MyCharacter _character;
-    public static MyCharacter Character
-    {
+    public static MyCharacter Character {
         get { return _character; }
         set { _character = value; }
     }
 
-    void Awake()
-    {
+    void Awake() {
         State = MyState.Jumping;
         LastState = State;
         stop = false;
 
         // Initialize RICK into a Circle
-        Character = MyCharacter.CIRCLE;
+        Character = GetComponent<PlayerChange>().initial;
         GetComponent<PlayerChange>().Actualize();
         temp = MyState.Bouncing;
     }
 
-    void FixedUpdate()
-    {
-        if (temp != State)
-        {
+    void FixedUpdate() {
+
+        if (temp != State) {
             Debug.Log(State);
             temp = State;
         }
+
+        #region GENERAL BEHAVIOUR
 
         #region RICK HORIZONTAL MOVEMENT
         if (!stop) {
@@ -104,13 +102,14 @@ public class PlayerState : MonoBehaviour
         }
         #endregion
 
+        #endregion
+
         #region CIRCLE BEHAVIOR
         if (Character == MyCharacter.CIRCLE)
         {
 
             #region Bouncing
-            if (GetComponent<PlayerBounce>().CheckBounce())
-            {
+            if (GetComponent<PlayerBounce>().CheckBounce()) {
                 StartCoroutine(GetComponent<PlayerBounce>().Bounce());
                 LastState = State;
                 StartCoroutine(ActiveBouncing());
@@ -118,19 +117,17 @@ public class PlayerState : MonoBehaviour
             #endregion
 
             #region Wall Bouncing
-            if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce)
-            {
+            if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
                 StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
             }
-            else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce)
-            {
+            else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
                 StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
             }
             #endregion
 
             #region Jumping
-            if (InputManager.ButtonA)
-            {
+            if (InputManager.ButtonA) {
+
                 InputManager.ButtonA = false;
 
 
@@ -150,7 +147,6 @@ public class PlayerState : MonoBehaviour
                         break;
 
                 }
-
             }
             #endregion
 

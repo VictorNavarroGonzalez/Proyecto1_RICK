@@ -293,6 +293,7 @@
     <Compile Include="Assets\Addons\ProCore\ProGrids\Classes\pg_Util.cs" />
     <Compile Include="Assets\Addons\ProCore\ProGrids\MonoBehaviour\pg_IgnoreSnap.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Colliders\ControllerCollider.cs" />
     <Compile Include="Assets\Scripts\Colliders\GhostCollider.cs" />
     <Compile Include="Assets\Scripts\Colliders\SceneCollider.cs" />
     <Compile Include="Assets\Scripts\Colliders\Spawn\SpawnCollider.cs" />

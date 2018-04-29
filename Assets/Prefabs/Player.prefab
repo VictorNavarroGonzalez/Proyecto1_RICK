@@ -24,13 +24,13 @@ GameObject:
   - component: {fileID: 61705802844912048}
   - component: {fileID: 50090996274340046}
   - component: {fileID: 114875787555832094}
-  - component: {fileID: 114099290048305320}
+  - component: {fileID: 114922025359475566}
   - component: {fileID: 114828411796690352}
+  - component: {fileID: 114099290048305320}
   - component: {fileID: 114847105135815112}
   - component: {fileID: 114057809930271938}
   - component: {fileID: 114980672096989560}
   - component: {fileID: 114568617974319788}
-  - component: {fileID: 114922025359475566}
   - component: {fileID: 114298258415224548}
   - component: {fileID: 114090625117279960}
   m_Layer: 8
@@ -152,7 +152,6 @@ MonoBehaviour:
   canBounce: 0
   canWBounce: 0
   reading: 0
-  canChange: 0
 --- !u!114 &114298258415224548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,6 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   square: {fileID: 21300000, guid: 02a1e2315aab432478131af5d757d774, type: 3}
   circle: {fileID: 21300000, guid: 21936f94e77aa514292a1452f8c6efc8, type: 3}
+  initial: 0
 --- !u!114 &114847105135815112
 MonoBehaviour:
   m_ObjectHideFlags: 1
