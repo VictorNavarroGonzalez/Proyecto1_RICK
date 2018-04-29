@@ -7,7 +7,6 @@ public class MovePlatform : MonoBehaviour
 
    
     public bool inverted;           //Moves upside down that the player
-    public bool active;             //Always is active (don't need trigger)
     public Transform Area;          //Area of action for the platform
     private GameObject target;      //Target to copy (Player)
   
@@ -23,11 +22,9 @@ public class MovePlatform : MonoBehaviour
     void FixedUpdate()
     {
         //Reads the trigger to know if player is in the Area
-        active = Area.GetComponent<PlatformTrigger>().active;
         // Reads the target velocity and move the platform with the same vel
         // Bool inverted decide if platform moves like the target or oposite direction
-        if (active)
-        {
+        if (Area.GetComponent<PlatformTrigger>().Active) {
             if (!inverted) rb.velocity = new Vector2(target.GetComponent<Rigidbody2D>().velocity.x, 0);
             else rb.velocity = new Vector2(target.GetComponent<Rigidbody2D>().velocity.x * -1, 0);
         }

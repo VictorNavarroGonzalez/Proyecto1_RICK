@@ -21,6 +21,7 @@ public class SlidePlatform : MonoBehaviour {
     public bool active;
     public Transform Area;
 
+    private bool needTrigger;
     private float moveX;
     private float moveY;
     private float velX;
@@ -61,32 +62,36 @@ public class SlidePlatform : MonoBehaviour {
         if (distY > 0) startUp = true;
         else startUp = false;
 
+        if (!active) needTrigger = true;
+        else needTrigger = false;
+
+        //Debug.Log(needTrigger);
     }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
         //Reads the trigger to know if player is in the Area
-        active = Area.GetComponent<PlatformTrigger>().active;
-        if (active)
-        {      //Detect if platform has activator or not
+        if (active) {      
             CheckDirection();
 
             //Detects if platform has Horizontal movement
-            if (horizontal)
-            {
+            if (horizontal) {
                 if (goX) rb.velocity = new Vector2(velX, rb.velocity.y);            //Goes to select position
                 else if (backX) rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
             }
 
             //Detects if platform has Vertical movement
-            if (vertical)
-            {
+            if (vertical) {
                 if (goY) rb.velocity = new Vector2(rb.velocity.x, velY);            //Goes to select position
                 else if (backY) rb.velocity = new Vector2(rb.velocity.x, -velY);    //Returns to the start position
             }
         }
+        //Detect if platform has activator or not
         //Stops the platform when player leaves the area
-        else rb.velocity = new Vector2(0, 0);
+        else {
+                active = Area.GetComponent<PlatformTrigger>().Active;
+                rb.velocity = new Vector2(0, 0);
+        }
     }
 
     void CheckDirection() {
@@ -121,8 +126,7 @@ public class SlidePlatform : MonoBehaviour {
                 else if (!goY) backY = true;
             }
             //If Y axis is negative
-            else
-            {
+            else {
                 if (transform.position.y > moveY && !backY) goY = true;     //Go left
                 else goY = false;
 

@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PlatformTrigger : MonoBehaviour {
 
-    public bool active;
-
-    void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Player") {
-            active = true;
-        }
+    private bool _active;
+    public bool Active {
+        get { return _active; }
+        set { _active = value; }
     }
 
-    void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            active = false;
-        }
+    //Activate the objects when player is in the scope
+    void OnTriggerStay2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Player") Active = true;
+    }
+
+    //Desactivate the objects when player left the scope
+    void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject.tag == "Player") Active = false;
     }
 }
