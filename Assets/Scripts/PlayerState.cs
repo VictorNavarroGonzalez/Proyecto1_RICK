@@ -179,17 +179,7 @@ public class PlayerState : MonoBehaviour {
             #endregion
 
             #region Wall Climbing
-            if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit) {
-                if (InputManager.MainVertical() < 0.0f && !stop) {
-                    GetComponent<PlayerMovement>().MoveUp();
-                }
-                else if (InputManager.MainVertical() == 0.0f && !stop) {
-                    GetComponent<PlayerMovement>().StopY();
-                }
-                else if (InputManager.MainVertical() > 0.0f && !stop) {
-                    GetComponent<PlayerMovement>().MoveDown();
-                }
-            }
+            if(!stop) GetComponent<PlayerClimb>().Climb();
             #endregion
 
         }
