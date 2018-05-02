@@ -42,7 +42,6 @@ public class CameraMovement : MonoBehaviour {
                 #region Bouncing Tween
                 bouncing.Insert(2, transform.DOMoveX(player.position.x, 0f));
                 bouncing.Insert(2, transform.DOMoveY(player.position.y, 2f));
-                bouncing.Insert(2, transform.DOMoveZ(player.position.z - 20f, 3f));
                 bouncing.SetUpdate(UpdateType.Fixed, false);
                 #endregion
                 break;
