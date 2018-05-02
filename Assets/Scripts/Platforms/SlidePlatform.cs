@@ -83,9 +83,9 @@ public class SlidePlatform : MonoBehaviour {
                 if (goX) rb.velocity = new Vector2(velX, rb.velocity.y);            //Goes to select position
 
                 else if (backX) rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
-
+                if (isOnPlatform) StartCoroutine(Soften());
                 if (isOnPlatform && Mathf.Abs(target.GetComponent<Rigidbody2D>().velocity.x) < Mathf.Abs(rb.velocity.x))
-                        target.GetComponent<Rigidbody2D>().AddForce(rb.velocity.normalized * 15, ForceMode2D.Force);
+                    target.GetComponent<Rigidbody2D>().AddForce(rb.velocity.normalized * 15, ForceMode2D.Force);
             }
 
             //Detects if platform has Vertical movement
@@ -159,8 +159,8 @@ public class SlidePlatform : MonoBehaviour {
             isReading = true;
             bool temp = goX;
             yield return new WaitUntil(() => goX != temp);
-            target.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
-            target.GetComponent<Rigidbody2D>().AddForce(rb.velocity.normalized * -15, ForceMode2D.Force);
+            target.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+            target.GetComponent<Rigidbody2D>().AddForce(rb.velocity * 15, ForceMode2D.Force);
             isReading = false;
         }       
     }
