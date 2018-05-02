@@ -69,83 +69,94 @@ public class PlayerState : MonoBehaviour {
         }
         #endregion
 
-        #region RICK DASH 
+        #region RICK DASH  
         if (InputManager.ButtonX) {
-            InputManager.ButtonX = false;
+            if (GetComponent<PlayerDash>().enabled) {
 
-            if (GetComponent<PlayerDash>().CheckDash()) {
-                GetComponent<PlayerDash>().Dash();
-                LastState = State;
-                State = MyState.Dashing;
+                InputManager.ButtonX = false;
+
+                if (GetComponent<PlayerDash>().CheckDash()) {
+                    GetComponent<PlayerDash>().Dash();
+                    LastState = State;
+                    State = MyState.Dashing;
+                }
+
             }
         }
-
-       #endregion
+        #endregion
 
         #region RICK CHANGE CHARACTER
         if (InputManager.ButtonY) {
-            InputManager.ButtonY = false;
+            if (GetComponent<PlayerChange>().enabled) {
+                InputManager.ButtonY = false;
 
-            GetComponent<PlayerChange>().Change();
-            GetComponent<PlayerChange>().Actualize();
+                GetComponent<PlayerChange>().Change();
+                GetComponent<PlayerChange>().Actualize();
+            }
         }
         #endregion
 
         #region RICK GHOST
         if (InputManager.ButtonB) {
+            if (GetComponent<PlayerGhost>().enabled) {
+                InputManager.ButtonB = false;
 
-            InputManager.ButtonB = false;
-            if(GetComponent<PlayerGhost>().CheckGhost())
-                GetComponent<PlayerGhost>().Teleport();
-            else
-                GetComponent<PlayerGhost>().Create();
+                if (GetComponent<PlayerGhost>().CheckGhost())
+                    GetComponent<PlayerGhost>().Teleport();
+                else
+                    GetComponent<PlayerGhost>().Create();
+            }
         }
         #endregion
 
         #endregion
 
         #region CIRCLE BEHAVIOR
-        if (Character == MyCharacter.CIRCLE)
-        {
+        if (Character == MyCharacter.CIRCLE) {
 
             #region Bouncing
             if (GetComponent<PlayerBounce>().CheckBounce()) {
-                StartCoroutine(GetComponent<PlayerBounce>().Bounce());
-                LastState = State;
-                StartCoroutine(ActiveBouncing());
-            }
+                if (GetComponent<PlayerBounce>().enabled) {
+                    StartCoroutine(GetComponent<PlayerBounce>().Bounce());
+                    LastState = State;
+                    StartCoroutine(ActiveBouncing());
+                }
+            }    
             #endregion
 
             #region Wall Bouncing
-            if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
-                StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
-            }
-            else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
-                StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
+            if(GetComponent<PlayerBounce>().canWBounce) {
+                if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
+                    StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
+                }
+                else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
+                    StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
+                }
             }
             #endregion
 
             #region Jumping
             if (InputManager.ButtonA) {
+                if (GetComponent<PlayerJump>().enabled) {
 
-                InputManager.ButtonA = false;
+                    InputManager.ButtonA = false;
 
 
-                switch (State)
-                {
-                    case MyState.Grounding:
-                        StartCoroutine(GetComponent<PlayerBounce>().CheckWallBounce());
-                        GetComponent<PlayerJump>().Jump();
-                        LastState = State;
-                        State = MyState.Jumping;
-                        break;
+                    switch (State) {
+                        case MyState.Grounding:
+                            StartCoroutine(GetComponent<PlayerBounce>().CheckWallBounce());
+                            GetComponent<PlayerJump>().Jump();
+                            LastState = State;
+                            State = MyState.Jumping;
+                            break;
 
-                    case MyState.Jumping:
-                        GetComponent<PlayerJump>().DoubleJump();
-                        LastState = State;
-                        State = MyState.DoubleJumping;
-                        break;
+                        case MyState.Jumping:
+                            GetComponent<PlayerJump>().DoubleJump();
+                            LastState = State;
+                            State = MyState.DoubleJumping;
+                            break;
 
+                    }
                 }
             }
             #endregion

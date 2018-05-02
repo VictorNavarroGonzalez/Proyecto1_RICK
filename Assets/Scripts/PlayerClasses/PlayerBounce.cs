@@ -50,8 +50,7 @@ public class PlayerBounce : MonoBehaviour
     #region Checkers
 
     #region Dist to Ground
-    public float DistGround()
-    {
+    public float DistGround() {
         playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
         downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);            //Ray under the player
 
@@ -60,8 +59,7 @@ public class PlayerBounce : MonoBehaviour
     #endregion
 
     #region Check Normal Bounce
-    public bool CheckBounce()
-    {
+    public bool CheckBounce() {
         // Detect if Player is falling from enough heigh
         if (GetComponent<PlayerGround>().Grounded && reading)       //When player arrives to the ground
         {
