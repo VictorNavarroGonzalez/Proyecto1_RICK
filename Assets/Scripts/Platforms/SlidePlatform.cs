@@ -21,6 +21,7 @@ public class SlidePlatform : MonoBehaviour {
     public bool active;
     public Transform Area;
 
+    private bool isReading;
     private bool needTrigger;
     private float moveX;
     private float moveY;
@@ -66,6 +67,7 @@ public class SlidePlatform : MonoBehaviour {
 
         if (!active) needTrigger = true;
         else needTrigger = false;
+        isReading = false;
 
         //Debug.Log(needTrigger);
     }
@@ -78,14 +80,12 @@ public class SlidePlatform : MonoBehaviour {
 
             //Detects if platform has Horizontal movement
             if (horizontal) {
-                if (goX) {
-                    rb.velocity = new Vector2(velX, rb.velocity.y);            //Goes to select position
-                    if (isOnPlatform && target.GetComponent<Rigidbody2D>().velocity.x < rb.velocity.x) target.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 15, ForceMode2D.Force);
-                }
-                else if (backX) {
-                    rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
-                    if (isOnPlatform && target.GetComponent<Rigidbody2D>().velocity.x > rb.velocity.x) target.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 15, ForceMode2D.Force);
-                }
+                if (goX) rb.velocity = new Vector2(velX, rb.velocity.y);            //Goes to select position
+
+                else if (backX) rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
+
+                if (isOnPlatform && Mathf.Abs(target.GetComponent<Rigidbody2D>().velocity.x) < Mathf.Abs(rb.velocity.x))
+                        target.GetComponent<Rigidbody2D>().AddForce(rb.velocity.normalized * 15, ForceMode2D.Force);
             }
 
             //Detects if platform has Vertical movement
@@ -151,5 +151,17 @@ public class SlidePlatform : MonoBehaviour {
 
     private void OnCollisionExit2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player") isOnPlatform = false;
+    }
+
+    public IEnumerator Soften() {
+        if (!isReading)
+        {
+            isReading = true;
+            bool temp = goX;
+            yield return new WaitUntil(() => goX != temp);
+            target.GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+            target.GetComponent<Rigidbody2D>().AddForce(rb.velocity.normalized * -15, ForceMode2D.Force);
+            isReading = false;
+        }       
     }
 }
