@@ -52,7 +52,7 @@ public class CameraMovement : MonoBehaviour {
                 falling.Insert(3, transform.DOMoveX(player.position.x, 0f));
                 falling.Insert(3, transform.DOMoveY(player.position.y, 1f));
                 falling.Insert(3, transform.DOShakePosition(1.5f));
-                falling.Insert(3, transform.DOShakeRotation(1.5f, new Vector3(0, 0, 90), 1, 90, true));
+                //falling.Insert(3, transform.DOShakeRotation(1.5f, new Vector3(0, 0, 90), 1, 90, true));
                 falling.SetUpdate(UpdateType.Fixed, false);
                 #endregion
                 break; 
