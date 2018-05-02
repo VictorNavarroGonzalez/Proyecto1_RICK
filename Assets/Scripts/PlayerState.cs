@@ -116,22 +116,18 @@ public class PlayerState : MonoBehaviour {
 
             #region Bouncing
             if (GetComponent<PlayerBounce>().CheckBounce()) {
-                if (GetComponent<PlayerBounce>().enabled) {
-                    StartCoroutine(GetComponent<PlayerBounce>().Bounce());
-                    LastState = State;
-                    StartCoroutine(ActiveBouncing());
-                }
+                StartCoroutine(GetComponent<PlayerBounce>().Bounce());
+                LastState = State;
+                StartCoroutine(ActiveBouncing());
             }    
             #endregion
 
             #region Wall Bouncing
-            if(GetComponent<PlayerBounce>().canWBounce) {
-                if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
-                    StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
-                }
-                else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
-                    StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
-                }
+            if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
+                StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
+            }
+            else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
+                StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
             }
             #endregion
 

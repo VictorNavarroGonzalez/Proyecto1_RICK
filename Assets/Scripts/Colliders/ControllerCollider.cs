@@ -22,8 +22,8 @@ public class ControllerCollider : MonoBehaviour {
         if (collision.gameObject == player) {
 
             #region Update Player Controls
-            player.GetComponent<PlayerBounce>().enabled = bounce;
-            player.GetComponent<PlayerBounce>().canWBounce = walljump;
+            player.GetComponent<PlayerBounce>().StopBounce = !bounce;
+            player.GetComponent<PlayerBounce>().StopWallBounce = !walljump;
             player.GetComponent<PlayerChange>().enabled = change;
             player.GetComponent<PlayerGhost>().enabled = ghost;
             player.GetComponent<PlayerFall>().enabled = fall;
