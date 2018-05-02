@@ -32,13 +32,15 @@ public class SlidePlatform : MonoBehaviour {
     private bool backX;
     private bool goX;
     private bool startRight;
+    private bool isOnPlatform;
     private Rigidbody2D rb;
-
+    private GameObject target;      //Target to copy (Player)
 
     // Use this for initialization
     void Awake () {
 
         rb = GetComponent<Rigidbody2D>();
+        target = GameObject.Find("Player");
 
         //Position
         moveX = transform.position.x + distX;
@@ -52,7 +54,7 @@ public class SlidePlatform : MonoBehaviour {
         backX = false;  
         backY = false;  
         goX = true;     
-        goY = true;    
+        goY = true;
 
         //Detect if platform starts moves right or left
         if (distX > 0) startRight = true;
@@ -76,8 +78,14 @@ public class SlidePlatform : MonoBehaviour {
 
             //Detects if platform has Horizontal movement
             if (horizontal) {
-                if (goX) rb.velocity = new Vector2(velX, rb.velocity.y);            //Goes to select position
-                else if (backX) rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
+                if (goX) {
+                    rb.velocity = new Vector2(velX, rb.velocity.y);            //Goes to select position
+                    if (isOnPlatform && target.GetComponent<Rigidbody2D>().velocity.x < rb.velocity.x) target.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 15, ForceMode2D.Force);
+                }
+                else if (backX) {
+                    rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
+                    if (isOnPlatform && target.GetComponent<Rigidbody2D>().velocity.x > rb.velocity.x) target.GetComponent<Rigidbody2D>().AddForce(Vector2.left * 15, ForceMode2D.Force);
+                }
             }
 
             //Detects if platform has Vertical movement
@@ -92,6 +100,7 @@ public class SlidePlatform : MonoBehaviour {
                 active = Area.GetComponent<PlatformTrigger>().Active;
                 rb.velocity = new Vector2(0, 0);
         }
+       
     }
 
     void CheckDirection() {
@@ -134,5 +143,13 @@ public class SlidePlatform : MonoBehaviour {
                 else if (!goY) backY = true;
             }
         }       
+    }
+
+    private void OnCollisionStay2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Player") isOnPlatform = true;
+    }
+
+    private void OnCollisionExit2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Player") isOnPlatform = false;
     }
 }
