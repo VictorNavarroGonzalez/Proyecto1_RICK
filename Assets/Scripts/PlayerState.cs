@@ -177,9 +177,11 @@ public class PlayerState : MonoBehaviour {
                     case MyState.Jumping:
                     case MyState.DoubleJumping:
                     case MyState.Bouncing:
-                        GetComponent<PlayerFall>().Fall();
-                        LastState = State;
-                        State = MyState.Falling;
+                        if(GetComponent<PlayerBounce>().DistGround() > 7f) {            //Minimum height to smack
+                            GetComponent<PlayerFall>().Fall();
+                            LastState = State;
+                            State = MyState.Falling;
+                        }
                         break;
                 }
             }
