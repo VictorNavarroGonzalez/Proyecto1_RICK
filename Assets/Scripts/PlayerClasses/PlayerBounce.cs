@@ -10,7 +10,8 @@ public class PlayerBounce : MonoBehaviour
 
     public bool canBounce;
     public bool canWBounce;
-    public bool reading;           //Control when needs to save the height
+    private bool reading;           //Control when needs to save the height
+    private bool isChecking;
 
     Vector2 playerHeight;
     Vector2 playerPos;
@@ -42,18 +43,17 @@ public class PlayerBounce : MonoBehaviour
         canBounce = false;
         canWBounce = true;
         reading = false;
+        isChecking = false;
         _stopBounce = false;
         _stopWallBounce = false;
     }
 
     private void FixedUpdate()
     {
-        if (rb.velocity.y > 0) reading = false;     //Checks if player is going up to prepare for read start height
-
         //When player starts to fall, save his height if there isn't any saved height yet
-        else if (rb.velocity.y < 0 && !reading) {
-            tempY = rb.transform.position.y;
+         if (rb.velocity.y < 0 && !reading) {
             reading = true;
+            tempY = rb.transform.position.y;      
         }
         CheckBounce();      // Detect if Player is falling from enough heigh
     }
@@ -72,22 +72,25 @@ public class PlayerBounce : MonoBehaviour
     #region Check Normal Bounce
     public bool CheckBounce() {
         // Detect if Player is falling from enough heigh
-        if (GetComponent<PlayerGround>().Grounded && reading)       //When player arrives to the ground
-        {
+        if (GetComponent<PlayerGround>().Grounded && reading && !isChecking)
+        {       //When player arrives to the ground 
+            Debug.Log(Mathf.Abs(tempY - rb.transform.position.y));
+            isChecking = true;
             if (Mathf.Abs(tempY - rb.transform.position.y) > 9f) canBounce = true;          //If height is bigger than jump height + double jump height, Player can bounce
             else canBounce = false;
-            StartCoroutine(reactive());
+            StartCoroutine(Reactive());         //Reactive the read of the player's height 
         }
-
+        
         return canBounce;
     }
-    #endregion
-
-    public IEnumerator reactive()
-    {
-        yield return new WaitForEndOfFrame();
+    
+    public IEnumerator Reactive() {
+        yield return new WaitForSeconds(1f);
         reading = false;
+        isChecking = false;
     }
+
+    #endregion
 
     #region Check Wall Bounce
     //Avoid Player to bounce when he is jumping near a wall

@@ -42,10 +42,10 @@ public class PlayerState : MonoBehaviour {
 
     void FixedUpdate() {
 
-        if (temp != State) {
-            Debug.Log(State);
-            temp = State;
-        }
+        //if (temp != State) {
+        //    Debug.Log(State);
+        //    temp = State;
+        //}
 
         #region GENERAL BEHAVIOUR
 

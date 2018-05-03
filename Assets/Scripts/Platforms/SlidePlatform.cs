@@ -83,9 +83,13 @@ public class SlidePlatform : MonoBehaviour {
                 if (goX) rb.velocity = new Vector2(velX, rb.velocity.y);            //Goes to select position
 
                 else if (backX) rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
-                if (isOnPlatform) StartCoroutine(Soften());
-                if (isOnPlatform && Mathf.Abs(target.GetComponent<Rigidbody2D>().velocity.x) < Mathf.Abs(rb.velocity.x))
-                    target.GetComponent<Rigidbody2D>().AddForce(rb.velocity.normalized * 15, ForceMode2D.Force);
+
+                //Move the Player with the platform
+                if (isOnPlatform) {
+                    StartCoroutine(Soften());               //Prevent errors when platform change direction
+                    if (Mathf.Abs(target.GetComponent<Rigidbody2D>().velocity.x) < Mathf.Abs(rb.velocity.x))
+                        target.GetComponent<Rigidbody2D>().AddForce(rb.velocity.normalized * 15, ForceMode2D.Force);
+                }
             }
 
             //Detects if platform has Vertical movement
@@ -146,7 +150,7 @@ public class SlidePlatform : MonoBehaviour {
     }
 
     private void OnCollisionStay2D(Collision2D collision) {
-        if (collision.gameObject.tag == "Player") isOnPlatform = true;
+        if (collision.gameObject.tag == "Player" && target.transform.position.y > this.transform.position.y) isOnPlatform = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision) {
@@ -154,8 +158,7 @@ public class SlidePlatform : MonoBehaviour {
     }
 
     public IEnumerator Soften() {
-        if (!isReading)
-        {
+        if (!isReading) {
             isReading = true;
             bool temp = goX;
             yield return new WaitUntil(() => goX != temp);
