@@ -109,7 +109,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 492}
   m_MaxSize: {x: 14004, y: 14042}
   vertical: 0
-  controlID: 8208
+  controlID: 1063
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 492}
   m_MaxSize: {x: 10002, y: 14042}
   vertical: 1
-  controlID: 8160
+  controlID: 1272
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 221}
   m_MaxSize: {x: 8006, y: 4021}
   vertical: 0
-  controlID: 8140
+  controlID: 1322
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -367,9 +367,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: d0faffff84fbffff00000000d62a0000fc2a0000742b00007e2b0000
+    m_SelectedIDs: ee2c0000
+    m_LastClickedID: 11502
+    m_ExpandedIDs: 22e4ffff70e6ffff9efbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -388,7 +388,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 0}
     m_SearchString: 
   m_ExpandedScenes:
-  - CIRCLE
+  - C05
   m_CurrenRootInstanceID: 0
   m_Locked: 0
   m_CurrentSortingName: TransformSorting
@@ -425,9 +425,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 588.8857, y: 105.80488, z: -3.8217924}
+    m_Target: {x: 388.838, y: 78.062, z: -1.2703588}
     speed: 2
-    m_Value: {x: 588.8857, y: 105.80488, z: -3.8217924}
+    m_Value: {x: 388.838, y: 78.062, z: -1.2703588}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -455,9 +455,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 423.9137
+    m_Target: 168.7893
     speed: 2
-    m_Value: 423.9137
+    m_Value: 168.7893
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -535,19 +535,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Scripts/Platforms
+    - Assets/Scenes/Circle Levels
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Platforms
+  - Assets/Scenes/Circle Levels
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Documentos\Visual Projects\Proyecto1_RICK
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 9c280000
-    m_LastClickedID: 10396
-    m_ExpandedIDs: 000000003c2800005a2800007628000080280000ca280000062900004629000064290000962900002e2c0000302c0000322c0000342c0000362c0000382c00003a2c00003c2c00003e2c0000402c0000422c0000442c000000ca9a3bffffff7f
+    m_SelectedIDs: a4290000
+    m_LastClickedID: 10660
+    m_ExpandedIDs: 00000000302800004e2800006a28000074280000be280000fa2800003a290000582900008a290000282c00002a2c00002c2c00002e2c0000302c0000322c0000342c0000362c0000382c00003a2c00003c2c00003e2c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -575,7 +575,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003c2800005a2800007628000080280000ca280000062900004629000064290000962900002e2c0000302c0000322c0000342c0000362c0000382c00003a2c00003c2c00003e2c0000402c0000422c0000442c000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000302800004e2800006a28000074280000be280000fa2800003a290000582900008a290000282c00002a2c00002c2c00002e2c0000302c0000322c0000342c0000362c0000382c00003a2c00003c2c00003e2c000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

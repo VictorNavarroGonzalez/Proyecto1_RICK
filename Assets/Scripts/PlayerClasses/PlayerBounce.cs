@@ -51,12 +51,9 @@ public class PlayerBounce : MonoBehaviour
         if (rb.velocity.y > 0) reading = false;     //Checks if player is going up to prepare for read start height
 
         //When player starts to fall, save his height if there isn't any saved height yet
-        else if (rb.velocity.y < 0 && !reading)     
-        {
+        else if (rb.velocity.y < 0 && !reading) {
             tempY = rb.transform.position.y;
-
             reading = true;
-
         }
         CheckBounce();      // Detect if Player is falling from enough heigh
     }
@@ -79,12 +76,18 @@ public class PlayerBounce : MonoBehaviour
         {
             if (Mathf.Abs(tempY - rb.transform.position.y) > 9f) canBounce = true;          //If height is bigger than jump height + double jump height, Player can bounce
             else canBounce = false;
-            reading = false;
+            StartCoroutine(reactive());
         }
 
         return canBounce;
     }
     #endregion
+
+    public IEnumerator reactive()
+    {
+        yield return new WaitForEndOfFrame();
+        reading = false;
+    }
 
     #region Check Wall Bounce
     //Avoid Player to bounce when he is jumping near a wall

@@ -343,11 +343,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4183115198715342, guid: 9ac8a1c5191373245a395199f3987413, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 221.3
+      value: 316.3
       objectReference: {fileID: 0}
     - target: {fileID: 4183115198715342, guid: 9ac8a1c5191373245a395199f3987413, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 51.19
+      value: 86.5
       objectReference: {fileID: 0}
     - target: {fileID: 4183115198715342, guid: 9ac8a1c5191373245a395199f3987413, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1047,9 +1047,29 @@ Prefab:
       propertyPath: timeY
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114927020581801452, guid: d38c4da911a0e624f84f49fa4febe475,
+        type: 2}
+      propertyPath: active
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114927020581801452, guid: d38c4da911a0e624f84f49fa4febe475,
+        type: 2}
+      propertyPath: vertical
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114927020581801452, guid: d38c4da911a0e624f84f49fa4febe475,
+        type: 2}
+      propertyPath: Area
+      value: 
+      objectReference: {fileID: 1896931445}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d38c4da911a0e624f84f49fa4febe475, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &1896931445 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4629831116004968, guid: 25e8c14ac5aa70f4981595dbd1f9343b,
+    type: 2}
+  m_PrefabInternal: {fileID: 133161593}
 --- !u!1001 &1933503032
 Prefab:
   m_ObjectHideFlags: 0
