@@ -42,10 +42,7 @@ public class PlayerState : MonoBehaviour {
 
     void FixedUpdate() {
 
-        //if (temp != State) {
-        //    Debug.Log(State);
-        //    temp = State;
-        //}
+        // LogState();
 
         #region GENERAL BEHAVIOUR
 
@@ -225,5 +222,12 @@ public class PlayerState : MonoBehaviour {
     public IEnumerator ActiveBouncing() {         
         yield return new WaitForSeconds(0.3f);
         State = MyState.Bouncing;
+    }
+
+    public void LogState() {
+        if (temp != State) {
+            Debug.Log(State);
+            temp = State;
+        }
     }
 }

@@ -72,13 +72,16 @@ public class PlayerBounce : MonoBehaviour
     #region Check Normal Bounce
     public bool CheckBounce() {
         // Detect if Player is falling from enough heigh
-        if (GetComponent<PlayerGround>().Grounded && reading && !isChecking)
-        {       //When player arrives to the ground 
-            Debug.Log(Mathf.Abs(tempY - rb.transform.position.y));
+        if (GetComponent<PlayerGround>().Grounded && reading && !isChecking) {
+            //When player arrives to the ground
             isChecking = true;
-            if (Mathf.Abs(tempY - rb.transform.position.y) > 9f) canBounce = true;          //If height is bigger than jump height + double jump height, Player can bounce
+
+            //If height is bigger than jump height + double jump height, Player can bounce
+            if (Mathf.Abs(tempY - rb.transform.position.y) > 9f) canBounce = true;
             else canBounce = false;
-            StartCoroutine(Reactive());         //Reactive the read of the player's height 
+
+            //Reactive the read of the player's height 
+            StartCoroutine(Reactive());
         }
         
         return canBounce;

@@ -60,6 +60,7 @@
      <Compile Include="Assets\Addons\ProCore\ProGrids\Classes\pg_SceneMeshRender.cs" />
      <Compile Include="Assets\Addons\ProCore\ProGrids\Classes\pg_Util.cs" />
      <Compile Include="Assets\Addons\ProCore\ProGrids\MonoBehaviour\pg_IgnoreSnap.cs" />
+     <Compile Include="Assets\Scripts\CameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\CameraMovement.cs" />
      <Compile Include="Assets\Scripts\Colliders\ControllerCollider.cs" />
      <Compile Include="Assets\Scripts\Colliders\GhostCollider.cs" />
@@ -68,6 +69,7 @@
      <Compile Include="Assets\Scripts\Colliders\Text\TextDestroy.cs" />
      <Compile Include="Assets\Scripts\Colliders\Text\TextSpawn.cs" />
      <Compile Include="Assets\Scripts\InputManager.cs" />
+     <Compile Include="Assets\Scripts\Platforms\AxialPlatform.cs" />
      <Compile Include="Assets\Scripts\Platforms\MovePlatform.cs" />
      <Compile Include="Assets\Scripts\Platforms\PlatformTrigger.cs" />
      <Compile Include="Assets\Scripts\Platforms\SlidePlatform.cs" />
