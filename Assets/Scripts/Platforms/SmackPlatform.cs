@@ -31,7 +31,12 @@ public class SmackPlatform : MonoBehaviour {
         player = GameObject.Find("Player");
         mask = LayerMask.GetMask("Player");
 
-        size = GetComponent<BoxCollider2D>().size;
+        size = GetComponent<Transform>().localScale;
+        
+        // Adjust size to the local scale.
+        size.x *= GetComponent<BoxCollider2D>().size.x;
+        size.y *= GetComponent<BoxCollider2D>().size.y / 2;
+
         depth = 0.05f;
         active = false; // To avoid multiple state changes at the same time.
 
@@ -50,8 +55,8 @@ public class SmackPlatform : MonoBehaviour {
 
     void FixedUpdate() {
         // Overlap Box Collision
-        boxCenter = (Vector2) transform.position + Vector2.up * (size.y + depth) * 0.5f;
-        boxSize = new Vector2(size.x * 0.8f, depth);
+        boxCenter = (Vector2) transform.position + Vector2.up * size.y;
+        boxSize = new Vector2(size.x * 0.9f, depth);
         
         bool collision = Physics2D.OverlapBox(boxCenter, boxSize, 0, mask) != null;
 
