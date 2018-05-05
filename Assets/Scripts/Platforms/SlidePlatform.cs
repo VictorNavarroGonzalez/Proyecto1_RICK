@@ -162,8 +162,10 @@ public class SlidePlatform : MonoBehaviour {
             isReading = true;
             bool temp = goX;
             yield return new WaitUntil(() => goX != temp);
-            target.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
-            target.GetComponent<Rigidbody2D>().AddForce(rb.velocity * 15, ForceMode2D.Force);
+            if (isOnPlatform) {
+                target.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
+                target.GetComponent<Rigidbody2D>().AddForce(rb.velocity * 15, ForceMode2D.Force);
+            } 
             isReading = false;
         }       
     }

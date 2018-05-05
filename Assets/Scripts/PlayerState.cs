@@ -169,9 +169,16 @@ public class PlayerState : MonoBehaviour {
 
                 switch (State) {
                     case MyState.Grounding:
-                        GetComponent<PlayerJump>().Jump();
-                        LastState = State;
-                        State = MyState.Jumping;
+                        if (GetComponent<PlayerGround>().Grounded) {
+                            GetComponent<PlayerJump>().Jump();
+                            LastState = State;
+                            State = MyState.Jumping;
+                        }
+                        else if (GetComponent<PlayerBounce>().DistGround() > 7f) {
+                            GetComponent<PlayerFall>().Fall();
+                            LastState = State;
+                            State = MyState.Falling;
+                        }                        
                         break;
 
                     case MyState.Jumping:
