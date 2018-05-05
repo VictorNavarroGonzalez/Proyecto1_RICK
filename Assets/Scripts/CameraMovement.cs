@@ -76,6 +76,7 @@ public class CameraMovement : MonoBehaviour {
 
         }
         #endregion
+
     }
 
     public void Pause() {
