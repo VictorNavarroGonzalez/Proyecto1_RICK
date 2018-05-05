@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/Scenes/Circle Levels/Victor Test.unity
+=======
+- path: Assets/Scenes/Circle Levels/C05.unity
+>>>>>>> master
   isLoaded: 1
   isActive: 1
