@@ -95,13 +95,19 @@ public class PlayerState : MonoBehaviour {
 
         #region RICK GHOST
         if (InputManager.ButtonB) {
-            if (GetComponent<PlayerGhost>().enabled) {
+
+            PlayerGhost pg = GetComponent<PlayerGhost>();
+
+            if (pg.enabled) {
                 InputManager.ButtonB = false;
 
-                if (GetComponent<PlayerGhost>().CheckGhost())
-                    GetComponent<PlayerGhost>().Teleport();
-                else
-                    GetComponent<PlayerGhost>().Create();
+                if (pg.CheckGhost()) {
+                    if (pg.CheckTeleport()) pg.Teleport();
+                }
+                else {
+                    pg.Create();
+                }
+                    
             }
         }
         #endregion
