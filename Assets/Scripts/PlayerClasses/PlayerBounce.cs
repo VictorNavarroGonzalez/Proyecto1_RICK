@@ -7,6 +7,8 @@ public class PlayerBounce : MonoBehaviour
 
     private Rigidbody2D rb;
     public RaycastHit2D downHit;
+    public AudioClip bounceSound;
+    public AudioSource source;
 
     public bool canBounce;
     public bool canWBounce;
@@ -151,11 +153,13 @@ public class PlayerBounce : MonoBehaviour
                     //Increase the bounce force
                     rb.AddForce(Vector2.right * BounceForce * 11f * Time.deltaTime, ForceMode2D.Impulse);
                     rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
+                    source.PlayOneShot(bounceSound, 1f);
                 }
                 else {
                     //Normal bounce force
                     rb.AddForce(Vector2.right * BounceForce * 7f * Time.deltaTime, ForceMode2D.Impulse);
                     rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
+                    source.PlayOneShot(bounceSound, 1f);
                 }
             }
         }       
@@ -177,11 +181,13 @@ public class PlayerBounce : MonoBehaviour
                     //Increase the bounce force
                     rb.AddForce(Vector2.left * BounceForce * 11f * Time.deltaTime, ForceMode2D.Impulse);
                     rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
+                    source.PlayOneShot(bounceSound, 1f);
                 }
                 else {
                     //Normal bounce force
                     rb.AddForce(Vector2.left * BounceForce * 7f * Time.deltaTime, ForceMode2D.Impulse);
                     rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
+                    source.PlayOneShot(bounceSound, 1f);
                 }
             }
         }     

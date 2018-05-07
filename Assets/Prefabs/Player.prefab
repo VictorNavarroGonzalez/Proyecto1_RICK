@@ -35,7 +35,6 @@ GameObject:
   - component: {fileID: 114090625117279960}
   - component: {fileID: 114849525816482800}
   - component: {fileID: 82689462362491724}
-  - component: {fileID: 81703685959074864}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -116,13 +115,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
---- !u!81 &81703685959074864
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1159177897575942}
-  m_Enabled: 1
 --- !u!82 &82689462362491724
 AudioSource:
   m_ObjectHideFlags: 1
@@ -228,6 +220,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1737890686110064, guid: 686aece9161e6424e8ae4287f39a63f9, type: 2}
+  circle: {fileID: 0}
+  square: {fileID: 0}
 --- !u!114 &114099290048305320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,6 +233,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f7509191126a4e478e65b2de2787509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounceSound: {fileID: 8300000, guid: d91c4f616a6423e41a97163cd552d315, type: 3}
+  source: {fileID: 82689462362491724}
   canBounce: 0
   canWBounce: 0
 --- !u!114 &114298258415224548
@@ -288,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ff173202b9bf34f99b6826614292cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skinDepth: 0.0005
+  depth: 0.05
   mask:
     serializedVersion: 2
     m_Bits: 512
@@ -325,8 +321,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16e5100c1f59db14698726ef42783b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  genericAudio: {fileID: 0}
-  source: {fileID: 0}
+  genericAudio: {fileID: 8300000, guid: d91c4f616a6423e41a97163cd552d315, type: 3}
+  source: {fileID: 82689462362491724}
 --- !u!114 &114980672096989560
 MonoBehaviour:
   m_ObjectHideFlags: 1
