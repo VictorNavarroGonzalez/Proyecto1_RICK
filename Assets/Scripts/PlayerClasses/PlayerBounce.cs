@@ -48,13 +48,16 @@ public class PlayerBounce : MonoBehaviour
         _stopWallBounce = false;
     }
 
-    private void FixedUpdate()
-    {
+    void Update() {
         //When player starts to fall, save his height if there isn't any saved height yet
-         if (rb.velocity.y < 0 && !reading) {
+        if (rb.velocity.y < 0 && !reading) {
             reading = true;
-            tempY = rb.transform.position.y;      
+            tempY = rb.transform.position.y;
         }
+    }
+
+    void FixedUpdate()
+    {
         CheckBounce();      // Detect if Player is falling from enough heigh
     }
 
@@ -112,6 +115,8 @@ public class PlayerBounce : MonoBehaviour
     #region Normal Bounce
     public IEnumerator Bounce() {
         if (!StopBounce) {
+           
+            Debug.Log("Salto");
             float multiplier;           //Part of force that depends on fall height
 
             if (PlayerState.State == PlayerState.MyState.Bouncing || (PlayerState.State == PlayerState.MyState.Dashing && PlayerState.LastState == PlayerState.MyState.Bouncing))       //If player has bounce before: 

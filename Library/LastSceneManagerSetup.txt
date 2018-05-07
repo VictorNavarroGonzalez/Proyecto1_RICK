@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/Circle Levels/C06.unity
-=======
-- path: Assets/Scenes/CIRCLE.unity
->>>>>>> master
+- path: Assets/Scenes/Circle Levels/Marc Test.unity
   isLoaded: 1
   isActive: 1
