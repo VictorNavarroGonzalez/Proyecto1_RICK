@@ -5,8 +5,18 @@ using UnityEngine;
 public class PlayerGhost : MonoBehaviour {
 
     private bool hasGhost = false;
+    private PlayerState.MyCharacter _ghostChar;
+    public PlayerState.MyCharacter GhostChar {
+        get { return _ghostChar;  }
+    }
+
     new private GameObject camera;
+
     public GameObject prefab;
+
+    public Sprite circle;
+    public Sprite square;
+
     private GameObject ghost;
 
     void Start() {
@@ -24,7 +34,6 @@ public class PlayerGhost : MonoBehaviour {
             if (!renderer.isVisible) {
                 hasGhost = false;
                 Destroy(ghost);
-                Debug.Log("Destroyed");
             }
 
         }
@@ -58,8 +67,17 @@ public class PlayerGhost : MonoBehaviour {
 
     // Instatiates the ghost prefab to be teleported on in the future.
     public void Create() {
-        //Debug.Log("Button");
-        ghost = Instantiate(prefab, transform.position, transform.rotation);
+        if(PlayerState.Character == PlayerState.MyCharacter.CIRCLE) {
+            ghost = Instantiate(prefab, transform.position, transform.rotation);
+            ghost.GetComponent<SpriteRenderer>().sprite = circle;
+            _ghostChar = PlayerState.MyCharacter.CIRCLE;
+        }
+        else if (PlayerState.Character == PlayerState.MyCharacter.SQUARE) {
+            ghost = Instantiate(prefab, transform.position, transform.rotation);
+            ghost.GetComponent<SpriteRenderer>().sprite = square;
+            _ghostChar = PlayerState.MyCharacter.SQUARE;
+        }
+        
         hasGhost = true;
     }
 
