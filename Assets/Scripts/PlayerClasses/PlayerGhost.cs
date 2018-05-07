@@ -24,10 +24,11 @@ public class PlayerGhost : MonoBehaviour {
             if (!renderer.isVisible) {
                 hasGhost = false;
                 Destroy(ghost);
+                Debug.Log("Destroyed");
             }
 
         }
-        
+
     }
 
     // Returns true if the player has a ghost to be telported. 
@@ -57,6 +58,7 @@ public class PlayerGhost : MonoBehaviour {
 
     // Instatiates the ghost prefab to be teleported on in the future.
     public void Create() {
+        //Debug.Log("Button");
         ghost = Instantiate(prefab, transform.position, transform.rotation);
         hasGhost = true;
     }

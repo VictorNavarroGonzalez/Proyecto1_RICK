@@ -30,7 +30,7 @@ public class PlayerChange : MonoBehaviour {
 
                 // Change RICK Properties
                 GetComponent<PlayerMovement>().SideForce = 50f;
-                GetComponent<PlayerJump>().JumpForce = 250f;
+                GetComponent<PlayerJump>().JumpForce = 450f;
                 GetComponent<PlayerFall>().FallForce = 2000f;
                 GetComponent<PlayerDash>().DashForce = 100f;
 
