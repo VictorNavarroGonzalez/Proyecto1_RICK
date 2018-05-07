@@ -6,7 +6,8 @@ public class PlayerState : MonoBehaviour {
 
     private GameObject player;
     private bool stop;
-
+    public AudioClip genericAudio;
+    public AudioSource source;
     public enum MyState { Jumping, DoubleJumping, Dashing, Bouncing, Grounding, Falling };
     public static MyState _state;
     public static MyState State
@@ -119,6 +120,7 @@ public class PlayerState : MonoBehaviour {
             #region Bouncing
             if (GetComponent<PlayerBounce>().CheckBounce()) {
                 StartCoroutine(GetComponent<PlayerBounce>().Bounce());
+                source.PlayOneShot(genericAudio, 1f);
                 LastState = State;
                 StartCoroutine(ActiveBouncing());
             }    
@@ -144,12 +146,14 @@ public class PlayerState : MonoBehaviour {
                         case MyState.Grounding:
                             StartCoroutine(GetComponent<PlayerBounce>().CheckWallBounce());
                             GetComponent<PlayerJump>().Jump();
+                            source.PlayOneShot(genericAudio, 1f);
                             LastState = State;
                             State = MyState.Jumping;
                             break;
 
                         case MyState.Jumping:
                             GetComponent<PlayerJump>().DoubleJump();
+                            source.PlayOneShot(genericAudio, 1f);
                             LastState = State;
                             State = MyState.DoubleJumping;
                             break;
