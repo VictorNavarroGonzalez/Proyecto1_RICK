@@ -45,8 +45,8 @@ public class PlayerDash : MonoBehaviour
         {
             rb.AddForce(-rb.velocity * DashForce / i * Time.deltaTime, ForceMode2D.Impulse);
             yield return new WaitForEndOfFrame();
-            PlayerState.State = PlayerState._lastState;
-            PlayerState._lastState = PlayerState.State;
         }
+        PlayerState.State = PlayerState._lastState;
+        PlayerState._lastState = PlayerState.State;
     }
 }
