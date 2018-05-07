@@ -18,13 +18,13 @@ public class PlayerBounce : MonoBehaviour
     Vector2 playerHeight;
     Vector2 playerPos;
 
-    private bool _stopBounce;       //Desable Bounce
+    private bool _stopBounce;       //Disable Bounce
     public bool StopBounce {
         get { return _stopBounce; }
         set { _stopBounce = value; }
     }
 
-    private bool _stopWallBounce;       //Desable Walled bounce
+    private bool _stopWallBounce;       //Disable Walled bounce
     public bool StopWallBounce {
         get { return _stopWallBounce; }
         set { _stopWallBounce = value; }
@@ -60,7 +60,7 @@ public class PlayerBounce : MonoBehaviour
 
     void FixedUpdate()
     {
-        CheckBounce();      // Detect if Player is falling from enough heigh
+        CheckBounce();      // Detect if Player is falling from enough height
     }
 
     #region Checkers

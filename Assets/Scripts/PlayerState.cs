@@ -6,9 +6,11 @@ public class PlayerState : MonoBehaviour {
 
     private GameObject player;
     private bool stop;
+    //Audio
     public AudioClip genericAudio;
     public AudioClip dashSound;
     public AudioSource source;
+    //Player State
     public enum MyState { Jumping, DoubleJumping, Dashing, Bouncing, Grounding, Falling };
     public static MyState _state;
     public static MyState State
@@ -23,7 +25,7 @@ public class PlayerState : MonoBehaviour {
         get { return _lastState; }
         set { _lastState = value; }
     }
-
+    //Player phase
     public enum MyCharacter { SQUARE, CIRCLE }
     public static MyCharacter _character;
     public static MyCharacter Character {
@@ -64,7 +66,7 @@ public class PlayerState : MonoBehaviour {
 
         #region RICK GROUNDING
         if (State != MyState.Grounding && GetComponent<PlayerGround>().CheckGround()) {
-            StartCoroutine(ActiveGrounding());
+            StartCoroutine(ActiveGrounding());                                                  //Controls if Rick is on the ground
         }
         #endregion
 
@@ -75,7 +77,7 @@ public class PlayerState : MonoBehaviour {
                 InputManager.ButtonX = false;
 
                 if (GetComponent<PlayerDash>().CheckDash()) {
-                    GetComponent<PlayerDash>().Dash();
+                    GetComponent<PlayerDash>().Dash();                                           //Initializes Rick's dash
                     source.PlayOneShot(dashSound, 1f);
                     LastState = State;
                     State = MyState.Dashing;
@@ -90,7 +92,7 @@ public class PlayerState : MonoBehaviour {
             PlayerChange playerChange = GetComponent<PlayerChange>();
 
             if (playerChange.enabled) {
-                InputManager.ButtonY = false;
+                InputManager.ButtonY = false;                                                   //Allows Rick to change between Square and Circle
 
                 playerChange.Change();
                 playerChange.Actualize();
