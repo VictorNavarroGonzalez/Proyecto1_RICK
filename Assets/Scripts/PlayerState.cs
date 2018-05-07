@@ -95,13 +95,18 @@ public class PlayerState : MonoBehaviour {
 
         #region RICK GHOST
         if (InputManager.ButtonB) {
-            if (GetComponent<PlayerGhost>().enabled) {
-                InputManager.ButtonB = false;
+            
+            PlayerGhost pg = GetComponent<PlayerGhost>();
 
-                if (GetComponent<PlayerGhost>().CheckGhost())
-                    GetComponent<PlayerGhost>().Teleport();
-                else
-                    GetComponent<PlayerGhost>().Create();
+            if (pg.enabled) {
+                InputManager.ButtonB = false;
+                if (pg.CheckGhost()) {
+                    if (pg.CheckTeleport()) pg.Teleport();
+                }
+                else {
+                    pg.Create();
+                }
+                    
             }
         }
         #endregion
@@ -181,10 +186,12 @@ public class PlayerState : MonoBehaviour {
                     case MyState.Jumping:
                     case MyState.DoubleJumping:
                     case MyState.Bouncing:
-                        if(GetComponent<PlayerBounce>().DistGround() > 7f) {            //Minimum height to smack
-                            GetComponent<PlayerFall>().Fall();
-                            LastState = State;
-                            State = MyState.Falling;
+                        if(GetComponent<PlayerBounce>().DistGround() > 2.5f) {            //Minimum height to smack
+                            if(!GetComponent<PlayerGround>().LeftHit && !GetComponent<PlayerGround>().RightHit) {
+                                GetComponent<PlayerFall>().Fall();
+                                LastState = State;
+                                State = MyState.Falling;
+                            }
                         }
                         break;
                 }

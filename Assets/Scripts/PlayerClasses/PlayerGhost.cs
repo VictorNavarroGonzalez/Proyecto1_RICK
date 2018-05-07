@@ -13,17 +13,33 @@ public class PlayerGhost : MonoBehaviour {
         camera = GameObject.Find("Camera");
     }
 
-    // Returns true if the player has a ghost to be telported.
-    // If the ghost is colliding with something it will return false.
-    public bool CheckGhost() {
-        if (hasGhost) {
-            if (ghost.GetComponent<GhostCollider>().Overlaped)
-                return false;
+    // Kills the ghost if is not visible in camera.
+    void FixedUpdate() {
 
-            return true;
+        // Avoid accesing at an uninstantiated object.
+        if (ghost != null) {
+
+            // Check if the ghost renderer is visible on camera.
+            SpriteRenderer renderer = ghost.GetComponent<SpriteRenderer>();
+            if (!renderer.isVisible) {
+                hasGhost = false;
+                Destroy(ghost);
+                Debug.Log("Destroyed");
+            }
+
         }
 
-        return false;
+    }
+
+    // Returns true if the player has a ghost to be telported. 
+    public bool CheckGhost() {
+        return hasGhost;
+    }
+
+    // Returns true if the player can teleport to the ghost, i.e,
+    // the ghost is not being overlaped by a platform.
+    public bool CheckTeleport() {
+        return !ghost.GetComponent<GhostCollider>().Overlaped;
     }
 
     // The player and the camera are teleported to the ghost.
@@ -42,6 +58,7 @@ public class PlayerGhost : MonoBehaviour {
 
     // Instatiates the ghost prefab to be teleported on in the future.
     public void Create() {
+        //Debug.Log("Button");
         ghost = Instantiate(prefab, transform.position, transform.rotation);
         hasGhost = true;
     }
