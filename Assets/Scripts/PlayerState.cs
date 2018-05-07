@@ -84,11 +84,13 @@ public class PlayerState : MonoBehaviour {
 
         #region RICK CHANGE CHARACTER
         if (InputManager.ButtonY) {
-            if (GetComponent<PlayerChange>().enabled) {
+            PlayerChange playerChange = GetComponent<PlayerChange>();
+
+            if (playerChange.enabled) {
                 InputManager.ButtonY = false;
 
-                GetComponent<PlayerChange>().Change();
-                GetComponent<PlayerChange>().Actualize();
+                playerChange.Change();
+                playerChange.Actualize();
             }
         }
         #endregion
@@ -96,16 +98,22 @@ public class PlayerState : MonoBehaviour {
         #region RICK GHOST
         if (InputManager.ButtonB) {
             
-            PlayerGhost pg = GetComponent<PlayerGhost>();
+            PlayerGhost playerGhost = GetComponent<PlayerGhost>();
 
-            if (pg.enabled) {
+            if (playerGhost.enabled) {
                 InputManager.ButtonB = false;
 
-                if (pg.CheckGhost()) {
-                    if (pg.CheckTeleport()) pg.Teleport();
+                if (playerGhost.CheckGhost()) {
+                    if (playerGhost.CheckTeleport()) {
+                        playerGhost.Teleport();
+
+                        // Change character to the ghost one and actualize the properties.
+                        Character = playerGhost.GhostChar;
+                        GetComponent<PlayerChange>().Actualize();
+                    }
                 }
                 else {
-                    pg.Create();
+                    playerGhost.Create();
                 }   
             }
         }
