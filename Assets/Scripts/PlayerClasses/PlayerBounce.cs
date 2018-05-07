@@ -115,7 +115,7 @@ public class PlayerBounce : MonoBehaviour
     #region Normal Bounce
     public IEnumerator Bounce() {
         if (!StopBounce) {
-           
+            canBounce = false;
             Debug.Log("Salto");
             float multiplier;           //Part of force that depends on fall height
 
@@ -131,7 +131,7 @@ public class PlayerBounce : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * BounceForce * multiplier * Time.deltaTime, ForceMode2D.Impulse);           //Bounce
             }
-            canBounce = false;
+            
         }
     }
     #endregion
