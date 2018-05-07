@@ -75,6 +75,7 @@ public class PlayerState : MonoBehaviour {
 
                 if (GetComponent<PlayerDash>().CheckDash()) {
                     GetComponent<PlayerDash>().Dash();
+                    source.PlayOneShot(genericAudio, 1f);
                     LastState = State;
                     State = MyState.Dashing;
                 }
@@ -107,6 +108,7 @@ public class PlayerState : MonoBehaviour {
                 if (playerGhost.CheckGhost()) {
                     if (playerGhost.CheckTeleport()) {
                         playerGhost.Teleport();
+                        source.PlayOneShot(genericAudio, 1f);
 
                         // Change character to the ghost one and actualize the properties.
                         Character = playerGhost.GhostChar;
@@ -115,7 +117,9 @@ public class PlayerState : MonoBehaviour {
                 }
                 else {
                     playerGhost.Create();
-                }   
+                    source.PlayOneShot(genericAudio, 1f);
+
+                }
             }
         }
         #endregion
@@ -185,6 +189,7 @@ public class PlayerState : MonoBehaviour {
                     case MyState.Grounding:
                         if (GetComponent<PlayerGround>().Grounded) {
                             GetComponent<PlayerJump>().Jump();
+                            source.PlayOneShot(genericAudio, 1f);
                             LastState = State;
                             State = MyState.Jumping;
                         }

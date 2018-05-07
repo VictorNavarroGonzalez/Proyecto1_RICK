@@ -1040,6 +1040,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4448288479218162, guid: 5d046e4b928fa2c43ab65a0a7264158d,
     type: 2}
   m_PrefabInternal: {fileID: 968930448}
+--- !u!82 &1015747168 stripped
+AudioSource:
+  m_PrefabParentObject: {fileID: 82689462362491724, guid: 9ac8a1c5191373245a395199f3987413,
+    type: 2}
+  m_PrefabInternal: {fileID: 579442334}
 --- !u!1001 &1031795599
 Prefab:
   m_ObjectHideFlags: 0
@@ -1212,6 +1217,16 @@ Prefab:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114913116139585338, guid: 6d5b9f1b8ca3b2943951ebac3bd298a5,
+        type: 2}
+      propertyPath: genericAudio
+      value: 
+      objectReference: {fileID: 8300000, guid: d91c4f616a6423e41a97163cd552d315, type: 3}
+    - target: {fileID: 114913116139585338, guid: 6d5b9f1b8ca3b2943951ebac3bd298a5,
+        type: 2}
+      propertyPath: source
+      value: 
+      objectReference: {fileID: 1015747168}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d5b9f1b8ca3b2943951ebac3bd298a5, type: 2}
   m_IsPrefabParent: 0
