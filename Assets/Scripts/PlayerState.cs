@@ -7,6 +7,7 @@ public class PlayerState : MonoBehaviour {
     private GameObject player;
     private bool stop;
     public AudioClip genericAudio;
+    public AudioClip dashSound;
     public AudioSource source;
     public enum MyState { Jumping, DoubleJumping, Dashing, Bouncing, Grounding, Falling };
     public static MyState _state;
@@ -75,7 +76,7 @@ public class PlayerState : MonoBehaviour {
 
                 if (GetComponent<PlayerDash>().CheckDash()) {
                     GetComponent<PlayerDash>().Dash();
-                    source.PlayOneShot(genericAudio, 1f);
+                    source.PlayOneShot(dashSound, 1f);
                     LastState = State;
                     State = MyState.Dashing;
                 }
@@ -108,7 +109,7 @@ public class PlayerState : MonoBehaviour {
                 if (playerGhost.CheckGhost()) {
                     if (playerGhost.CheckTeleport()) {
                         playerGhost.Teleport();
-                        source.PlayOneShot(genericAudio, 1f);
+                        source.PlayOneShot(genericAudio, 0.5f);
 
                         // Change character to the ghost one and actualize the properties.
                         Character = playerGhost.GhostChar;
@@ -117,7 +118,7 @@ public class PlayerState : MonoBehaviour {
                 }
                 else {
                     playerGhost.Create();
-                    source.PlayOneShot(genericAudio, 1f);
+                    source.PlayOneShot(genericAudio, 0.5f);
 
                 }
             }
@@ -132,7 +133,7 @@ public class PlayerState : MonoBehaviour {
             #region Bouncing
             if (GetComponent<PlayerBounce>().CheckBounce()) {
                 StartCoroutine(GetComponent<PlayerBounce>().Bounce());
-                source.PlayOneShot(genericAudio, 1f);
+                source.PlayOneShot(genericAudio, 0.5f);
                 LastState = State;
                 StartCoroutine(ActiveBouncing());
             }    
@@ -158,14 +159,14 @@ public class PlayerState : MonoBehaviour {
                         case MyState.Grounding:
                             StartCoroutine(GetComponent<PlayerBounce>().CheckWallBounce());
                             GetComponent<PlayerJump>().Jump();
-                            source.PlayOneShot(genericAudio, 1f);
+                            source.PlayOneShot(genericAudio, 0.5f);
                             LastState = State;
                             State = MyState.Jumping;
                             break;
 
                         case MyState.Jumping:
                             GetComponent<PlayerJump>().DoubleJump();
-                            source.PlayOneShot(genericAudio, 1f);
+                            source.PlayOneShot(genericAudio, 0.5f);
                             LastState = State;
                             State = MyState.DoubleJumping;
                             break;
@@ -189,7 +190,7 @@ public class PlayerState : MonoBehaviour {
                     case MyState.Grounding:
                         if (GetComponent<PlayerGround>().Grounded) {
                             GetComponent<PlayerJump>().Jump();
-                            source.PlayOneShot(genericAudio, 1f);
+                            source.PlayOneShot(genericAudio, 0.5f);
                             LastState = State;
                             State = MyState.Jumping;
                         }

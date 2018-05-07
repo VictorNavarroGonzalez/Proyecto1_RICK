@@ -505,6 +505,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114922025359475566, guid: 9ac8a1c5191373245a395199f3987413,
+        type: 2}
+      propertyPath: dashSound
+      value: 
+      objectReference: {fileID: 8300000, guid: d644523a689ad9a46b83af0f5c9ba84a, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ac8a1c5191373245a395199f3987413, type: 2}
   m_IsPrefabParent: 0
