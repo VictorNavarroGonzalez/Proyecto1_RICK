@@ -100,13 +100,13 @@ public class PlayerState : MonoBehaviour {
 
             if (pg.enabled) {
                 InputManager.ButtonB = false;
+
                 if (pg.CheckGhost()) {
                     if (pg.CheckTeleport()) pg.Teleport();
                 }
                 else {
                     pg.Create();
-                }
-                    
+                }   
             }
         }
         #endregion
