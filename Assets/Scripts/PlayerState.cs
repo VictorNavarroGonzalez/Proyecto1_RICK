@@ -11,7 +11,7 @@ public class PlayerState : MonoBehaviour {
     public AudioClip dashSound;
     public AudioSource source;
     //Player State
-    public enum MyState { Jumping, DoubleJumping, Dashing, Bouncing, Grounding, Falling };
+    public enum MyState { Jumping, DoubleJumping, Dashing, Bouncing, Grounding, Falling, Climbing };
     public static MyState _state;
     public static MyState State
     {
@@ -225,7 +225,15 @@ public class PlayerState : MonoBehaviour {
             #endregion
 
             #region Wall Climbing
-            if(!stop) GetComponent<PlayerClimb>().Climb();
+            if (!stop && GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit)
+            {
+                if (GetComponent<PlayerGround>().LeftHit != GetComponent<PlayerGround>().RightHit)
+                {
+                    LastState = State;
+                    State = MyState.Climbing;
+                    GetComponent<PlayerClimb>().Climb();
+                }
+            }
             #endregion
 
         }

@@ -59,7 +59,7 @@ public class PlayerGround : MonoBehaviour {
         rigthCenter = (Vector2) transform.position + Vector2.right * (playerSize.x + invertedBox.x) * 0.5f;
         leftCenter = (Vector2) transform.position + Vector2.left * (playerSize.x + invertedBox.x) * 0.5f;
 
-        _grounded = (Physics2D.OverlapBox(boxCenter, boxSize, 0, mask) != null);                   //Box collider to the left of the player (detect if grounding)
+        _grounded = (Physics2D.OverlapBox(boxCenter, boxSize * 0.9f, 0, mask) != null);                   //Box collider to the left of the player (detect if grounding)
         _leftHit = (Physics2D.OverlapBox(leftCenter, invertedBox, 0, mask) != null);               //Box collider to the left of the player (dtect left hit)
         _rightHit = (Physics2D.OverlapBox(rigthCenter, invertedBox, 0, mask) != null);             //Box collider to the left of the player (detect right hit)
     }
