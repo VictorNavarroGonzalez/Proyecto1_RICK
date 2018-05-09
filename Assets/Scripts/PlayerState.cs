@@ -229,8 +229,10 @@ public class PlayerState : MonoBehaviour {
             {
                 if (GetComponent<PlayerGround>().LeftHit != GetComponent<PlayerGround>().RightHit)
                 {
-                    LastState = State;
-                    State = MyState.Climbing;
+                    if(!GetComponent<PlayerGround>().Grounded) {
+                        LastState = State;
+                        State = MyState.Climbing;
+                    }                   
                     GetComponent<PlayerClimb>().Climb();
                 }
             }

@@ -38,8 +38,11 @@ public class PlayerClimb : MonoBehaviour {
         // Wait until the player reach the top
         yield return new WaitUntil(() => (!GetComponent<PlayerGround>().LeftHit && !GetComponent<PlayerGround>().RightHit));   
         // Impulse to reach the top 
-        rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * 300, ForceMode2D.Force);       
+        if(GetComponent<PlayerBounce>().DistGround() > 0.5f) {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+            rb.AddForce(Vector2.up * 300, ForceMode2D.Force);
+        }
+              
         active = false;
     }
 }

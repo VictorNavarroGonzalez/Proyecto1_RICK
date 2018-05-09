@@ -108,7 +108,6 @@ public class PlayerBounce : MonoBehaviour
             yield return new WaitForSeconds(0.6f);      //Wait 0.6 seconds before check if he should bounce
             canWBounce = true;
         }
-
     }
     #endregion
 
@@ -151,12 +150,14 @@ public class PlayerBounce : MonoBehaviour
                 //If Player dash before bounce:
                 if (PlayerState.State == PlayerState.MyState.Dashing) {
                     //Increase the bounce force
+                    Debug.Log("Dash");
                     rb.AddForce(Vector2.right * BounceForce * 11f * Time.deltaTime, ForceMode2D.Impulse);
                     rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
                     source.PlayOneShot(bounceSound, 1f);
                 }
                 else {
                     //Normal bounce force
+                    Debug.Log("Normal");
                     rb.AddForce(Vector2.right * BounceForce * 7f * Time.deltaTime, ForceMode2D.Impulse);
                     rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
                     source.PlayOneShot(bounceSound, 1f);
