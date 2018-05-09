@@ -47,7 +47,7 @@ public class PlayerGround : MonoBehaviour {
         // Box collision on the sides of the player.
         invertedBox = GetComponent<Transform>().localScale;
         invertedBox.x *= depth;
-        invertedBox.y *= GetComponent<BoxCollider2D>().size.y * 0.9f;
+        invertedBox.y *= GetComponent<BoxCollider2D>().size.y * 0.65f;
 
     }
 
