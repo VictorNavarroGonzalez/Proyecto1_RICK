@@ -46,7 +46,7 @@ public class PlayerState : MonoBehaviour {
 
     void FixedUpdate() {
 
-        // LogState();
+        LogState();
 
         #region GENERAL BEHAVIOUR
 
