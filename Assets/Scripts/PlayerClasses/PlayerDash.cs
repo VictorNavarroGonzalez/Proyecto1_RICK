@@ -43,7 +43,7 @@ public class PlayerDash : MonoBehaviour
     //Slows down the player gradually
    public IEnumerator Counterdash()
     {
-        for (int i = 50; i > 1; i-=10)
+        for (int i = 120; i > 1; i-=10)
         {
             rb.AddForce(-rb.velocity * DashForce / i * Time.deltaTime, ForceMode2D.Impulse);
             yield return new WaitForEndOfFrame();
