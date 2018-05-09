@@ -130,9 +130,11 @@ public class PlayerState : MonoBehaviour {
         #endregion
 
         #region CIRCLE BEHAVIOR
+        //Circle properties and habilities
         if (Character == MyCharacter.CIRCLE) {
 
             #region Bouncing
+            //Checks if the player can bounce on the floor
             if (GetComponent<PlayerBounce>().CheckBounce()) {
                 StartCoroutine(GetComponent<PlayerBounce>().Bounce());
                 source.PlayOneShot(genericAudio, 0.5f);
@@ -142,6 +144,7 @@ public class PlayerState : MonoBehaviour {
             #endregion
 
             #region Wall Bouncing
+            //Checks if the player can bounce in a wall in both sides
             if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
                 StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
             }
@@ -156,8 +159,9 @@ public class PlayerState : MonoBehaviour {
 
                     InputManager.ButtonA = false;
 
-
+                    //Checks the current player state in order to distinguish between a jump and a double jump
                     switch (State) {
+                       
                         case MyState.Grounding:
                             StartCoroutine(GetComponent<PlayerBounce>().CheckWallBounce());
                             GetComponent<PlayerJump>().Jump();
@@ -182,12 +186,14 @@ public class PlayerState : MonoBehaviour {
         #endregion
 
         #region SQUARE BEHAVIOR
+        //Square properties and habilities
         else if (Character == MyCharacter.SQUARE) {
 
             #region Jumping & Falling
             if (InputManager.ButtonA) {
                 InputManager.ButtonA = false;
 
+                //Checks the player state in order to Smack or Jump, as both habilities are triggered by the same button
                 switch (State) {
                     case MyState.Grounding:
                         if (GetComponent<PlayerGround>().Grounded) {

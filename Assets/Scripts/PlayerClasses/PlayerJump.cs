@@ -25,7 +25,7 @@ public class PlayerJump : MonoBehaviour {
     }
 	
 	void FixedUpdate () { 
-        //Better jump feel modifying gravityScale
+        //Better jump feel modifying gravityScale depending on player's velocity in Y axis
         if(rb.velocity.y < 0) {
             rb.gravityScale = highGravity;
         }
@@ -36,12 +36,12 @@ public class PlayerJump : MonoBehaviour {
             rb.gravityScale = 2f;
         }
 	}
-
+    //Character jump
     public void Jump() {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
     }
-
+    //Character double jump
     public void DoubleJump() {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);

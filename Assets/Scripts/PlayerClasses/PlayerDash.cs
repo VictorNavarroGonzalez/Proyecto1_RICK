@@ -14,22 +14,23 @@ public class PlayerDash : MonoBehaviour
         set { _dashForce = value;  }
     }
 
-
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
     }
+    //Checks and updates if the player is on the ground, in order to reset the dash
     private void FixedUpdate()
     {
         if (canDash == false && PlayerState.State == PlayerState.MyState.Grounding) canDash = true;
 
+        else if (canDash == false && PlayerState.Character == PlayerState.MyCharacter.SQUARE && (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit)) canDash = true;
 
     }
-
+    //Checks whether the player can dash or not
     public bool CheckDash() {
         if (PlayerState.State != PlayerState.MyState.Grounding && canDash) return true;
         return false; 
     }
-
+    //Adds an impulse to the player 
     public void Dash() {
         canDash = false;
         temp = rb.velocity;
@@ -39,6 +40,7 @@ public class PlayerDash : MonoBehaviour
         rb.AddForce(rb.velocity * DashForce* Time.deltaTime , ForceMode2D.Impulse);
     }
     
+    //Slows down the player gradually
    public IEnumerator Counterdash()
     {
         for (int i = 50; i > 1; i-=10)

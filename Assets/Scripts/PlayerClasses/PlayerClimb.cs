@@ -16,10 +16,12 @@ public class PlayerClimb : MonoBehaviour {
         if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit) {
             // Move up
             if (InputManager.MainVertical() < 0.0f) {
-                StartCoroutine(Top());          //Check if player is at the top of the wall
+                if (!active)
+                {
+                    StartCoroutine(Top());          //Check if player is at the top of the wall
+                    Debug.Log(GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit);
+                }
                 GetComponent<PlayerMovement>().MoveUp();
-                //Reactive the corroutine
-                if (active) active = false;         
             }
             //Drag Force to reduce the fall and improve the feeling
             else if (InputManager.MainVertical() == 0.0f) {
@@ -34,12 +36,14 @@ public class PlayerClimb : MonoBehaviour {
 
 
     public IEnumerator Top() {
-        // Wait until the player reach the top
-        yield return new WaitUntil(() => (!GetComponent<PlayerGround>().LeftHit && !GetComponent<PlayerGround>().RightHit) && !active);
         // Desable coroutine to prevent overlap
-        active = true;          
+        active = true;
+        // Wait until the player reach the top
+        yield return new WaitUntil(() => (!GetComponent<PlayerGround>().LeftHit && !GetComponent<PlayerGround>().RightHit));   
         // Impulse to reach the top 
         rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(Vector2.up * 300, ForceMode2D.Force);   
+        rb.AddForce(Vector2.up * 300, ForceMode2D.Force);
+        active = false;
+        //Debug.Log("activo");
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour{
     
     #region JOYSTICK INPUT
+    //Gets input from joysticks and normalizes it
     public static float MainHorizontal() {
         float r = 0.0f;
         r += Input.GetAxis("J_Horizontal");
@@ -23,6 +24,7 @@ public class InputManager : MonoBehaviour{
     #endregion
 
     #region JUMP INPUTS
+    //Gets Button A
     public static bool ButtonA;
   
     public static bool ButtonDownA() {
@@ -31,11 +33,13 @@ public class InputManager : MonoBehaviour{
     #endregion
 
     #region CHANGE INPUT
+    //Gets button Y
     public static bool ButtonY;
     public static bool ButtonB;
     #endregion
 
     #region DASH INPUTS
+    //Gets button X
     public static bool ButtonX;
     
     public static bool ButtonDownX()
@@ -43,7 +47,7 @@ public class InputManager : MonoBehaviour{
         return Input.GetButton("ButtonX");
     }
     #endregion
-
+    //Constantly updates waiting for input
     private void Update()
     {
         if (!ButtonA)
