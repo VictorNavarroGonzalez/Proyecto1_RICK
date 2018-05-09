@@ -46,7 +46,7 @@ public class PlayerState : MonoBehaviour {
 
     void FixedUpdate() {
 
-        LogState();
+        //LogState();
 
         #region GENERAL BEHAVIOUR
 
@@ -146,10 +146,11 @@ public class PlayerState : MonoBehaviour {
             #region Wall Bouncing
             //Checks if the player can bounce in a wall in both sides
             if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
-                StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
+                    StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
+                
             }
             else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
-                StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
+                    StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
             }
             #endregion
 

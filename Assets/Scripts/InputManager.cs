@@ -42,16 +42,25 @@ public class InputManager : MonoBehaviour{
     //Gets button X
     public static bool ButtonX;
     
-    public static bool ButtonDownX()
-    {
+    public static bool ButtonDownX() {
         return Input.GetButton("ButtonX");
     }
     #endregion
+
+    #region TIMER
+    private static float _timePressed;
+    public static float TimePressed {
+        get { return _timePressed; }
+        set { _timePressed = value; }
+    }
+    #endregion
+
     //Constantly updates waiting for input
     private void Update()
     {
-        if (!ButtonA)
-            ButtonA = Input.GetButtonDown("ButtonA");
+        //Reads when ButtonA is pressed to know how much time the button is pressed
+        if (!ButtonDownA()) TimePressed = Time.time;        
+        if (!ButtonA) ButtonA = Input.GetButtonDown("ButtonA"); 
         if (!ButtonX)
             ButtonX = Input.GetButtonDown("ButtonX");
         if (!ButtonY)

@@ -42,7 +42,7 @@ public class PlayerClimb : MonoBehaviour {
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * 300, ForceMode2D.Force);
         }
-              
+        // Reactive the coroutine
         active = false;
     }
 }

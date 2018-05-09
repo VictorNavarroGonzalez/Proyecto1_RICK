@@ -142,7 +142,7 @@ public class PlayerBounce : MonoBehaviour
     {
         if (!StopWallBounce) {
             yield return new WaitUntil(() => (GetComponent<PlayerGround>().LeftHit));           //If Player is hitting a left side wall
-            if (InputManager.ButtonDownA())          //If button A is pressed:
+            if (InputManager.ButtonDownA() && Time.time - InputManager.TimePressed > 0.5f)          //If button A is pressed for more than 0.5 seconds:
             {
                 StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));         //Stops the joystick input for 0.5 second to improve bounce feeling
                 rb.velocity = new Vector2(0, 0);
@@ -150,14 +150,14 @@ public class PlayerBounce : MonoBehaviour
                 //If Player dash before bounce:
                 if (PlayerState.State == PlayerState.MyState.Dashing) {
                     //Increase the bounce force
-                    Debug.Log("Dash");
+                    //Debug.Log("Dash");
                     rb.AddForce(Vector2.right * BounceForce * 11f * Time.deltaTime, ForceMode2D.Impulse);
                     rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
                     source.PlayOneShot(bounceSound, 1f);
                 }
                 else {
                     //Normal bounce force
-                    Debug.Log("Normal");
+                    //Debug.Log("Normal");
                     rb.AddForce(Vector2.right * BounceForce * 7f * Time.deltaTime, ForceMode2D.Impulse);
                     rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
                     source.PlayOneShot(bounceSound, 1f);
@@ -172,7 +172,7 @@ public class PlayerBounce : MonoBehaviour
     {
         if(!StopWallBounce) {
             yield return new WaitUntil(() => (GetComponent<PlayerGround>().RightHit));      //If Player is hitting a right side wall
-            if (InputManager.ButtonDownA())           //If button A is pressed:
+            if (InputManager.ButtonDownA() && Time.time - InputManager.TimePressed > 0.5f)           //If button A is pressed for more than 0.5 seconds:
             {
                 StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));       //Stops the joystick input for 0.5 second to improve bounce feeling
                 rb.velocity = new Vector2(0, 0);
