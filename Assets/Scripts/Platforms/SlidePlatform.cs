@@ -18,11 +18,9 @@ public class SlidePlatform : MonoBehaviour {
     public bool vertical;
 
     //Trigger
-    public bool active;
     public Transform Area;
 
     private bool isReading;
-    private bool needTrigger;
     private float moveX;
     private float moveY;
     private float velX;
@@ -65,8 +63,7 @@ public class SlidePlatform : MonoBehaviour {
         if (distY > 0) startUp = true;
         else startUp = false;
 
-        if (!active) needTrigger = true;
-        else needTrigger = false;
+  
         isReading = false;
 
         //Debug.Log(needTrigger);
@@ -75,7 +72,7 @@ public class SlidePlatform : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         //Reads the trigger to know if player is in the Area
-        if (active) {      
+        if (Area.GetComponent<PlatformTrigger>().Active) {      
             CheckDirection();
 
             //Detects if platform has Horizontal movement
@@ -101,7 +98,7 @@ public class SlidePlatform : MonoBehaviour {
         //Detect if platform has activator or not
         //Stops the platform when player leaves the area
         else {
-                active = Area.GetComponent<PlatformTrigger>().Active;
+                
                 rb.velocity = new Vector2(0, 0);
         }
        
