@@ -9,6 +9,7 @@ public class PlayerBounce : MonoBehaviour
     public RaycastHit2D downHit;
     public AudioClip bounceSound;
     public AudioSource source;
+    public LayerMask mask;
 
     public bool canBounce;
     public bool canWBounce;
@@ -68,7 +69,7 @@ public class PlayerBounce : MonoBehaviour
     #region Dist to Ground
     public float DistGround() {
         playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
-        downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down);            //Ray under the player
+        downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down, Mathf.Infinity, mask);            //Ray under the player
 
         return downHit.distance;            //Distance to the ground
     }

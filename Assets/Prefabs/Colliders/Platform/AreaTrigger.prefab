@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4629831116004968}
   - component: {fileID: 61669344294296574}
   - component: {fileID: 114467737386500352}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AreaTrigger
   m_TagString: Area
   m_Icon: {fileID: 0}
@@ -77,4 +77,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1ed6637f52cba64d880286e124254a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  active: 0
