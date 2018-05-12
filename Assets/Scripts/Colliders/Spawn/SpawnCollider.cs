@@ -42,7 +42,7 @@ public class SpawnCollider : MonoBehaviour {
         yield return new WaitForSeconds(time);
         player.transform.position = spawn.transform.position;
 
-        camera.GetComponent<CameraMovement>().Pause();
+        camera.GetComponent<CameraBehaviour>().Pause();
         Vector3 offset = new Vector3(0, 0, 2);
         camera.transform.position = player.transform.position - offset;
 
@@ -55,11 +55,10 @@ public class SpawnCollider : MonoBehaviour {
     private IEnumerator Teleport() {
         yield return new WaitForSeconds(time);
         float distY = player.GetComponent<PlayerBounce>().DistGround();
-        Debug.Log(player.GetComponent<PlayerBounce>().DistGround());
         player.transform.position = spawn.transform.position + new Vector3(0,Mathf.Abs(distY) + 0.6436337f , 0);
-        camera.GetComponent<CameraMovement>().Pause();
+        camera.GetComponent<CameraBehaviour>().Pause();
 
-        Vector3 offset = camera.GetComponent<CameraMovement>().offset;
+        Vector3 offset = camera.GetComponent<CameraBehaviour>().offset;
         camera.transform.position = player.transform.position + offset;
 
         isActive = true;

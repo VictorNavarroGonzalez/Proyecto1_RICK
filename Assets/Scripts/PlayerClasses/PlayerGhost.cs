@@ -57,7 +57,7 @@ public class PlayerGhost : MonoBehaviour {
     public void Teleport() {
         transform.position = ghost.transform.position;
 
-        camera.GetComponent<CameraMovement>().Pause();
+        camera.GetComponent<CameraBehaviour>().Pause();
         Vector3 offset = new Vector3(0, 0, 2);
         camera.transform.position = ghost.transform.position - offset;
 

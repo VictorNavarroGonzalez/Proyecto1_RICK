@@ -14,7 +14,7 @@ public class SceneCollider : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.gameObject == player) {
             Debug.Log("Next Scene: " + next.name);
-            camera.GetComponent<CameraMovement>().Pause();
+            camera.GetComponent<CameraBehaviour>().Pause();
             SceneManager.LoadScene(next.name, LoadSceneMode.Single);
         }
     }
