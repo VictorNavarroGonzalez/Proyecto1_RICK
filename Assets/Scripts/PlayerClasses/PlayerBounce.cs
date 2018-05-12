@@ -6,6 +6,7 @@ public class PlayerBounce : MonoBehaviour
 {
 
     private Rigidbody2D rb;
+    private PlayerJump pj;
     public RaycastHit2D downHit;
     public AudioClip bounceSound;
     public AudioSource source;
@@ -15,6 +16,8 @@ public class PlayerBounce : MonoBehaviour
     public bool canWBounce;
     private bool reading;           //Control when needs to save the height
     private bool isChecking;
+    private float K;                //Elsaticity constant
+    private float g;                //Gravity
 
     Vector2 playerHeight;
     Vector2 playerPos;
@@ -42,6 +45,7 @@ public class PlayerBounce : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        pj = GetComponent<PlayerJump>();
         playerHeight = new Vector2(0, GetComponent<CircleCollider2D>().radius * 2);
         canBounce = false;
         canWBounce = true;
@@ -49,6 +53,8 @@ public class PlayerBounce : MonoBehaviour
         isChecking = false;
         _stopBounce = false;
         _stopWallBounce = false;
+        K = 0.8f;
+        g = 2;
     }
 
     void Update() {
@@ -83,7 +89,7 @@ public class PlayerBounce : MonoBehaviour
             isChecking = true;
 
             //If height is bigger than jump height + double jump height, Player can bounce
-            if (Mathf.Abs(tempY - rb.transform.position.y) > 9f) canBounce = true;
+            if (Mathf.Abs(tempY - rb.transform.position.y) > 8f) canBounce = true;
             else canBounce = false;
 
             //Reactive the read of the player's height 
@@ -117,21 +123,24 @@ public class PlayerBounce : MonoBehaviour
     #region Normal Bounce
     public IEnumerator Bounce() {
         if (!StopBounce) {
-            canBounce = false;
-            Debug.Log("Salto");
-            float multiplier;           //Part of force that depends on fall height
-
+            canBounce = false;          
+            float h = Mathf.Abs(tempY - rb.transform.position.y);       //Jump height
+            float BounceForce = K*h;           //Part of force that depends on fall height
+            float softBounce = 0.4f * h;
+            float extraForce;                  
             if (PlayerState.State == PlayerState.MyState.Bouncing || (PlayerState.State == PlayerState.MyState.Dashing && PlayerState.LastState == PlayerState.MyState.Bouncing))       //If player has bounce before: 
-                multiplier = Mathf.Abs(tempY - rb.transform.position.y) / 2;        //Set bounce force only a half of normal bounce
-            else multiplier = Mathf.Abs(tempY - rb.transform.position.y);  //Set normal bounce force
-
-            if (multiplier > 15.3f) multiplier = 15.3f;                 // Set a maximum bounce force for a fall
+                extraForce = 0;       
+            else extraForce = GetComponent<PlayerJump>().JumpForce*Time.deltaTime;    //Add the jumpForce to the bounce
 
             yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));          //Wait until Player touch ground
             if (InputManager.ButtonDownA())         //If button A is pressed:
             {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * BounceForce * multiplier * Time.deltaTime, ForceMode2D.Impulse);           //Bounce
+                rb.AddForce(Vector2.up * (BounceForce + extraForce), ForceMode2D.Impulse);           //Bounce
+            }
+            else {
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+                rb.AddForce(Vector2.up * (softBounce), ForceMode2D.Impulse);           //Bounce
             }
             
         }
@@ -152,15 +161,15 @@ public class PlayerBounce : MonoBehaviour
                 if (PlayerState.State == PlayerState.MyState.Dashing) {
                     //Increase the bounce force
                     //Debug.Log("Dash");
-                    rb.AddForce(Vector2.right * BounceForce * 11f * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.right * pj.JumpForce * 2 * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.up * pj.JumpForce * 1.3f* Time.deltaTime, ForceMode2D.Impulse);
                     source.PlayOneShot(bounceSound, 1f);
                 }
                 else {
                     //Normal bounce force
                     //Debug.Log("Normal");
-                    rb.AddForce(Vector2.right * BounceForce * 7f * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.right * pj.JumpForce * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.up * pj.JumpForce * 0.8f * Time.deltaTime, ForceMode2D.Impulse);
                     source.PlayOneShot(bounceSound, 1f);
                 }
             }
@@ -181,14 +190,14 @@ public class PlayerBounce : MonoBehaviour
                 //If Player dash before bounce:
                 if (PlayerState.State == PlayerState.MyState.Dashing) {
                     //Increase the bounce force
-                    rb.AddForce(Vector2.left * BounceForce * 11f * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.left * pj.JumpForce * 2 * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.up * pj.JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
                     source.PlayOneShot(bounceSound, 1f);
                 }
                 else {
                     //Normal bounce force
-                    rb.AddForce(Vector2.left * BounceForce * 7f * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.up * GetComponent<PlayerJump>().JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.left * pj.JumpForce * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.up * pj.JumpForce * 0.8f * Time.deltaTime, ForceMode2D.Impulse);
                     source.PlayOneShot(bounceSound, 1f);
                 }
             }
