@@ -235,8 +235,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceSound: {fileID: 8300000, guid: d91c4f616a6423e41a97163cd552d315, type: 3}
   source: {fileID: 82689462362491724}
-  canBounce: 0
-  canWBounce: 0
+  mask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!114 &114298258415224548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -322,6 +323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   genericAudio: {fileID: 8300000, guid: d91c4f616a6423e41a97163cd552d315, type: 3}
+  dashSound: {fileID: 0}
   source: {fileID: 82689462362491724}
 --- !u!114 &114980672096989560
 MonoBehaviour:
