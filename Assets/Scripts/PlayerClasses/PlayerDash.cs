@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDash : MonoBehaviour
-{
+public class PlayerDash : MonoBehaviour {
 
     private Rigidbody2D rb;
     private bool canDash;
@@ -17,15 +16,18 @@ public class PlayerDash : MonoBehaviour
     void Awake() {
         rb = GetComponent<Rigidbody2D>();
     }
+
     //Checks and updates if the player is on the ground, in order to reset the dash
     private void FixedUpdate() {
         if (canDash == false && (PlayerState.State == PlayerState.MyState.Grounding || PlayerState.State == PlayerState.MyState.Climbing)) canDash = true;
     }
+
     //Checks whether the player can dash or not
     public bool CheckDash() {
         if (PlayerState.State != PlayerState.MyState.Grounding && canDash) return true;
         return false; 
     }
+
     //Adds an impulse to the player 
     public void Dash() {
         canDash = false;
@@ -37,7 +39,7 @@ public class PlayerDash : MonoBehaviour
     }
     
     //Slows down the player gradually
-   public IEnumerator Counterdash()
+    public IEnumerator Counterdash()
     {
         for (int i = 120; i > 1 || !GetComponent<PlayerBounce>().canWBounce; i-=10)
         {

@@ -43,8 +43,7 @@ public class SmackPlatform : MonoBehaviour {
         // Define all the possible states. Is important to place the
         // collider in the state 0 by default.
         Vector2 current = transform.position; // For more legible code after the declaration.
-        states.Add(current);
-        for(int i = 0; i < totalStates; i++) {
+        for(int i = 0; i <= totalStates; i++) {
             states.Add(new Vector2(current.x, current.y + offset * i));
         }
 
@@ -87,12 +86,12 @@ public class SmackPlatform : MonoBehaviour {
             currentState--;
             transform.position = states[currentState];
 
-            foreach (GameObject p in platforms) {
+            foreach (GameObject p in platforms) { 
                 p.GetComponent<SmackPlatform>().Increase();
             }
         }
         
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         active = false;
     }
 

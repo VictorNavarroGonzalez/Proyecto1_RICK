@@ -187,39 +187,36 @@ public class PlayerState : MonoBehaviour {
         #endregion
 
         #region SQUARE BEHAVIOR
-        //Square properties and habilities
+        // Square properties and habilities
         else if (Character == MyCharacter.SQUARE) {
 
             #region Jumping & Falling
             if (InputManager.ButtonA) {
                 InputManager.ButtonA = false;
 
-                //Checks the player state in order to Smack or Jump, as both habilities are triggered by the same button
+                // Checks the player state in order to Smack or Jump, 
+                // as both habilities are triggered by the same button
                 switch (State) {
                     case MyState.Grounding:
-                        if (GetComponent<PlayerGround>().Grounded) {
-                            GetComponent<PlayerJump>().Jump();
-                            source.PlayOneShot(genericAudio, 0.5f);
-                            LastState = State;
-                            State = MyState.Jumping;
-                        }
-                        else if (GetComponent<PlayerBounce>().DistGround() > 7f) {
-                            GetComponent<PlayerFall>().Fall();
-                            LastState = State;
-                            State = MyState.Falling;
-                        }                        
+                    case MyState.Climbing:
+                        GetComponent<PlayerJump>().Jump();
+                        source.PlayOneShot(genericAudio, 0.5f);
+                        LastState = State;
+                        State = MyState.Jumping;                      
                         break;
 
                     case MyState.Jumping:
                     case MyState.DoubleJumping:
                     case MyState.Bouncing:
-                        if(GetComponent<PlayerBounce>().DistGround() > 2.5f) {            //Minimum height to smack
-                            if(!GetComponent<PlayerGround>().LeftHit && !GetComponent<PlayerGround>().RightHit) {
-                                GetComponent<PlayerFall>().Fall();
-                                LastState = State;
-                                State = MyState.Falling;
-                            }
+                        if (!GetComponent<PlayerGround>().LeftHit && !GetComponent<PlayerGround>().RightHit) {
+                            GetComponent<PlayerFall>().Fall();
+                            LastState = State;
+                            State = MyState.Falling;
                         }
+
+                        //if (GetComponent<PlayerBounce>().DistGround() > 0f) {
+                            
+                        //}
                         break;
                 }
             }
