@@ -12,7 +12,6 @@ D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\nunit.framework.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.Advertisements.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.Analytics.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.dll
-D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.GoogleAudioSpatializer.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.Graphs.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.HoloLens.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.Networking.dll
@@ -31,12 +30,10 @@ D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.HoloLens.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.Networking.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.Purchasing.dll
-D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.SpatialTracking.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.StandardEvents.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.TestRunner.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.Timeline.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.UI.dll
-D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.UIAutomation.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\Unity.Cecil.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\Unity.SerializationLogic.dll
@@ -60,14 +57,11 @@ D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\nunit.framework.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.Timeline.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.Timeline.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.TreeEditor.xml
-D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.UIAutomation.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.UIAutomation.xml
-D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.GoogleAudioSpatializer.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.GoogleAudioSpatializer.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.HoloLens.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.HoloLens.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.SpatialTracking.xml
-D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.SpatialTracking.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.VR.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\DOTween.xml
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\DOTween43.xml
@@ -78,3 +72,5 @@ D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.iOS.Extensions.Xcode.xml
 D:\UNITY\Proyecto1_RICK\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\UNITY\Proyecto1_RICK\obj\Debug\Assembly-CSharp.dll
 D:\UNITY\Proyecto1_RICK\obj\Debug\Assembly-CSharp.pdb
+D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\TextMeshPro-2017.3-Editor.dll
+D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\TextMeshPro-2017.3-Runtime.dll

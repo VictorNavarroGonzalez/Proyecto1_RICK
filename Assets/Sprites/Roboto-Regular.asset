@@ -9,9 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -667331979, guid: 89f0137620f6af44b9ba852b4190e64e, type: 3}
-  m_Name: Roboto-Regular SDF
+  m_Name: Roboto-Regular
   m_EditorClassIdentifier: 
-  hashCode: 2003208237
+  hashCode: 2018147868
   material: {fileID: 21458247609555632}
   materialHashCode: -1393991930
   fontAssetType: 1
@@ -966,7 +966,7 @@ MonoBehaviour:
     italicTypeface: {fileID: 0}
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}
-  - regularTypeface: {fileID: 0}
+  - regularTypeface: {fileID: 11400000, guid: 5f49c5c259ef59f41995e58a7216d84b, type: 2}
     italicTypeface: {fileID: 0}
   - regularTypeface: {fileID: 0}
     italicTypeface: {fileID: 0}

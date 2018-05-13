@@ -6,23 +6,28 @@ using TMPro;
 
 public class ButtonHover : MonoBehaviour, ISelectHandler, IDeselectHandler {
 
+    // Get the text of the button and his original value.
     private TextMeshProUGUI text;
     private string original;
 
     void Awake() {
+        // Get the childen of the button which is his child.
         text = GetComponentInChildren<TextMeshProUGUI>();
         original = text.text;
     }
 
+    // Properties to consider when the button is selected.
     public void OnSelect(BaseEventData eventData) {
+        text.SetText(text.text + '.');
         text.fontStyle = FontStyles.Bold;
         text.fontSize += 2f;
-        text.SetText(text.text + '.');
+        text.UpdateFontAsset();
     }
 
+    // Properties to consider when the button is deselected.
     public void OnDeselect(BaseEventData data) {
-        text.fontStyle = FontStyles.Normal;
-        text.fontSize -= 2f;
         text.SetText(original);
+        text.fontStyle = FontStyles.Normal;
+        text.fontSize -= 2f;    
     }
 }

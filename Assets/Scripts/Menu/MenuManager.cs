@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour {
 
     public GameObject mainMenu;
     public GameObject newGameMenu;
+    public GameObject rickText;
 
     void Start() {
         Pause();
@@ -27,11 +28,13 @@ public class MenuManager : MonoBehaviour {
 
     public void Resume() {
         mainMenu.SetActive(false);
+        rickText.SetActive(false);
         Time.timeScale = 1f;
     }
 
     public void Pause() {
         mainMenu.SetActive(true);
+        rickText.SetActive(true);
         Time.timeScale = 0f;
     }
 
