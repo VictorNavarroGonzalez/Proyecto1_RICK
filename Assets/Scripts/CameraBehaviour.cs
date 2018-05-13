@@ -95,7 +95,7 @@ public class CameraBehaviour : MonoBehaviour {
         #region Falling Tween
         falling.Insert(3, transform.DOMoveX(target.x, 0f));
         falling.Insert(3, transform.DOMoveY(target.y, 1f));
-        falling.Insert(3, transform.DOShakePosition(2f));
+        falling.Insert(3, transform.DOShakePosition(1f));
         //falling.Insert(3, transform.DOShakeRotation(1.5f, new Vector3(0, 0, 90), 1, 90, true));
         falling.SetUpdate(UpdateType.Fixed, false);
         #endregion
