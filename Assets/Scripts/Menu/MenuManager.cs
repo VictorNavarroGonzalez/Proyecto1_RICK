@@ -11,7 +11,7 @@ public class MenuManager : MonoBehaviour {
     public GameObject newGameMenu;
 
     void Start() {
-        //mainMenu.SetActive(false);
+        Pause();
     }
 
     void Update() {
@@ -40,12 +40,14 @@ public class MenuManager : MonoBehaviour {
     }
 
     public void LoadConfirmation() {
-        mainMenu.SetActive(false);
         newGameMenu.SetActive(true);
+        newGameMenu.GetComponent<ButtonSelector>().SelectButton();
+        mainMenu.SetActive(false);
     }
 
     public void LoadMainMenu() {
         mainMenu.SetActive(true);
+        mainMenu.GetComponent<ButtonSelector>().SelectButton();
         newGameMenu.SetActive(false);
     }
     
