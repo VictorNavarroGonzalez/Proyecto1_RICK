@@ -46,7 +46,6 @@ public class PlayerChange : MonoBehaviour {
                 // Change RICK Properties
                 GetComponent<PlayerMovement>().SideForce = 100f;
                 GetComponent<PlayerJump>().JumpForce = 500f;
-                GetComponent<PlayerBounce>().BounceForce = 100f;
                 GetComponent<PlayerDash>().DashForce = 100f;
 
                 // Change RICK Scripts

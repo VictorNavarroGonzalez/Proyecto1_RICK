@@ -32,11 +32,17 @@ public class PlayerState : MonoBehaviour {
         get { return _character; }
         set { _character = value; }
     }
+    private bool _stopBounce;
+    public bool StopBounce { get { return _stopBounce; } set { _stopBounce = value; } }
+    private bool _stopWallBounce;
+    public bool StopWallBounce { get { return _stopWallBounce; } set { _stopWallBounce = value; } }
 
     void Awake() {
         State = MyState.Jumping;
         LastState = State;
         stop = false;
+        StopBounce = false;
+        StopWallBounce = false;
 
         // Initialize RICK into a Circle
         Character = GetComponent<PlayerChange>().initial;
@@ -136,7 +142,7 @@ public class PlayerState : MonoBehaviour {
             #region Bouncing
             //Checks if the player can bounce on the floor
             if (GetComponent<PlayerBounce>().CheckBounce()) {
-                StartCoroutine(GetComponent<PlayerBounce>().Bounce());
+                if(!StopBounce) StartCoroutine(GetComponent<PlayerBounce>().NormalBounce());
                 source.PlayOneShot(genericAudio, 0.5f);
                 LastState = State;
                 StartCoroutine(ActiveBouncing());
@@ -145,12 +151,8 @@ public class PlayerState : MonoBehaviour {
 
             #region Wall Bouncing
             //Checks if the player can bounce in a wall in both sides
-            if (GetComponent<PlayerGround>().LeftHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
-                    StartCoroutine(GetComponent<PlayerBounce>().LeftBounce());
-                
-            }
-            else if (GetComponent<PlayerGround>().RightHit && GetComponent<PlayerBounce>().DistGround() > 0.4f && GetComponent<PlayerBounce>().canWBounce) {
-                    StartCoroutine(GetComponent<PlayerBounce>().RightBounce());
+            if (GetComponent<PlayerBounce>().CheckWallBounce()) {
+                StartCoroutine(GetComponent<PlayerBounce>().WalledBounce());
             }
             #endregion
 
@@ -164,7 +166,6 @@ public class PlayerState : MonoBehaviour {
                     switch (State) {
                        
                         case MyState.Grounding:
-                            StartCoroutine(GetComponent<PlayerBounce>().CheckWallBounce());
                             GetComponent<PlayerJump>().Jump();
                             source.PlayOneShot(genericAudio, 0.5f);
                             LastState = State;

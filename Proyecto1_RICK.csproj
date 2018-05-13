@@ -227,14 +227,8 @@
     <Reference Include="UnityEditor.TreeEditor">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TreeEditor/Editor/UnityEditor.TreeEditor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UIAutomation">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UIAutomation/UnityEngine.UIAutomation.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UIAutomation">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UIAutomation/Editor/UnityEditor.UIAutomation.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.GoogleAudioSpatializer">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/Editor/UnityEditor.GoogleAudioSpatializer.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.GoogleAudioSpatializer">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityGoogleAudioSpatializer/RuntimeEditor/UnityEngine.GoogleAudioSpatializer.dll</HintPath>
@@ -247,9 +241,6 @@
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/Editor/UnityEditor.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.SpatialTracking">
-      <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.VR">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
@@ -362,17 +353,19 @@
     <Compile Include="Assets\Addons\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\Addons\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\Scripts\CameraBehaviour.cs" />
-    <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Colliders\ControllerCollider.cs" />
     <Compile Include="Assets\Scripts\Colliders\GhostCollider.cs" />
     <Compile Include="Assets\Scripts\Colliders\SceneCollider.cs" />
     <Compile Include="Assets\Scripts\Colliders\Spawn\SpawnCollider.cs" />
     <Compile Include="Assets\Scripts\Colliders\Text\TextDestroy.cs" />
+    <Compile Include="Assets\Scripts\Colliders\Text\TextPoint.cs" />
     <Compile Include="Assets\Scripts\Colliders\Text\TextSpawn.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuManager.cs" />
     <Compile Include="Assets\Scripts\Menu\TextHover.cs" />
     <Compile Include="Assets\Scripts\Platforms\AxialPlatform.cs" />
+    <Compile Include="Assets\Scripts\Platforms\BetterCliff.cs" />
+    <Compile Include="Assets\Scripts\Platforms\BetterGround.cs" />
     <Compile Include="Assets\Scripts\Platforms\MovePlatform.cs" />
     <Compile Include="Assets\Scripts\Platforms\PlatformTrigger.cs" />
     <Compile Include="Assets\Scripts\Platforms\SlidePlatform.cs" />

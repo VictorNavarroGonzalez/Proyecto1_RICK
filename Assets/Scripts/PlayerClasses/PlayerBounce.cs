@@ -2,207 +2,158 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBounce : MonoBehaviour
-{
 
+public class PlayerBounce : MonoBehaviour {
+
+    const int MINIMUM_HEIGHT = 8;
+
+    private PlayerGround pg;
     private Rigidbody2D rb;
-    private PlayerJump pj;
     public RaycastHit2D downHit;
     public AudioClip bounceSound;
     public AudioSource source;
     public LayerMask mask;
 
-    public bool canBounce;
-    public bool canWBounce;
-    private bool reading;           //Control when needs to save the height
-    private bool isChecking;
-    private float K;                //Elsaticity constant
-    private float g;                //Gravity
-
     Vector2 playerHeight;
     Vector2 playerPos;
+    Vector2 wallForce = new Vector2(600, 600);
+    Vector2 wallDashForce = new Vector2(900, 900);
 
-    private bool _stopBounce;       //Disable Bounce
-    public bool StopBounce {
-        get { return _stopBounce; }
-        set { _stopBounce = value; }
-    }
+    private bool _canBounce;
+    public bool CanBounce { get { return _canBounce; } set { _canBounce = value; } }
+    private bool _canWBounce;
+    public bool CanWBounce { get { return _canWBounce; } set { _canWBounce = value; } }
+    private bool reading;       //Checks if need save the height
+    private bool running;       //Checks if player is WallBouncing
+    private float startY;
+    private float height;
+    private float timeHit;
+    private float k;
+    private float t;
 
-    private bool _stopWallBounce;       //Disable Walled bounce
-    public bool StopWallBounce {
-        get { return _stopWallBounce; }
-        set { _stopWallBounce = value; }
-    }
 
-    private float tempY;            //Save the maximum height of a fall
-    private float _bounceForce;
-    public float BounceForce
-    {
-        get { return _bounceForce; }
-        set { _bounceForce = value; }
-    }
-
-    void Awake()
-    {
+    void Awake() {
+        pg = GetComponent<PlayerGround>();
         rb = GetComponent<Rigidbody2D>();
-        pj = GetComponent<PlayerJump>();
-        playerHeight = new Vector2(0, GetComponent<CircleCollider2D>().radius * 2);
-        canBounce = false;
-        canWBounce = true;
         reading = false;
-        isChecking = false;
-        _stopBounce = false;
-        _stopWallBounce = false;
-        K = 0.8f;
-        g = 2;
+        k = 1f;
     }
 
     void Update() {
-        //When player starts to fall, save his height if there isn't any saved height yet
-        if (rb.velocity.y < 0 && !reading) {
-            reading = true;
-            tempY = rb.transform.position.y;
-        }
-    }
-
-    void FixedUpdate()
-    {
-        CheckBounce();      // Detect if Player is falling from enough height
+        CheckHeight();
     }
 
     #region Checkers
 
-    #region Dist to Ground
-    public float DistGround() {
-        playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
-        downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down, Mathf.Infinity, mask);            //Ray under the player
-
-        return downHit.distance;            //Distance to the ground
+    #region Height
+    public float CheckHeight() {
+        if (!reading && rb.velocity.y < 0) {
+            reading = true;
+            startY = rb.position.y;
+            t = Time.fixedTime;
+        }
+        else if (rb.velocity.y > 0 && DistGround() > 1f) reading = false;
+        return startY;
     }
     #endregion
 
     #region Check Normal Bounce
     public bool CheckBounce() {
         // Detect if Player is falling from enough heigh
-        if (GetComponent<PlayerGround>().Grounded && reading && !isChecking) {
-            //When player arrives to the ground
-            isChecking = true;
-
-            //If height is bigger than jump height + double jump height, Player can bounce
-            if (Mathf.Abs(tempY - rb.transform.position.y) > 8f) canBounce = true;
-            else canBounce = false;
-
-            //Reactive the read of the player's height 
-            StartCoroutine(Reactive());
+        if (pg.Grounded) {
+            if (Mathf.Abs(startY - rb.transform.position.y) != height) {
+                height = Mathf.Abs(startY - rb.transform.position.y);
+                if (height > MINIMUM_HEIGHT) CanBounce = true;
+                else CanBounce = false;
+            }
         }
-        
-        return canBounce;
+        return CanBounce;
     }
-    
-    public IEnumerator Reactive() {
-        yield return new WaitForSeconds(1f);
-        reading = false;
-        isChecking = false;
-    }
-
     #endregion
 
     #region Check Wall Bounce
-    //Avoid Player to bounce when he is jumping near a wall
-    public IEnumerator CheckWallBounce() {
-        if (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit) {        //If Player is touching a wall
-            canWBounce = false;
-            yield return new WaitForSeconds(0.6f);      //Wait 0.6 seconds before check if he should bounce
-            canWBounce = true;
+    public bool CheckWallBounce() {
+        // Detect if Player is falling from enough heigh
+        if (DistGround() > 2f && ((GetComponent<PlayerGround>().LeftHit) || (GetComponent<PlayerGround>().RightHit))) {
+            CanWBounce = true;
+            if (Time.time - timeHit > 1f) timeHit = Time.time;
         }
+        else CanWBounce = false;
+        return CanWBounce;
+    }
+    #endregion
+
+    #region Dist to Ground
+    public float DistGround() {
+        playerPos = new Vector2(rb.transform.position.x, rb.transform.position.y);
+        downHit = Physics2D.Raycast(playerPos - playerHeight / 2, Vector2.down, Mathf.Infinity, mask);            //Ray under the player
+        return downHit.distance;            //Distance to the ground
     }
     #endregion
 
     #endregion
 
-    #region Normal Bounce
-    public IEnumerator Bounce() {
-        if (!StopBounce) {
-            canBounce = false;          
-            float h = Mathf.Abs(tempY - rb.transform.position.y);       //Jump height
-            float BounceForce = K*h;           //Part of force that depends on fall height
-            float softBounce = 0.4f * h;
-            float extraForce;                  
-            if (PlayerState.State == PlayerState.MyState.Bouncing || (PlayerState.State == PlayerState.MyState.Dashing && PlayerState.LastState == PlayerState.MyState.Bouncing))       //If player has bounce before: 
-                extraForce = 0;       
-            else extraForce = GetComponent<PlayerJump>().JumpForce*Time.deltaTime;    //Add the jumpForce to the bounce
+    #region Bounces
 
-            yield return new WaitUntil(() => (GetComponent<PlayerGround>().Grounded));          //Wait until Player touch ground
-            if (InputManager.ButtonDownA())         //If button A is pressed:
-            {
+    #region VerticalBounce
+    public IEnumerator NormalBounce() {
+        if (CanBounce) {
+            CanBounce = false;
+            yield return new WaitUntil(() => pg.Grounded);
+            if (InputManager.ButtonDownA() && PlayerState.State != PlayerState.MyState.Bouncing && PlayerState.LastState != PlayerState.MyState.Bouncing) {
+                if (rb.velocity.y <= 0) {
+                    t = Time.fixedTime - t;
+                    rb.velocity = new Vector2(rb.velocity.x, 0);
+                    rb.AddForce(Vector2.up * k * height / t, ForceMode2D.Impulse);
+                    Debug.Log(height / t);
+                }
+            }
+            else if (InputManager.ButtonDownA()) {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * (BounceForce + extraForce), ForceMode2D.Impulse);           //Bounce
+                rb.AddForce(Vector2.up * k * 0.6f * height, ForceMode2D.Impulse);
             }
             else {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
-                rb.AddForce(Vector2.up * (softBounce), ForceMode2D.Impulse);           //Bounce
+                rb.AddForce(Vector2.up * k * 0.4f * height, ForceMode2D.Impulse);
             }
-            
         }
     }
     #endregion
 
-    #region Left Bounce
-    public IEnumerator LeftBounce()
-    {
-        if (!StopWallBounce) {
-            yield return new WaitUntil(() => (GetComponent<PlayerGround>().LeftHit));           //If Player is hitting a left side wall
-            if (InputManager.ButtonDownA() && Time.time - InputManager.TimePressed > 0.5f)          //If button A is pressed for more than 0.5 seconds:
-            {
-                StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));         //Stops the joystick input for 0.5 second to improve bounce feeling
+    #region LateralBounce
+    public IEnumerator WalledBounce() {
+        if (CanWBounce && !running) {
+            yield return new WaitUntil(() => (pg.LeftHit && (InputManager.MainHorizontal() > 0 || Time.time - timeHit > 0.15f))
+            || (pg.RightHit && (InputManager.MainHorizontal() < 0 || Time.time - timeHit > 0.15f)));
+            StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
+            if (pg.LeftHit && InputManager.ButtonDownA()) {
                 rb.velocity = new Vector2(0, 0);
-
-                //If Player dash before bounce:
                 if (PlayerState.State == PlayerState.MyState.Dashing) {
-                    //Increase the bounce force
-                    //Debug.Log("Dash");
-                    rb.AddForce(Vector2.right * pj.JumpForce * 2 * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.up * pj.JumpForce * 1.3f* Time.deltaTime, ForceMode2D.Impulse);
-                    source.PlayOneShot(bounceSound, 1f);
+                    rb.AddForce(Vector2.up * wallDashForce.y * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.right * wallDashForce.x * Time.deltaTime, ForceMode2D.Impulse);
                 }
                 else {
-                    //Normal bounce force
-                    //Debug.Log("Normal");
-                    rb.AddForce(Vector2.right * pj.JumpForce * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.up * pj.JumpForce * 0.8f * Time.deltaTime, ForceMode2D.Impulse);
-                    source.PlayOneShot(bounceSound, 1f);
+                    rb.AddForce(Vector2.up * wallForce.y * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.right * wallForce.x * Time.deltaTime, ForceMode2D.Impulse);
                 }
+                running = false;
             }
-        }       
+            else if (pg.RightHit && InputManager.ButtonDownA()) {
+                rb.velocity = new Vector2(0, 0);
+                if (PlayerState.State == PlayerState.MyState.Dashing) {
+                    rb.AddForce(Vector2.up * wallDashForce.y * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.left * wallDashForce.x * Time.deltaTime, ForceMode2D.Impulse);
+                }
+                else {
+                    rb.AddForce(Vector2.up * wallForce.y * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.left * wallForce.x * Time.deltaTime, ForceMode2D.Impulse);
+                }
+                running = false;
+            }
+        }
     }
     #endregion
 
-    #region Right Bounce
-    public IEnumerator RightBounce()
-    {
-        if(!StopWallBounce) {
-            yield return new WaitUntil(() => (GetComponent<PlayerGround>().RightHit));      //If Player is hitting a right side wall
-            if (InputManager.ButtonDownA() && Time.time - InputManager.TimePressed > 0.5f)           //If button A is pressed for more than 0.5 seconds:
-            {
-                StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));       //Stops the joystick input for 0.5 second to improve bounce feeling
-                rb.velocity = new Vector2(0, 0);
-
-                //If Player dash before bounce:
-                if (PlayerState.State == PlayerState.MyState.Dashing) {
-                    //Increase the bounce force
-                    rb.AddForce(Vector2.left * pj.JumpForce * 2 * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.up * pj.JumpForce * 1.3f * Time.deltaTime, ForceMode2D.Impulse);
-                    source.PlayOneShot(bounceSound, 1f);
-                }
-                else {
-                    //Normal bounce force
-                    rb.AddForce(Vector2.left * pj.JumpForce * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.up * pj.JumpForce * 0.8f * Time.deltaTime, ForceMode2D.Impulse);
-                    source.PlayOneShot(bounceSound, 1f);
-                }
-            }
-        }     
-    }
     #endregion
 
 }
