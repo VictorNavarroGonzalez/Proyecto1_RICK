@@ -32,6 +32,7 @@ public class SlidePlatform : MonoBehaviour {
     private bool goX;
     private bool startRight;
     private bool isOnPlatform;
+    private bool extraSpeed;
     private Rigidbody2D rb;
     private GameObject target;      //Target to copy (Player)
 
@@ -63,7 +64,7 @@ public class SlidePlatform : MonoBehaviour {
         if (distY > 0) startUp = true;
         else startUp = false;
 
-  
+        extraSpeed = false;
         isReading = false;
 
         //Debug.Log(needTrigger);
@@ -83,9 +84,18 @@ public class SlidePlatform : MonoBehaviour {
 
                 //Move the Player with the platform
                 if (isOnPlatform) {
+                    if (!extraSpeed) {
+                        extraSpeed = true;
+                        target.GetComponent<PlayerMovement>().MaxSpeed = 10f + velX;   
+                    }
                     StartCoroutine(Soften());               //Prevent errors when platform change direction
-                    if (Mathf.Abs(target.GetComponent<Rigidbody2D>().velocity.x) < Mathf.Abs(rb.velocity.x))
+                    if (Mathf.Abs(target.GetComponent<Rigidbody2D>().velocity.x) < (Mathf.Abs(rb.velocity.x) + 10f * Mathf.Abs(InputManager.MainHorizontal()))) {
                         target.GetComponent<Rigidbody2D>().AddForce(rb.velocity.normalized * 15, ForceMode2D.Force);
+                    }
+                }
+                else if (extraSpeed) {
+                    extraSpeed = false;
+                    target.GetComponent<PlayerMovement>().MaxSpeed = 10;                   
                 }
             }
 
@@ -97,8 +107,7 @@ public class SlidePlatform : MonoBehaviour {
         }
         //Detect if platform has activator or not
         //Stops the platform when player leaves the area
-        else {
-                
+        else {                
                 rb.velocity = new Vector2(0, 0);
         }
        
