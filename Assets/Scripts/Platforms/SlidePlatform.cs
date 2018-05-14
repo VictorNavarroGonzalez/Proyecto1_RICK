@@ -86,7 +86,7 @@ public class SlidePlatform : MonoBehaviour {
                 if (isOnPlatform) {
                     if (!extraSpeed) {
                         extraSpeed = true;
-                        target.GetComponent<PlayerMovement>().MaxSpeed = 10f + velX;   
+                        target.GetComponent<PlayerMovement>().MaxSpeed = 10f + Mathf.Abs(velX);   
                     }
                     StartCoroutine(Soften());               //Prevent errors when platform change direction
                     if (Mathf.Abs(target.GetComponent<Rigidbody2D>().velocity.x) < (Mathf.Abs(rb.velocity.x) + 10f * Mathf.Abs(InputManager.MainHorizontal()))) {
