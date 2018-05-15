@@ -12,14 +12,17 @@ public class SlidePlatform : MonoBehaviour {
     //Velocity
     public float distY;
     public float timeY;
+    public float delay;
 
     //Direction selector
     public bool horizontal;
     public bool vertical;
 
+
     //Trigger
     public Transform Area;
 
+    private float timeStart;
     private bool isReading;
     private float moveX;
     private float moveY;
@@ -64,6 +67,7 @@ public class SlidePlatform : MonoBehaviour {
         if (distY > 0) startUp = true;
         else startUp = false;
 
+        timeStart = 0;
         extraSpeed = false;
         isReading = false;
 
@@ -73,42 +77,44 @@ public class SlidePlatform : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
         //Reads the trigger to know if player is in the Area
-        if (Area.GetComponent<PlatformTrigger>().Active) {      
-            CheckDirection();
+        if (Area.GetComponent<PlatformTrigger>().Active) {
+            if (timeStart == 0) timeStart = Time.fixedTime;
+            if (Time.fixedTime - timeStart >= delay) {
+                CheckDirection();
+                //Detects if platform has Horizontal movement
+                if (horizontal) {
+                    if (goX) rb.velocity = new Vector2(velX, rb.velocity.y);            //Goes to select position
 
-            //Detects if platform has Horizontal movement
-            if (horizontal) {
-                if (goX) rb.velocity = new Vector2(velX, rb.velocity.y);            //Goes to select position
+                    else if (backX) rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
 
-                else if (backX) rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
-
-                //Move the Player with the platform
-                if (isOnPlatform) {
-                    if (!extraSpeed) {
-                        extraSpeed = true;
-                        target.GetComponent<PlayerMovement>().MaxSpeed = 10f + Mathf.Abs(velX);   
+                    //Move the Player with the platform
+                    if (isOnPlatform) {
+                        if (!extraSpeed) {
+                            extraSpeed = true;
+                            target.GetComponent<PlayerMovement>().MaxSpeed = 10f + Mathf.Abs(velX);
+                        }
+                        StartCoroutine(Soften());               //Prevent errors when platform change direction
+                        if (Mathf.Abs(target.GetComponent<Rigidbody2D>().velocity.x) < (Mathf.Abs(rb.velocity.x) + 10f * Mathf.Abs(InputManager.MainHorizontal()))) {
+                            target.GetComponent<Rigidbody2D>().AddForce(rb.velocity.normalized * 15, ForceMode2D.Force);
+                        }
                     }
-                    StartCoroutine(Soften());               //Prevent errors when platform change direction
-                    if (Mathf.Abs(target.GetComponent<Rigidbody2D>().velocity.x) < (Mathf.Abs(rb.velocity.x) + 10f * Mathf.Abs(InputManager.MainHorizontal()))) {
-                        target.GetComponent<Rigidbody2D>().AddForce(rb.velocity.normalized * 15, ForceMode2D.Force);
+                    else if (extraSpeed) {
+                        extraSpeed = false;
+                        target.GetComponent<PlayerMovement>().MaxSpeed = 10;
                     }
                 }
-                else if (extraSpeed) {
-                    extraSpeed = false;
-                    target.GetComponent<PlayerMovement>().MaxSpeed = 10;                   
+
+                //Detects if platform has Vertical movement
+                if (vertical) {
+                    if (goY) rb.velocity = new Vector2(rb.velocity.x, velY);            //Goes to select position
+                    else if (backY) rb.velocity = new Vector2(rb.velocity.x, -velY);    //Returns to the start position
                 }
             }
-
-            //Detects if platform has Vertical movement
-            if (vertical) {
-                if (goY) rb.velocity = new Vector2(rb.velocity.x, velY);            //Goes to select position
-                else if (backY) rb.velocity = new Vector2(rb.velocity.x, -velY);    //Returns to the start position
-            }
-        }
-        //Detect if platform has activator or not
-        //Stops the platform when player leaves the area
-        else {                
+            //Detect if platform has activator or not
+            //Stops the platform when player leaves the area
+            else {
                 rb.velocity = new Vector2(0, 0);
+            }
         }
        
     }

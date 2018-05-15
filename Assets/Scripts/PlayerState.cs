@@ -53,7 +53,6 @@ public class PlayerState : MonoBehaviour {
     void FixedUpdate() {
 
         //LogState();
-        Debug.Log(GetComponent<PlayerMovement>().MaxSpeed);
         #region GENERAL BEHAVIOUR
 
         #region RICK HORIZONTAL MOVEMENT
