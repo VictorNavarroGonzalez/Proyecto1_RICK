@@ -10,7 +10,7 @@ public class PlayerDash : MonoBehaviour {
     private float _dashForce = 1000f;
     public float DashForce {
         get { return _dashForce; }
-        set { _dashForce = value;  }
+        set { _dashForce = value; }
     }
 
     void Awake() {
@@ -25,7 +25,7 @@ public class PlayerDash : MonoBehaviour {
     //Checks whether the player can dash or not
     public bool CheckDash() {
         if (PlayerState.State != PlayerState.MyState.Grounding && canDash) return true;
-        return false; 
+        return false;
     }
 
     //Adds an impulse to the player 
@@ -35,15 +35,13 @@ public class PlayerDash : MonoBehaviour {
         StartCoroutine(GetComponent<PlayerState>().Stopping(0.1f));
         StartCoroutine(Counterdash());
         rb.velocity = new Vector2(rb.velocity.x, 0);
-        rb.AddForce(rb.velocity * DashForce* Time.deltaTime , ForceMode2D.Impulse);
+        rb.AddForce(rb.velocity * DashForce * Time.deltaTime, ForceMode2D.Impulse);
     }
-    
+
     //Slows down the player gradually
-    public IEnumerator Counterdash()
-    {
-        for (int i = 120; i > 1 || !GetComponent<PlayerBounce>().CheckWallBounce(); i-=10)
-        {
-            rb.AddForce(-rb.velocity * DashForce / i * Time.deltaTime, ForceMode2D.Impulse);
+    public IEnumerator Counterdash() {
+        for (int i = 120; i > 1 || !GetComponent<PlayerBounce>().CheckWallBounce(); i -= 10) {
+            rb.AddForce((-rb.velocity * DashForce / i) * Time.deltaTime, ForceMode2D.Impulse);
             yield return new WaitForEndOfFrame();
         }
         //Debug.Log("STOP");
