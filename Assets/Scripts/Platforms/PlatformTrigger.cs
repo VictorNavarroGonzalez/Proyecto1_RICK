@@ -9,14 +9,25 @@ public class PlatformTrigger : MonoBehaviour {
         get { return _active; }
         set { _active = value; }
     }
+    private bool _restart;
+    public bool Restart {
+        get { return _restart; }
+        set { _restart = value; }
+    }
 
     //Activate the objects when player is in the scope
     void OnTriggerStay2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Player") Active = true;
+        if (collision.gameObject.tag == "Player") {
+            _restart = false;
+            Active = true;
+        }
     }
 
     //Desactivate the objects when player left the scope
     void OnTriggerExit2D(Collider2D collision) {
-        if (collision.gameObject.tag == "Player") Active = false;
+        if (collision.gameObject.tag == "Player") {
+            Active = false;
+            _restart = true;
+        }
     }
 }

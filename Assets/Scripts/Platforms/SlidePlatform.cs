@@ -21,6 +21,7 @@ public class SlidePlatform : MonoBehaviour {
 
     //Trigger
     public Transform Area;
+    public bool reset;
 
     private float timeStart;
     private bool isReading;
@@ -36,6 +37,7 @@ public class SlidePlatform : MonoBehaviour {
     private bool startRight;
     private bool isOnPlatform;
     private bool extraSpeed;
+    private Vector3 initPosition;
     private Rigidbody2D rb;
     private GameObject target;      //Target to copy (Player)
 
@@ -66,6 +68,9 @@ public class SlidePlatform : MonoBehaviour {
         //Detect if platform starts moves up or down
         if (distY > 0) startUp = true;
         else startUp = false;
+
+        //Detect if platform should restart when player exit the trigger
+        if (reset) initPosition = rb.transform.position;
 
         timeStart = 0;
         extraSpeed = false;
@@ -112,10 +117,9 @@ public class SlidePlatform : MonoBehaviour {
             }
             //Detect if platform has activator or not
             //Stops the platform when player leaves the area
-            else {
-                rb.velocity = new Vector2(0, 0);
-            }
+            else rb.velocity = new Vector2(0, 0);
         }
+        if (Area.GetComponent<PlatformTrigger>().Restart && reset) rb.position = initPosition;
        
     }
 

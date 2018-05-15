@@ -25,6 +25,7 @@ public class PlayerBounce : MonoBehaviour {
     public bool CanWBounce { get { return _canWBounce; } set { _canWBounce = value; } }
     private bool reading;       //Checks if need save the height
     private bool running;       //Checks if player is WallBouncing
+    private bool isOnPlatform;
     private float startY;       //Max height
     private float height;       
     private float timeHit;      //Time since Player hit the wall
@@ -36,6 +37,7 @@ public class PlayerBounce : MonoBehaviour {
         pg = GetComponent<PlayerGround>();
         rb = GetComponent<Rigidbody2D>();
         reading = false;
+        isOnPlatform = false;
         k = 1f;
     }
 
@@ -70,6 +72,10 @@ public class PlayerBounce : MonoBehaviour {
             }
         }
         return CanBounce;
+    }
+
+    private void OnCollisionStay2D(Collision2D collision) {
+        if (collision.gameObject.tag == "Platform") isOnPlatform = true;
     }
     #endregion
 
@@ -119,7 +125,7 @@ public class PlayerBounce : MonoBehaviour {
                 rb.AddForce(Vector2.up * k * 0.6f * height, ForceMode2D.Impulse);
             }
                 //Button A isn't pressed (soft bounce for attenuate the fall)
-            else if(height > 5f){
+            else if(!isOnPlatform) {    //not isOnPlatform prevent blinking in platforms
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * k * 0.4f * height, ForceMode2D.Impulse);
             }
