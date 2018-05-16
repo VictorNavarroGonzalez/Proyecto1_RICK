@@ -139,8 +139,7 @@ public class PlayerBounce : MonoBehaviour {
             running = true;     //Prevent overload
             //Wait unitil Player Hit the wall and:
                 //Change joystic direction  OR  wait 0.15second
-            yield return new WaitUntil(() => (pg.LeftHit && (InputManager.MainHorizontal() > 0 || Time.time - timeHit > 0.15f))
-            || (pg.RightHit && (InputManager.MainHorizontal() < 0 || Time.time - timeHit > 0.15f)));
+            yield return new WaitUntil(() => (pg.LeftHit || pg.RightHit));
             StartCoroutine(GetComponent<PlayerState>().Stopping(0.5f));
             //Left Bounce
             if (pg.LeftHit && InputManager.ButtonDownA()) {

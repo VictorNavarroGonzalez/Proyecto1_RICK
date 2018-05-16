@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerDash : MonoBehaviour {
 
     private Rigidbody2D rb;
+    private PlayerBounce pb;
     private bool canDash;
     private Vector2 temp;
     private float _dashForce = 1000f;
@@ -33,18 +34,17 @@ public class PlayerDash : MonoBehaviour {
         canDash = false;
         temp = rb.velocity;
         StartCoroutine(GetComponent<PlayerState>().Stopping(0.1f));
-        StartCoroutine(Counterdash());
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(rb.velocity * DashForce * Time.deltaTime, ForceMode2D.Impulse);
+        StartCoroutine(Counterdash());
     }
 
     //Slows down the player gradually
     public IEnumerator Counterdash() {
-        for (int i = 120; i > 1 || !GetComponent<PlayerBounce>().CheckWallBounce(); i -= 10) {
+        for (int i = 120; i > 1; i -= 10) {
             rb.AddForce((-rb.velocity * DashForce / i) * Time.deltaTime, ForceMode2D.Impulse);
             yield return new WaitForEndOfFrame();
         }
-        //Debug.Log("STOP");
         PlayerState.State = PlayerState._lastState;
         PlayerState._lastState = PlayerState.State;
     }
