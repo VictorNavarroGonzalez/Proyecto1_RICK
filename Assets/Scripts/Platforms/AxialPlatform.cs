@@ -34,7 +34,7 @@ public class AxialPlatform : MonoBehaviour {
     }
 
     public IEnumerator StopVertical() {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(3.2f);
         // Ensure that the platform stops in 90 degrees
         rb.freezeRotation = true;
         rb.rotation = 90; 
