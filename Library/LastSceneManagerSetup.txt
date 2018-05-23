@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Circle Levels/Marc Test.unity
+- path: Assets/Scenes/SQUARE.unity
   isLoaded: 1
   isActive: 1
