@@ -162,6 +162,8 @@
     <Compile Include="Assets\Scripts\Colliders\Text\TextPoint.cs" />
     <Compile Include="Assets\Scripts\Colliders\Text\TextSpawn.cs" />
     <Compile Include="Assets\Scripts\InputManager.cs" />
+    <Compile Include="Assets\Scripts\Menu\ButtonHover.cs" />
+    <Compile Include="Assets\Scripts\Menu\ButtonSelector.cs" />
     <Compile Include="Assets\Scripts\Menu\MenuManager.cs" />
     <Compile Include="Assets\Scripts\Menu\TextHover.cs" />
     <Compile Include="Assets\Scripts\Platforms\AxialPlatform.cs" />
