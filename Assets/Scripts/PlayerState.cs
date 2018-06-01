@@ -6,11 +6,16 @@ public class PlayerState : MonoBehaviour {
 
     private GameObject player;
     private bool stop;
-    //Audio
+
+    // Audio Clips.
     public AudioClip genericAudio;
     public AudioClip dashSound;
     public AudioSource source;
-    //Player State
+
+    // Particle Systems Prefabs.
+    public GameObject dustParticles;
+
+    // Player State.
     public enum MyState { Jumping, DoubleJumping, Dashing, Bouncing, Grounding, Falling, Climbing };
     public static MyState _state;
     public static MyState State
@@ -19,19 +24,22 @@ public class PlayerState : MonoBehaviour {
         set { _state = value; }
     }
     private static MyState temp;
+
     public static MyState _lastState;
     public static MyState LastState
     {
         get { return _lastState; }
         set { _lastState = value; }
     }
-    //Player phase
+
+    // Player Character.
     public enum MyCharacter { SQUARE, CIRCLE }
     public static MyCharacter _character;
     public static MyCharacter Character {
         get { return _character; }
         set { _character = value; }
     }
+
     private bool _stopBounce;
     public bool StopBounce { get { return _stopBounce; } set { _stopBounce = value; } }
     private bool _stopWallBounce;
@@ -45,7 +53,7 @@ public class PlayerState : MonoBehaviour {
         StopWallBounce = false;
 
         // Initialize RICK into a Circle
-        Character = GetComponent<PlayerChange>().initial;
+        Character = MyCharacter.CIRCLE;
         GetComponent<PlayerChange>().Actualize();
         temp = MyState.Bouncing;
     }
@@ -154,13 +162,15 @@ public class PlayerState : MonoBehaviour {
                 StartCoroutine(GetComponent<PlayerBounce>().WalledBounce());
             }
             #endregion
-            Debug.Log(Input.GetButtonDown("ButtonA"));
+
+            
+
             #region Jumping
             if (InputManager.ButtonA) {
                 if (GetComponent<PlayerJump>().enabled) {
 
                     InputManager.ButtonA = false;
-
+                    
                     //Checks the current player state in order to distinguish between a jump and a double jump
                     switch (State) {
                        
@@ -192,11 +202,11 @@ public class PlayerState : MonoBehaviour {
 
             #region Jumping & Falling
             if (InputManager.ButtonA) {
-                
+
                 InputManager.ButtonA = false;
 
                 // Checks the player state in order to Smack or Jump, 
-                // as both habilities are triggered by the same button
+                // as both habilities are triggered by the same button.
                 switch (State) {
                     case MyState.Grounding:
                     case MyState.Climbing:
@@ -210,16 +220,18 @@ public class PlayerState : MonoBehaviour {
                     case MyState.DoubleJumping:
                     case MyState.Bouncing:
                         if (!GetComponent<PlayerGround>().LeftHit && !GetComponent<PlayerGround>().RightHit) {
+
                             GetComponent<PlayerFall>().Fall();
                             LastState = State;
                             State = MyState.Falling;
-                        }
 
-                        //if (GetComponent<PlayerBounce>().DistGround() > 0f) {
-                            
-                        //}
+                            // Spawn dust particles after falling.
+                            StartCoroutine(SpawnDust());
+
+                        }
                         break;
                 }
+
             }
             #endregion
 
@@ -243,14 +255,14 @@ public class PlayerState : MonoBehaviour {
     }
 
 
-    // Stop certain action on a specified time
+    // Stop certain action on a specified time.
     public IEnumerator Stopping(float time) {
         stop = true;
         yield return new WaitForSeconds(time);
         stop = false;
     }
 
-    //Change the state to Grounding with some delay (0.05 seconds) to have time to do the checks
+    // Change the state to Grounding with some delay (0.05 seconds) to have time to do the checks.
     public IEnumerator ActiveGrounding() {
         if (Character == MyCharacter.CIRCLE) yield return new WaitForSeconds(0.05f);
         else if (Character == MyCharacter.SQUARE) yield return new WaitForSeconds(0.05f);
@@ -260,10 +272,20 @@ public class PlayerState : MonoBehaviour {
         }
     }
 
-    //Change the state to Bouncing with some delay (0.3 seconds) to have time to do the checks
+    // Change the state to Bouncing with some delay (0.3 seconds) to have time to do the checks.
     public IEnumerator ActiveBouncing() {         
         yield return new WaitForSeconds(0.3f);
         State = MyState.Bouncing;
+    }
+
+    // Spawn dust particles after RICK square falling.
+    // The coroutine is needed in order to spawn them in the ground.
+    public IEnumerator SpawnDust() {
+        yield return new WaitUntil(() => GetComponent<PlayerBounce>().DistGround() < 0.25f);
+
+        // Spawn dust particles after falling.
+        GameObject dust = Instantiate(dustParticles, transform);
+        Destroy(dust, 1);
     }
 
     public void LogState() {

@@ -20,7 +20,7 @@ TagManager:
   - Ground
   - Cliff
   - Area
-  - 
+  - Particles
   - 
   - 
   - 
@@ -55,4 +55,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 1851918699
+    locked: 0
+  - name: Particles
+    uniqueID: 2276766467
     locked: 0
