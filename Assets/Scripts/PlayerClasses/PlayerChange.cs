@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PlayerChange : MonoBehaviour {
     
-    public Sprite square;
-    public Sprite circle;
-
-    public PlayerState.MyCharacter initial;
 
     // This function changes the player character to the other one.
     public void Change() {
@@ -25,9 +21,6 @@ public class PlayerChange : MonoBehaviour {
     public void Actualize() {
         switch (PlayerState.Character) {
             case PlayerState.MyCharacter.SQUARE:
-                // Change RICK Apparel
-                GetComponent<SpriteRenderer>().sprite = square;
-
                 // Change RICK Properties
                 GetComponent<PlayerMovement>().SideForce = 50f;
                 GetComponent<PlayerJump>().JumpForce = 450f;
@@ -37,12 +30,12 @@ public class PlayerChange : MonoBehaviour {
                 // Change RICK Scripts
                 GetComponent<BoxCollider2D>().enabled = true;
                 GetComponent<CircleCollider2D>().enabled = false;
+
+                GetComponent<Animator>().SetBool("Square", true);
+                GetComponent<Animator>().SetBool("Circle", false);
                 break;
 
-            case PlayerState.MyCharacter.CIRCLE:
-                // Change RICK Apparel
-                GetComponent<SpriteRenderer>().sprite = circle;
-                
+            case PlayerState.MyCharacter.CIRCLE:  
                 // Change RICK Properties
                 GetComponent<PlayerMovement>().SideForce = 100f;
                 GetComponent<PlayerJump>().JumpForce = 500f;
@@ -51,6 +44,9 @@ public class PlayerChange : MonoBehaviour {
                 // Change RICK Scripts
                 GetComponent<CircleCollider2D>().enabled = true;
                 GetComponent<BoxCollider2D>().enabled = false;
+
+                GetComponent<Animator>().SetBool("Square", false);
+                GetComponent<Animator>().SetBool("Circle", true);
                 break;
         }
     }

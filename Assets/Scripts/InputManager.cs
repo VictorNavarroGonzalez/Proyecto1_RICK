@@ -60,7 +60,7 @@ public class InputManager : MonoBehaviour{
     //Constantly updates waiting for input
     private void Update()
     {
-        //Reads when ButtonA is pressed to know how much time the button is pressed
+        // Reads when ButtonA is pressed to know how much time the button is pressed
         if (!ButtonDownA()) TimePressed = Time.time;        
         if (!ButtonA) ButtonA = Input.GetButtonDown("ButtonA"); 
         if (!ButtonX) ButtonX = Input.GetButtonDown("ButtonX");
