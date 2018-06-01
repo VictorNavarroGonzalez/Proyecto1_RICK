@@ -281,7 +281,7 @@ public class PlayerState : MonoBehaviour {
     // Spawn dust particles after RICK square falling.
     // The coroutine is needed in order to spawn them in the ground.
     public IEnumerator SpawnDust() {
-        yield return new WaitUntil(() => GetComponent<PlayerBounce>().DistGround() < 0.25f);
+        yield return new WaitUntil(() => GetComponent<PlayerGround>().Grounded);
 
         // Spawn dust particles after falling.
         GameObject dust = Instantiate(dustParticles, transform);
