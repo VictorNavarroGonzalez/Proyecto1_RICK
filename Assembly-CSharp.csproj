@@ -93,6 +93,7 @@
      <Compile Include="Assets\Addons\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\Addons\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\Addons\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+     <Compile Include="Assets\Scripts\BetterEdge.cs" />
      <Compile Include="Assets\Scripts\CameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\Colliders\ControllerCollider.cs" />
      <Compile Include="Assets\Scripts\Colliders\GhostCollider.cs" />
