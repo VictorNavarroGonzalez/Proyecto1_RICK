@@ -23,7 +23,7 @@ public class MenuManager : MonoBehaviour {
 
             InputManager.ButtonStart = false;
 
-            if (mainMenu.activeSelf) Resume(); 
+            if (mainMenu.activeSelf) Resume();
             else Pause();
 
         }
@@ -37,8 +37,10 @@ public class MenuManager : MonoBehaviour {
         }
 
         // To prevent changing character  and jumping from the menu.
-        if (InputManager.ButtonY) InputManager.ButtonY = false;
-        if (InputManager.ButtonA) InputManager.ButtonA = false;
+        if (mainMenu.activeSelf || newGameMenu.activeSelf) {
+            if (InputManager.ButtonY) InputManager.ButtonY = false;
+            if (InputManager.ButtonA) InputManager.ButtonA = false;
+        }
         #endregion
 
         // Change background colors according to RICK character.
