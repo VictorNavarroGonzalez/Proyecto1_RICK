@@ -154,7 +154,7 @@ public class PlayerState : MonoBehaviour {
                 StartCoroutine(GetComponent<PlayerBounce>().WalledBounce());
             }
             #endregion
-
+            Debug.Log(Input.GetButtonDown("ButtonA"));
             #region Jumping
             if (InputManager.ButtonA) {
                 if (GetComponent<PlayerJump>().enabled) {
@@ -192,6 +192,7 @@ public class PlayerState : MonoBehaviour {
 
             #region Jumping & Falling
             if (InputManager.ButtonA) {
+                
                 InputManager.ButtonA = false;
 
                 // Checks the player state in order to Smack or Jump, 
