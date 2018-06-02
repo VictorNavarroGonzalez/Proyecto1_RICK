@@ -1,8 +1,8 @@
-[Ll]ibrary/
-[Tt]emp/
-[Oo]bj/
-[Bb]uild/
-[Bb]uilds/
+Library/
+temp/
+obj/
+Build/
+Builds/
 Assets/AssetStoreTools*
 
 # Visual Studio cache directory
@@ -23,6 +23,7 @@ ExportedObj/
 *.svd
 *.pdb
 *.opendb
+*.dwlt
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -35,4 +36,4 @@ sysinfo.txt
 *.apk
 *.unitypackage
 
-Library/CurrentLayout\.dwlt
+
