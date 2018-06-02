@@ -16,6 +16,9 @@ public class AxialPlatform : MonoBehaviour {
         //Block the platform while not smacking
         rb.freezeRotation = true;
     }
+    private void FixedUpdate() {
+       // if (rb.rotation < 1 && rb.rotation > -5 && rb.rotation != 0){ Debug.Log("vel:"); Debug.Log(rb.angularVelocity);}
+    }
 
     void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player" && PlayerState.Character == PlayerState.MyCharacter.SQUARE)
@@ -30,7 +33,7 @@ public class AxialPlatform : MonoBehaviour {
                 rb.AddForce(InputManager.MainJoystick().normalized * 4400, ForceMode2D.Impulse);
                 // Block the platform at 0 or 180 degrees (depending on player position)
                 StartCoroutine(StopHorizontal());
-            }          
+            }
     }
 
     public IEnumerator StopVertical() {
@@ -41,7 +44,8 @@ public class AxialPlatform : MonoBehaviour {
     }
 
     public IEnumerator StopHorizontal() {
-        yield return new WaitUntil(() => ((rb.rotation <= 180 && rb.rotation >= 90) || (rb.rotation >= 0 && rb.rotation <= 90)) && Mathf.Abs(rb.angularVelocity) < 200 && Mathf.Abs(rb.angularVelocity) > 10);
+        yield return new WaitUntil(() => ((rb.rotation <= 180 && rb.rotation >= 90) || (rb.rotation >= 0 && rb.rotation <= 90)) && Mathf.Abs(rb.angularVelocity) < 250 && Mathf.Abs(rb.angularVelocity) > 10);
+        Debug.Log(rb.rotation);
         // Ensure that the platform stops in 0 or 180 degrees
         if (rb.rotation > 90) rb.rotation = 180;
         else if (rb.rotation < 90) rb.rotation = 0;
