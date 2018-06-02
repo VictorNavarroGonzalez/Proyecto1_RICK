@@ -93,7 +93,6 @@
      <Compile Include="Assets\Addons\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
      <Compile Include="Assets\Addons\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
      <Compile Include="Assets\Addons\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
-     <Compile Include="Assets\Scripts\BetterEdge.cs" />
      <Compile Include="Assets\Scripts\CameraBehaviour.cs" />
      <Compile Include="Assets\Scripts\Colliders\ControllerCollider.cs" />
      <Compile Include="Assets\Scripts\Colliders\GhostCollider.cs" />
@@ -108,8 +107,8 @@
      <Compile Include="Assets\Scripts\Menu\MenuManager.cs" />
      <Compile Include="Assets\Scripts\Menu\TextHover.cs" />
      <Compile Include="Assets\Scripts\Platforms\AxialPlatform.cs" />
-     <Compile Include="Assets\Scripts\Platforms\BetterCliff.cs" />
      <Compile Include="Assets\Scripts\Platforms\BetterGround.cs" />
+     <Compile Include="Assets\Scripts\Platforms\BreakablePlatform.cs" />
      <Compile Include="Assets\Scripts\Platforms\MovePlatform.cs" />
      <Compile Include="Assets\Scripts\Platforms\PlatformTrigger.cs" />
      <Compile Include="Assets\Scripts\Platforms\SlidePlatform.cs" />
