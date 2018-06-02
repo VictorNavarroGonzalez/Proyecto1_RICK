@@ -236,7 +236,7 @@ public class PlayerState : MonoBehaviour {
             #endregion
 
             #region Wall Climbing
-            if (!stop && GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit)
+            if (!stop && (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit) && State != MyState.Falling)
             {
                 if (GetComponent<PlayerGround>().LeftHit != GetComponent<PlayerGround>().RightHit)
                 {
