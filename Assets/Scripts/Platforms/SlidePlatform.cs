@@ -17,6 +17,7 @@ public class SlidePlatform : MonoBehaviour {
     //Direction selector
     public bool horizontal;
     public bool vertical;
+    public bool noLoop;
 
 
     //Trigger
@@ -43,7 +44,6 @@ public class SlidePlatform : MonoBehaviour {
 
     // Use this for initialization
     void Awake () {
-
         rb = GetComponent<Rigidbody2D>();
         target = GameObject.Find("Player");
 
@@ -75,8 +75,6 @@ public class SlidePlatform : MonoBehaviour {
         timeStart = 0;
         extraSpeed = false;
         isReading = false;
-
-        //Debug.Log(needTrigger);
     }
 	
 	// Update is called once per frame
@@ -87,10 +85,11 @@ public class SlidePlatform : MonoBehaviour {
             if (Time.fixedTime - timeStart >= delay) {
                 CheckDirection();
                 //Detects if platform has Horizontal movement
+                #region Horizontal Movement
                 if (horizontal) {
                     if (goX) rb.velocity = new Vector2(velX, rb.velocity.y);            //Goes to select position
-
-                    else if (backX) rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
+                    else if (backX && !noLoop) rb.velocity = new Vector2(-velX, rb.velocity.y);    //Returns to the start position
+                    else rb.velocity = new Vector2(0, 0);
 
                     //Move the Player with the platform
                     if (isOnPlatform) {
@@ -108,21 +107,32 @@ public class SlidePlatform : MonoBehaviour {
                         target.GetComponent<PlayerMovement>().MaxSpeed = 10;
                     }
                 }
+                #endregion
 
                 //Detects if platform has Vertical movement
+                #region Vertical Movement
                 if (vertical) {
                     if (goY) rb.velocity = new Vector2(rb.velocity.x, velY);            //Goes to select position
-                    else if (backY) rb.velocity = new Vector2(rb.velocity.x, -velY);    //Returns to the start position
+                    else if (backY && !noLoop) rb.velocity = new Vector2(rb.velocity.x, -velY);    //Returns to the start position
+                    else rb.velocity = new Vector2(0, 0);
                 }
+                #endregion
             }
-            //Detect if platform has activator or not
             //Stops the platform when player leaves the area
             else rb.velocity = new Vector2(0, 0);
         }
-        if (Area.GetComponent<PlatformTrigger>().Restart && reset) rb.position = initPosition;
+        //Return to the initial platform position when player exit (only if RESET is active)
+        if (Area.GetComponent<PlatformTrigger>().Restart && reset) {
+            //Reset Position
+            rb.position = initPosition;         
+            //Reset timer (prepares for apply delay next time)
+            timeStart = 0;
+        }
        
     }
+    #region Checkers
 
+    #region Platform Direction
     void CheckDirection() {
         //Check Horizontal movement (if there is)
         if (horizontal) {   
@@ -152,7 +162,7 @@ public class SlidePlatform : MonoBehaviour {
                 else goY = false;
 
                 if (transform.position.y < moveY - distY) backY = false;    //Go left
-                else if (!goY) backY = true;
+                else if (!goY && !noLoop) backY = true;
             }
             //If Y axis is negative
             else {
@@ -164,7 +174,10 @@ public class SlidePlatform : MonoBehaviour {
             }
         }       
     }
+    #endregion
 
+    #region Player on Platform
+    //Detect if player is ON platform
     private void OnCollisionStay2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player" && target.transform.position.y > this.transform.position.y) isOnPlatform = true;
     }
@@ -172,7 +185,8 @@ public class SlidePlatform : MonoBehaviour {
     private void OnCollisionExit2D(Collision2D collision) {
         if (collision.gameObject.tag == "Player") isOnPlatform = false;
     }
-
+ 
+    //Reduce the perturbation on Player when platform change direction
     public IEnumerator Soften() {
         if (!isReading) {
             isReading = true;
@@ -185,4 +199,7 @@ public class SlidePlatform : MonoBehaviour {
             isReading = false;
         }       
     }
+    #endregion
+
+    #endregion
 }
