@@ -75,7 +75,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58012641980524064
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -238,8 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1737890686110064, guid: 686aece9161e6424e8ae4287f39a63f9, type: 2}
-  circle: {fileID: 0}
-  square: {fileID: 0}
 --- !u!114 &114099290048305320
 MonoBehaviour:
   m_ObjectHideFlags: 1
