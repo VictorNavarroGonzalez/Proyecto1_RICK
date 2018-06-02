@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/BOTH.unity
+- path: Assets/Scenes/Test Levels/Test Victor.unity
   isLoaded: 1
   isActive: 1

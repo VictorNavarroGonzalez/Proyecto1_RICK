@@ -8,3 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CIRCLE.unity
     guid: 314227c845424344bb0505c68a24e948
+  - enabled: 1
+    path: Assets/Scenes/SQUARE.unity
+    guid: 26cc45dcbf05c7049a55d2be35b278bc
+  - enabled: 1
+    path: Assets/Scenes/BOTH.unity
+    guid: fb696bfd43926174896a8c0211f2a558
