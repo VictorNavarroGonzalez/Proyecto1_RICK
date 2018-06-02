@@ -77,7 +77,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4027129e8a1e6c3448c814c5c483560f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounce: 0
-  change: 0
-  ghost: 0
-  fall: 0
+  enter:
+    bounce: 0
+    walljump: 0
+    change: 0
+    ghost: 0
+    fall: 0
+    climb: 0
+    dash: 0
+    elasticConstant: 0
+    jumpForce: 0
+  exit:
+    bounce: 0
+    walljump: 0
+    change: 0
+    ghost: 0
+    fall: 0
+    climb: 0
+    dash: 0
+    elasticConstant: 0
+    jumpForce: 0

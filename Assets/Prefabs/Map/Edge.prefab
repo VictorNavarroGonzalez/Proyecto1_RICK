@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4259463186885808}
   - component: {fileID: 212312944907049390}
   - component: {fileID: 60478802775330614}
-  - component: {fileID: 114727986497494290}
+  - component: {fileID: 114216591607722766}
   m_Layer: 10
   m_Name: Edge
-  m_TagString: Untagged
+  m_TagString: Edge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ PolygonCollider2D:
       - {x: 3.975, y: -4}
       - {x: 4.005, y: -4}
       - {x: 4.005, y: 4}
---- !u!114 &114727986497494290
+--- !u!114 &114216591607722766
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -79,7 +79,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1945884491454042}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fd736dbb7973c142af1cb3334d37ef1, type: 3}
+  m_Script: {fileID: 11500000, guid: f328d8655039bcd43b6d15feacfc89ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212312944907049390
