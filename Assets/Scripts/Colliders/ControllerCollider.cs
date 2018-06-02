@@ -61,6 +61,7 @@ public class ControllerCollider : MonoBehaviour {
             #endregion
 
             player.GetComponent<PlayerBounce>().K = exit.elasticConstant;
+            player.GetComponent<PlayerJump>().JumpForce = exit.jumpForce;
 
         }
     }
