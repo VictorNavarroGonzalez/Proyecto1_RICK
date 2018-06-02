@@ -130,7 +130,7 @@ public class PlayerBounce : MonoBehaviour {
                 rb.AddForce(Vector2.up * k * 0.6f * height, ForceMode2D.Impulse);
             }
                 //Button A isn't pressed (soft bounce for attenuate the fall)
-            else if(!isOnPlatform) {    //not isOnPlatform prevent blinking in platforms
+            else if(!isOnPlatform && height > 3f) {    //not isOnPlatform prevent blinking in platforms
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * k * 0.4f * height, ForceMode2D.Impulse);
             }
