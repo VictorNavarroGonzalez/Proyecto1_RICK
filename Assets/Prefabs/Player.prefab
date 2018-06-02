@@ -35,7 +35,7 @@ GameObject:
   - component: {fileID: 114090625117279960}
   - component: {fileID: 114849525816482800}
   - component: {fileID: 82689462362491724}
-  - component: {fileID: 95155556795918200}
+  - component: {fileID: 95285269703727394}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -196,7 +196,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!95 &95155556795918200
+--- !u!95 &95285269703727394
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -206,7 +206,7 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: ff5b441460efaee4ea8f75b721655156, type: 2}
-  m_CullingMode: 2
+  m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0

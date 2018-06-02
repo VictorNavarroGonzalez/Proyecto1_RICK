@@ -71,6 +71,10 @@ public class PlayerBounce : MonoBehaviour {
                 else CanBounce = false;
             }
         }
+        //if (DistGround() < MINIMUM_HEIGHT + 20 && DistGround() > MINIMUM_HEIGHT+5 && rb.velocity.y <= -2) {
+        //    Debug.Log(DistGround());          
+        //    GetComponent<Animator>().SetBool("Bouncing", true);
+        //}
         return CanBounce;
     }
 
@@ -111,7 +115,8 @@ public class PlayerBounce : MonoBehaviour {
             CanBounce = false;      //Present overload
             yield return new WaitUntil(() => pg.Grounded);
             //WalledBounce if:
-                //ButtonA is pressed and hasn't bounced yet
+            
+            //ButtonA is pressed and hasn't bounced yet
             if (InputManager.ButtonDownA() && PlayerState.State != PlayerState.MyState.Bouncing && PlayerState.LastState != PlayerState.MyState.Bouncing) {
                 if (rb.velocity.y <= 0) {
                     t = Time.fixedTime - t;
@@ -129,6 +134,7 @@ public class PlayerBounce : MonoBehaviour {
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 rb.AddForce(Vector2.up * k * 0.4f * height, ForceMode2D.Impulse);
             }
+            //GetComponent<Animator>().SetBool("Bouncing", false);
         }
     }
     #endregion
