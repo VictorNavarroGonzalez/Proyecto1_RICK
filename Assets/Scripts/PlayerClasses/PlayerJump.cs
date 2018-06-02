@@ -6,13 +6,16 @@ public class PlayerJump : MonoBehaviour {
 
     private Rigidbody2D rb;
 
-    private float _jumpForce = 600f;
+    private float _jumpForce;
     public float JumpForce {
-        get {
-            return _jumpForce;
-        }
+        get { return _jumpForce; }
         set {
-            _jumpForce = value;
+            if(value == -1) {
+                _jumpForce = DefaultValues.Circle.JumpForce;
+            }
+            else {
+                _jumpForce = value;
+            }
         }
     }
 
@@ -36,12 +39,12 @@ public class PlayerJump : MonoBehaviour {
             rb.gravityScale = 2f;
         }
 	}
-    //Character jump
+
     public void Jump() {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);
     }
-    //Character double jump
+
     public void DoubleJump() {
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(Vector2.up * _jumpForce * Time.deltaTime, ForceMode2D.Impulse);

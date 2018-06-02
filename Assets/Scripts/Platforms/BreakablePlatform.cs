@@ -53,15 +53,17 @@ public class BreakablePlatform : MonoBehaviour {
             Rigidbody2D player = collision.gameObject.GetComponent<Rigidbody2D>();
 
             // Compare the player velocity and
-            if(player.velocity.y > minimunVelocity || player.velocity.y < -minimunVelocity) {
+            if(Mathf.Abs(player.velocity.y) > minimunVelocity) {
 
                 // Make all the components dynamic to get pushed by the player
                 // and destroy them after an specified time.
                 foreach (GameObject p in pieces) {
                     p.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
-                    p.GetComponent<Rigidbody2D>().mass = 1f;
+                    p.GetComponent<Rigidbody2D>().mass = 0.1f;
                     StartCoroutine(DestroyPieces());
                 }
+
+                GetComponent<BoxCollider2D>().enabled = false;
             }
         }
 
@@ -70,7 +72,10 @@ public class BreakablePlatform : MonoBehaviour {
     // This coroutine destroys all the pieces and plays the breaking animation.
     private IEnumerator DestroyPieces() {
 
+        yield return new WaitForSeconds(0.1f);
+       
         foreach (GameObject p in pieces) {
+            p.GetComponent<BoxCollider2D>().enabled = false;
             Destroy(p, 1f);
 
             Animator animator = p.GetComponent<Animator>();
