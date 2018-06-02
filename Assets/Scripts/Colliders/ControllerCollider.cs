@@ -2,15 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ControllerCollider : MonoBehaviour {
 
-    public bool bounce;
-    public bool walljump;
-    public bool change;
-    public bool ghost;
-    public bool fall;
-    public bool climb;
-    public bool dash;
+    [System.Serializable]
+    public class Options {
+        public bool bounce;
+        public bool walljump;
+        public bool change;
+        public bool ghost;
+        public bool fall;
+        public bool climb;
+        public bool dash;
+
+        public float elasticConstant;
+        public float jumpForce;
+    }
+
+    public Options enter;
+    public Options exit;
 
     private GameObject player;
 
@@ -22,17 +32,37 @@ public class ControllerCollider : MonoBehaviour {
         if (collision.gameObject == player) {
 
             #region Update Player Controls
-            player.GetComponent<PlayerState>().StopBounce = !bounce;
-            player.GetComponent<PlayerState>().StopWallBounce = !walljump;
-            player.GetComponent<PlayerChange>().enabled = change;
-            player.GetComponent<PlayerGhost>().enabled = ghost;
-            player.GetComponent<PlayerFall>().enabled = fall;
-            player.GetComponent<PlayerClimb>().enabled = climb;
-            player.GetComponent<PlayerDash>().enabled = dash;
+            player.GetComponent<PlayerState>().StopBounce = !enter.bounce;
+            player.GetComponent<PlayerState>().StopWallBounce = !enter.walljump;
+            player.GetComponent<PlayerChange>().enabled = enter.change;
+            player.GetComponent<PlayerGhost>().enabled = enter.ghost;
+            player.GetComponent<PlayerFall>().enabled = enter.fall;
+            player.GetComponent<PlayerClimb>().enabled = enter.climb;
+            player.GetComponent<PlayerDash>().enabled = enter.dash;
             #endregion
 
-            // Destroy the objects after the collision.
-            gameObject.SetActive(false);
+            player.GetComponent<PlayerBounce>().K = enter.elasticConstant;
+            player.GetComponent<PlayerJump>().JumpForce = enter.jumpForce;
+
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision) {
+        if (collision.gameObject == player) {
+
+            #region Update Player Controls
+            player.GetComponent<PlayerState>().StopBounce = !exit.bounce;
+            player.GetComponent<PlayerState>().StopWallBounce = !exit.walljump;
+            player.GetComponent<PlayerChange>().enabled = exit.change;
+            player.GetComponent<PlayerGhost>().enabled = exit.ghost;
+            player.GetComponent<PlayerFall>().enabled = exit.fall;
+            player.GetComponent<PlayerClimb>().enabled = exit.climb;
+            player.GetComponent<PlayerDash>().enabled = exit.dash;
+            #endregion
+
+            player.GetComponent<PlayerBounce>().K = exit.elasticConstant;
+            player.GetComponent<PlayerJump>().JumpForce = exit.jumpForce;
+
         }
     }
 }

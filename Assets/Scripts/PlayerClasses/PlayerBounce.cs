@@ -23,14 +23,18 @@ public class PlayerBounce : MonoBehaviour {
     public bool CanBounce { get { return _canBounce; } set { _canBounce = value; } }
     private bool _canWBounce;
     public bool CanWBounce { get { return _canWBounce; } set { _canWBounce = value; } }
-    private bool reading;       //Checks if need save the height
-    private bool running;       //Checks if player is WallBouncing
+    private bool reading;       // Checks if need save the height
+    private bool running;       // Checks if player is WallBouncing
     private bool isOnPlatform;
-    private float startY;       //Max height
+    private float startY;       // Max height
     private float height;       
-    private float timeHit;      //Time since Player hit the wall
-    private float k;            //Elsatiicity constant
-    private float t;            //Time falling
+    private float timeHit;      // Time since Player hit the wall
+    private float k;            // Elsatiicity constant
+    public float K {
+        set { k = value; }
+        get { return k; }
+    }
+    private float t;            // Time falling
 
 
     void Awake() {
@@ -85,10 +89,12 @@ public class PlayerBounce : MonoBehaviour {
 
     #region Check Wall Bounce
     public bool CheckWallBounce() {
+       
         // Detect if Player is hitting the wall and isn't at the ground
         if (DistGround() > 2f && ((GetComponent<PlayerGround>().LeftHit) || (GetComponent<PlayerGround>().RightHit))) {
             CanWBounce = true;
             if (Time.time - timeHit > 1f) timeHit = Time.time;
+            Debug.Log("Entra");
         }
         else CanWBounce = false;
         return CanWBounce;

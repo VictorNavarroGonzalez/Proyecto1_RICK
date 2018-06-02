@@ -74,3 +74,9 @@ D:\UNITY\Proyecto1_RICK\obj\Debug\Assembly-CSharp.dll
 D:\UNITY\Proyecto1_RICK\obj\Debug\Assembly-CSharp.pdb
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\TextMeshPro-2017.3-Editor.dll
 D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\TextMeshPro-2017.3-Runtime.dll
+D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.GoogleAudioSpatializer.dll
+D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.SpatialTracking.dll
+D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.UIAutomation.dll
+D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.UIAutomation.xml
+D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEditor.GoogleAudioSpatializer.xml
+D:\UNITY\Proyecto1_RICK\Temp\bin\Debug\UnityEngine.SpatialTracking.xml

@@ -32,3 +32,4 @@ public class MovePlatform : MonoBehaviour
         else rb.velocity = new Vector2(0, 0);
     }
 }
+
