@@ -99,7 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   genericAudio: {fileID: 0}
   source: {fileID: 0}
-  offset: {x: 0, y: 0, z: -25}
+  offset: {x: 0, y: 0, z: -30}
 --- !u!124 &124222676406246818
 Behaviour:
   m_ObjectHideFlags: 1
