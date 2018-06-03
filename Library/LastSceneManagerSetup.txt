@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/SQUARE.unity
+- path: Assets/Scenes/CIRCLE.unity
   isLoaded: 1
   isActive: 1

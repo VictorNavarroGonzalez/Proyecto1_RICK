@@ -147,19 +147,22 @@ public class PlayerState : MonoBehaviour {
         if (Character == MyCharacter.CIRCLE) {
 
             #region Bouncing
+
             //Checks if the player can bounce on the floor
             if (GetComponent<PlayerBounce>().CheckBounce()) {
-                if(!StopBounce) StartCoroutine(GetComponent<PlayerBounce>().NormalBounce());
-                source.PlayOneShot(genericAudio, 0.5f);
-                LastState = State;
-                StartCoroutine(ActiveBouncing());
+                if (!StopBounce) {
+                    StartCoroutine(GetComponent<PlayerBounce>().NormalBounce());
+                    source.PlayOneShot(genericAudio, 0.5f);
+                    LastState = State;
+                    StartCoroutine(ActiveBouncing());
+                }
             }    
             #endregion
 
             #region Wall Bouncing
             //Checks if the player can bounce in a wall in both sides
             if (GetComponent<PlayerBounce>().CheckWallBounce()) {
-                StartCoroutine(GetComponent<PlayerBounce>().WalledBounce());
+                if(!StopWallBounce) StartCoroutine(GetComponent<PlayerBounce>().WalledBounce());
             }
             #endregion        
 
