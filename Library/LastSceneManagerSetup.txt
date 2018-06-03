@@ -1,12 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: Assets/Scenes/CIRCLE.unity
-=======
-<<<<<<< HEAD
-- path: Assets/Scenes/Test Levels/Test Carles.unity
-=======
-- path: Assets/Scenes/SQUARE.unity
->>>>>>> master
->>>>>>> master
   isLoaded: 1
   isActive: 1
