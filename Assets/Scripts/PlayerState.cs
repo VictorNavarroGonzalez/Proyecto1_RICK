@@ -161,15 +161,14 @@ public class PlayerState : MonoBehaviour {
             if (GetComponent<PlayerBounce>().CheckWallBounce()) {
                 StartCoroutine(GetComponent<PlayerBounce>().WalledBounce());
             }
-            #endregion
-
-            
+            #endregion        
 
             #region Jumping
             if (InputManager.ButtonA) {
-                if (GetComponent<PlayerJump>().enabled) {
 
-                    InputManager.ButtonA = false;
+                InputManager.ButtonA = false;
+
+                if (GetComponent<PlayerJump>().enabled) {
                     
                     //Checks the current player state in order to distinguish between a jump and a double jump
                     switch (State) {
@@ -201,50 +200,53 @@ public class PlayerState : MonoBehaviour {
         else if (Character == MyCharacter.SQUARE) {
 
             #region Jumping & Falling
-            if (InputManager.ButtonA) {
+            if (InputManager.ButtonA){
 
                 InputManager.ButtonA = false;
 
-                // Checks the player state in order to Smack or Jump, 
-                // as both habilities are triggered by the same button.
-                switch (State) {
-                    case MyState.Grounding:
-                    case MyState.Climbing:
-                        GetComponent<PlayerJump>().Jump();
-                        source.PlayOneShot(genericAudio, 0.5f);
-                        LastState = State;
-                        State = MyState.Jumping;                      
-                        break;
+                if (GetComponent<PlayerJump>().enabled) {
 
-                    case MyState.Jumping:
-                    case MyState.DoubleJumping:
-                    case MyState.Bouncing:
-                        if (!GetComponent<PlayerGround>().LeftHit && !GetComponent<PlayerGround>().RightHit) {
-
-                            GetComponent<PlayerFall>().Fall();
+                    // Checks the player state in order to Smack or Jump, 
+                    // as both habilities are triggered by the same button.
+                    switch (State) {
+                        case MyState.Grounding:
+                        case MyState.Climbing:
+                            GetComponent<PlayerJump>().Jump();
+                            source.PlayOneShot(genericAudio, 0.5f);
                             LastState = State;
-                            State = MyState.Falling;
+                            State = MyState.Jumping;
+                            break;
 
-                            // Spawn dust particles after falling.
-                            StartCoroutine(SpawnDust());
+                        case MyState.Jumping:
+                        case MyState.DoubleJumping:
+                        case MyState.Bouncing:
+                            if (!GetComponent<PlayerGround>().LeftHit && !GetComponent<PlayerGround>().RightHit) {
 
-                        }
-                        break;
+                                GetComponent<PlayerFall>().Fall();
+                                LastState = State;
+                                State = MyState.Falling;
+
+                                // Spawn dust particles after falling.
+                                StartCoroutine(SpawnDust());
+
+                            }
+                            break;
+                    }
                 }
 
             }
             #endregion
 
             #region Wall Climbing
-            if (!stop && (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit) && State != MyState.Falling)
-            {
-                if (GetComponent<PlayerGround>().LeftHit != GetComponent<PlayerGround>().RightHit)
-                {
-                    if(!GetComponent<PlayerGround>().Grounded) {
-                        LastState = State;
-                        State = MyState.Climbing;
-                    }                   
-                    GetComponent<PlayerClimb>().Climb();
+            if (GetComponent<PlayerClimb>().enabled) {
+                if (!stop && (GetComponent<PlayerGround>().LeftHit || GetComponent<PlayerGround>().RightHit) && State != MyState.Falling) {
+                    if (GetComponent<PlayerGround>().LeftHit != GetComponent<PlayerGround>().RightHit) {
+                        if (!GetComponent<PlayerGround>().Grounded) {
+                            LastState = State;
+                            State = MyState.Climbing;
+                        }
+                        GetComponent<PlayerClimb>().Climb();
+                    }
                 }
             }
             #endregion

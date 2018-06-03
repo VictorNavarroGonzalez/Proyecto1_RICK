@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/SQUARE.unity
-=======
 - path: Assets/Scenes/CIRCLE.unity
->>>>>>> circle_levels
   isLoaded: 1
   isActive: 1

@@ -7,6 +7,7 @@ public class ControllerCollider : MonoBehaviour {
 
     [System.Serializable]
     public class Options {
+        public bool jump;
         public bool bounce;
         public bool walljump;
         public bool change;
@@ -17,6 +18,8 @@ public class ControllerCollider : MonoBehaviour {
 
         public float elasticConstant;
         public float jumpForce;
+
+        public PlayerState.MyCharacter character;
     }
 
     public Options enter;
@@ -39,11 +42,14 @@ public class ControllerCollider : MonoBehaviour {
             player.GetComponent<PlayerFall>().enabled = enter.fall;
             player.GetComponent<PlayerClimb>().enabled = enter.climb;
             player.GetComponent<PlayerDash>().enabled = enter.dash;
+            player.GetComponent<PlayerJump>().enabled = enter.jump;
             #endregion
 
             player.GetComponent<PlayerBounce>().K = enter.elasticConstant;
             player.GetComponent<PlayerJump>().JumpForce = enter.jumpForce;
 
+            PlayerState.Character = enter.character;
+            player.GetComponent<PlayerChange>().Actualize();
         }
     }
 
@@ -58,11 +64,14 @@ public class ControllerCollider : MonoBehaviour {
             player.GetComponent<PlayerFall>().enabled = exit.fall;
             player.GetComponent<PlayerClimb>().enabled = exit.climb;
             player.GetComponent<PlayerDash>().enabled = exit.dash;
+            player.GetComponent<PlayerJump>().enabled = exit.jump;
             #endregion
 
             player.GetComponent<PlayerBounce>().K = exit.elasticConstant;
             player.GetComponent<PlayerJump>().JumpForce = exit.jumpForce;
 
+            PlayerState.Character = exit.character;
+            player.GetComponent<PlayerChange>().Actualize();
         }
     }
 }

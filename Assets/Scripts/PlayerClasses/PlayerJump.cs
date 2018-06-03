@@ -12,7 +12,7 @@ public class PlayerJump : MonoBehaviour {
         set {
             if(value == -1) {
 
-                if(PlayerState.Character == PlayerState.MyCharacter.CIRCLE)
+                if (PlayerState.Character == PlayerState.MyCharacter.CIRCLE)
                     _jumpForce = DefaultValues.Circle.JumpForce;
                 else
                     _jumpForce = DefaultValues.Square.JumpForce;

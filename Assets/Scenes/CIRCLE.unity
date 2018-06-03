@@ -2812,6 +2812,16 @@ Prefab:
       propertyPath: enter.sideForce
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 114731885885721854, guid: 2ddb7ae9e35f5e4439d89787bcd587fc,
+        type: 2}
+      propertyPath: enter.character
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114731885885721854, guid: 2ddb7ae9e35f5e4439d89787bcd587fc,
+        type: 2}
+      propertyPath: exit.character
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2ddb7ae9e35f5e4439d89787bcd587fc, type: 2}
   m_IsPrefabParent: 0
