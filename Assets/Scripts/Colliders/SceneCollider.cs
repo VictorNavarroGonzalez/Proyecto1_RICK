@@ -5,17 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class SceneCollider : MonoBehaviour {
 
-    public Object next;
-    public GameObject player;
-    new public Camera camera;
+    public Object nextScene;
+    private GameObject player;
+    new private GameObject camera;
+
+    // Get the player and the camera
+    void Start() {
+        player = GameObject.Find("Player");
+        camera = GameObject.Find("Camera");
+    }
 
     // If the player collides with the collider it will be loaded to
     // the next scene, moreover, the camera will be paused for ones seconds
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.gameObject == player) {
-            Debug.Log("Next Scene: " + next.name);
+
+        if (collision.gameObject.tag == "Player") {
             camera.GetComponent<CameraBehaviour>().Pause();
-            SceneManager.LoadScene(next.name, LoadSceneMode.Single);
+            SceneManager.LoadScene(nextScene.name, LoadSceneMode.Single);
         }
     }
 

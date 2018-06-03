@@ -25,7 +25,19 @@ public class PlayerMovement : MonoBehaviour {
     private float _sideForce = 5f;
     public float SideForce {
         get { return _sideForce; }
-        set { _sideForce = value; }
+        set {
+
+            if(value == -1) {
+                if (PlayerState.Character == PlayerState.MyCharacter.CIRCLE)
+                    _sideForce = DefaultValues.Circle.SideForce;
+                else
+                    _sideForce = DefaultValues.Square.SideForce;
+            }
+            else {
+                _sideForce = value;
+            } 
+            
+        }
     }
 
     private Rigidbody2D rb;

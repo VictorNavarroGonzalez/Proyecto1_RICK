@@ -52,11 +52,11 @@ TagManager:
   - name: Cliff
     uniqueID: 4138469663
     locked: 0
-  - name: UI
-    uniqueID: 3829114959
-    locked: 0
   - name: Player
     uniqueID: 1851918699
+    locked: 0
+  - name: UI
+    uniqueID: 3829114959
     locked: 0
   - name: Particles
     uniqueID: 2276766467
