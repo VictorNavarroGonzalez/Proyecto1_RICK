@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
-- path: Assets/Scenes/SQUARE.unity
-=======
-- path: Assets/Scenes/Test Levels/Test Victor.unity
->>>>>>> menus
+- path: Assets/Scenes/BOTH.unity
   isLoaded: 1
   isActive: 1
