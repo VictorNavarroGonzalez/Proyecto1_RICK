@@ -6,13 +6,24 @@ using TMPro;
 
 public class TextHover : MonoBehaviour {
 
-    private Button button;
+    private TextMeshProUGUI text;
 
     void Start() {
-        button = GetComponentInParent<Button>();
+
+        // Get text component to edit.
+        text = GetComponent<TextMeshProUGUI>();
+
     }
 
 	void Update () {
 
-	}
+        // Update type color according to RICK character.
+        if (PlayerState.Character == PlayerState.MyCharacter.CIRCLE) {
+            text.color = new Color32(0, 0, 0, 255);
+        }
+        else if (PlayerState.Character == PlayerState.MyCharacter.SQUARE) {
+            text.color = new Color32(255, 255, 255, 255);
+        }
+
+    }
 }
