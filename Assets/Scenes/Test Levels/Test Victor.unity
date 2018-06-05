@@ -188,7 +188,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7d7d086a00d480041a85005b510c1b34, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &129580715
+--- !u!1001 &149927001
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -227,22 +227,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114463486249939482, guid: df877b76ca367a74a8b1d5e70ae36dd6,
+    - target: {fileID: 114589697141986006, guid: df877b76ca367a74a8b1d5e70ae36dd6,
         type: 2}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114463486249939482, guid: df877b76ca367a74a8b1d5e70ae36dd6,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114112288354489394, guid: df877b76ca367a74a8b1d5e70ae36dd6,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114112288354489394, guid: df877b76ca367a74a8b1d5e70ae36dd6,
+    - target: {fileID: 114589697141986006, guid: df877b76ca367a74a8b1d5e70ae36dd6,
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -257,12 +247,12 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114387222884825920, guid: df877b76ca367a74a8b1d5e70ae36dd6,
+    - target: {fileID: 114463486249939482, guid: df877b76ca367a74a8b1d5e70ae36dd6,
         type: 2}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114387222884825920, guid: df877b76ca367a74a8b1d5e70ae36dd6,
+    - target: {fileID: 114463486249939482, guid: df877b76ca367a74a8b1d5e70ae36dd6,
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -277,14 +267,10 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1711725125669934, guid: df877b76ca367a74a8b1d5e70ae36dd6, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114727412575372600, guid: df877b76ca367a74a8b1d5e70ae36dd6,
+    - target: {fileID: 114958685730125642, guid: df877b76ca367a74a8b1d5e70ae36dd6,
         type: 2}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadLevelSelector
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: df877b76ca367a74a8b1d5e70ae36dd6, type: 2}
