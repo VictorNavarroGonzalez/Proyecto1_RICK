@@ -7,11 +7,6 @@ public class PlayerState : MonoBehaviour {
     private GameObject player;
     private bool stop;
 
-    // Audio Clips.
-    public AudioClip genericAudio;
-    public AudioClip dashSound;
-    public AudioSource source;
-
     // Particle Systems Prefabs.
     public GameObject dustParticles;
 
@@ -91,7 +86,6 @@ public class PlayerState : MonoBehaviour {
 
                 if (GetComponent<PlayerDash>().CheckDash()) {
                     GetComponent<PlayerDash>().Dash();                                           //Initializes Rick's dash
-                    source.PlayOneShot(dashSound, 1f);
                     LastState = State;
                     State = MyState.Dashing;
                 }
@@ -124,7 +118,6 @@ public class PlayerState : MonoBehaviour {
                 if (playerGhost.CheckGhost()) {
                     if (playerGhost.CheckTeleport()) {
                         playerGhost.Teleport();
-                        source.PlayOneShot(genericAudio, 0.5f);
 
                         // Change character to the ghost one and actualize the properties.
                         Character = playerGhost.GhostChar;
@@ -133,7 +126,6 @@ public class PlayerState : MonoBehaviour {
                 }
                 else {
                     playerGhost.Create();
-                    source.PlayOneShot(genericAudio, 0.5f);
 
                 }
             }
@@ -152,7 +144,6 @@ public class PlayerState : MonoBehaviour {
             if (GetComponent<PlayerBounce>().CheckBounce()) {
                 if (!StopBounce) {
                     StartCoroutine(GetComponent<PlayerBounce>().NormalBounce());
-                    source.PlayOneShot(genericAudio, 0.5f);
                     LastState = State;
                     StartCoroutine(ActiveBouncing());
                 }
@@ -178,14 +169,12 @@ public class PlayerState : MonoBehaviour {
                        
                         case MyState.Grounding:
                             GetComponent<PlayerJump>().Jump();
-                            source.PlayOneShot(genericAudio, 0.5f);
                             LastState = State;
                             State = MyState.Jumping;
                             break;
 
                         case MyState.Jumping:
                             GetComponent<PlayerJump>().DoubleJump();
-                            source.PlayOneShot(genericAudio, 0.5f);
                             LastState = State;
                             State = MyState.DoubleJumping;
                             break;
@@ -215,7 +204,6 @@ public class PlayerState : MonoBehaviour {
                         case MyState.Grounding:
                         case MyState.Climbing:
                             GetComponent<PlayerJump>().Jump();
-                            source.PlayOneShot(genericAudio, 0.5f);
                             LastState = State;
                             State = MyState.Jumping;
                             break;

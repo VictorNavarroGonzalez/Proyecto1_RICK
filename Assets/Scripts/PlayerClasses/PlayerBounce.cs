@@ -7,11 +7,9 @@ public class PlayerBounce : MonoBehaviour {
 
     const int MINIMUM_HEIGHT = 8;
 
-    private PlayerGround pg;        //PlayerGround
-    private Rigidbody2D rb;         //RigidBody2D
-    public RaycastHit2D downHit;    //Raycast under the player
-    public AudioClip bounceSound;
-    public AudioSource source;
+    private PlayerGround pg;        // PlayerGround.
+    private Rigidbody2D rb;         // RigidBody2D.
+    public RaycastHit2D downHit;    // Raycast under the player.
     public LayerMask mask;
 
     Vector2 playerHeight;
