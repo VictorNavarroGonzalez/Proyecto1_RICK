@@ -26,6 +26,28 @@ namespace DefaultValues {
         public const float Bounce = 0.2f;
     }
 
+    public class Levels {
+        private static Vector3 _current;
+        public static Vector3 Current {
+            get { return _current; }
+            set { _current = value; }
+        }
+
+        
+
+        public static Vector3 C01 { get { return new Vector3(-40, 1); } }
+        public static Vector3 C02 { get { return new Vector3(782, 204); } }
+        public static Vector3 C03 { get { return new Vector3(1030, 324); } }
+
+        public static Vector3 S01 { get { return new Vector3(-357, -27); } }
+        public static Vector3 S02 { get { return new Vector3(187, 48); } }
+        public static Vector3 S03 { get { return new Vector3(450, 70); } }
+
+        public static Vector3 B01 { get { return new Vector3(-295, -15); } }
+        public static Vector3 B02 { get { return new Vector3(47, 20); } }
+        public static Vector3 B03 { get { return new Vector3(184, 107); } }
+    }
+
 }
 
 

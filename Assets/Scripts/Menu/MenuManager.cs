@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DefaultValues;
 
 
 public class MenuManager : MonoBehaviour {
@@ -14,6 +15,9 @@ public class MenuManager : MonoBehaviour {
     void Start() {
         // To start without the menu.
         Resume();
+
+        GameObject player = GameObject.Find("Player");
+        player.transform.position = Levels.Current;
     }
 
     void Update() {
@@ -89,56 +93,53 @@ public class MenuManager : MonoBehaviour {
 
     public void LoadLevel(int level) {
 
-        GameObject player = GameObject.Find("Player");
-
         switch (level) {
             case 1:
                 SceneManager.LoadScene("CIRCLE", LoadSceneMode.Single);
-                player.transform.position = new Vector3(0, 0, 0);
+                Levels.Current = Levels.C01;
                 break;
 
             case 2:
                 SceneManager.LoadScene("CIRCLE", LoadSceneMode.Single);
-                player.transform.position = new Vector3(0, 0, 0);
+                Levels.Current = Levels.C02;
                 break;
 
             case 3:
                 SceneManager.LoadScene("CIRCLE", LoadSceneMode.Single);
-                player.transform.position = new Vector3(0, 0, 0);
+                Levels.Current = Levels.C03;
                 break;
 
             case 4:
                 SceneManager.LoadScene("SQUARE", LoadSceneMode.Single);
-                player.transform.position = new Vector3(0, 0, 0);
+                Levels.Current = Levels.S01;
                 break;
 
             case 5:
                 SceneManager.LoadScene("SQUARE", LoadSceneMode.Single);
-                player.transform.position = new Vector3(0, 0, 0);
+                Levels.Current = Levels.S02;
                 break;
 
             case 6:
                 SceneManager.LoadScene("SQUARE", LoadSceneMode.Single);
-                player.transform.position = new Vector3(0, 0, 0);
+                Levels.Current = Levels.S03;
                 break;
 
             case 7:
                 SceneManager.LoadScene("BOTH", LoadSceneMode.Single);
-                player.transform.position = new Vector3(0, 0, 0);
+                Levels.Current = Levels.B01;
                 break;
 
             case 8:
                 SceneManager.LoadScene("BOTH", LoadSceneMode.Single);
-                player.transform.position = new Vector3(0, 0, 0);
+                Levels.Current = Levels.B02;
                 break;
 
             case 9:
                 SceneManager.LoadScene("BOTH", LoadSceneMode.Single);
-                player.transform.position = new Vector3(0, 0, 0);
+                Levels.Current = Levels.B03;
                 break;
         }
 
-        Resume();
     }
 
     
