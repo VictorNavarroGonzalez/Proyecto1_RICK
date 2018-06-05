@@ -269,7 +269,7 @@ public class PlayerState : MonoBehaviour {
 
     // Change the state to Grounding with some delay (0.05 seconds) to have time to do the checks.
     public IEnumerator ActiveGrounding() {
-        if (Character == MyCharacter.CIRCLE) yield return new WaitForSeconds(0.05f);
+        if (Character == MyCharacter.CIRCLE) yield return new WaitForSeconds(0.02f);
         else if (Character == MyCharacter.SQUARE) yield return new WaitForSeconds(0.05f);
         if (GetComponent<PlayerGround>().CheckGround()) {
             LastState = State;
