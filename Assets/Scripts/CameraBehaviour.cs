@@ -7,8 +7,6 @@ public class CameraBehaviour : MonoBehaviour {
 
     private GameObject player;
     private Vector3 target;
-    public AudioClip genericAudio;
-    public AudioSource source;
     public Vector3 offset;
 
     Sequence grounding;
@@ -90,7 +88,6 @@ public class CameraBehaviour : MonoBehaviour {
 
     public IEnumerator SmackingTween() {
         yield return new WaitUntil(() => player.GetComponent<PlayerBounce>().DistGround() < 2f);
-        source.PlayOneShot(genericAudio, 1f);
 
         #region Falling Tween
         falling.Insert(3, transform.DOMoveX(target.x, 0f));
