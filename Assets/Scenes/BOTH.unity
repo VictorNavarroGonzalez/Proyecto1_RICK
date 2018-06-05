@@ -3963,6 +3963,11 @@ Prefab:
       propertyPath: offset.z
       value: -28
       objectReference: {fileID: 0}
+    - target: {fileID: 82036289150505930, guid: 6d5b9f1b8ca3b2943951ebac3bd298a5,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 84f72d317e151154d8a0522cf170615b, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6d5b9f1b8ca3b2943951ebac3bd298a5, type: 2}
   m_IsPrefabParent: 0
