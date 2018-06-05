@@ -16,8 +16,8 @@ public class PlayerBounce : MonoBehaviour {
 
     Vector2 playerHeight;
     Vector2 playerPos;
-    Vector2 wallForce = new Vector2(700, 700);
-    Vector2 wallDashForce = new Vector2(900, 750);
+    Vector2 wallForce = new Vector2(14, 12);
+    Vector2 wallDashForce = new Vector2(18, 14);
 
     private bool _canBounce;
     public bool CanBounce { get { return _canBounce; } set { _canBounce = value; } }
@@ -158,13 +158,13 @@ public class PlayerBounce : MonoBehaviour {
                 rb.velocity = new Vector2(0, 0);
                 //If Player is Dashing
                 if (PlayerState.State == PlayerState.MyState.Dashing) {
-                    rb.AddForce(Vector2.up * wallDashForce.y * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.right * wallDashForce.x * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.up * wallDashForce.y, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.right * wallDashForce.x, ForceMode2D.Impulse);
                 }
                 //If not dashing
                 else {
-                    rb.AddForce(Vector2.up * wallForce.y * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.right * wallForce.x * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.up * wallForce.y, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.right * wallForce.x, ForceMode2D.Impulse);
                 }
                 running = false;
             }
@@ -173,13 +173,13 @@ public class PlayerBounce : MonoBehaviour {
                 rb.velocity = new Vector2(0, 0);
                 //If Player is Dashing
                 if (PlayerState.State == PlayerState.MyState.Dashing) {
-                    rb.AddForce(Vector2.up * wallDashForce.y * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.left * wallDashForce.x * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.up * wallDashForce.y, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.left * wallDashForce.x, ForceMode2D.Impulse);
                 }
                 //If not dashing
                 else {
-                    rb.AddForce(Vector2.up * wallForce.y * Time.deltaTime, ForceMode2D.Impulse);
-                    rb.AddForce(Vector2.left * wallForce.x * Time.deltaTime, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.up * wallForce.y, ForceMode2D.Impulse);
+                    rb.AddForce(Vector2.left * wallForce.x, ForceMode2D.Impulse);
                 }
                 running = false;
             }

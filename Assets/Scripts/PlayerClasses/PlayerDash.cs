@@ -33,7 +33,6 @@ public class PlayerDash : MonoBehaviour {
     public void Dash() {
         canDash = false;
         temp = rb.velocity;
-        StartCoroutine(GetComponent<PlayerState>().Stopping(0.1f));
         rb.velocity = new Vector2(rb.velocity.x, 0);
         rb.AddForce(rb.velocity * DashForce * Time.deltaTime, ForceMode2D.Impulse);
         StartCoroutine(Counterdash());
