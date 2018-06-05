@@ -19,7 +19,8 @@ public class ControllerCollider : MonoBehaviour {
         public float elasticConstant;
         public float jumpForce;
 
-        public PlayerState.MyCharacter character;
+        public enum Character { SQUARE, CIRCLE, CURRENT };
+        public Character character;
     }
 
     public Options enter;
@@ -48,8 +49,19 @@ public class ControllerCollider : MonoBehaviour {
             player.GetComponent<PlayerBounce>().K = enter.elasticConstant;
             player.GetComponent<PlayerJump>().JumpForce = enter.jumpForce;
 
-            PlayerState.Character = enter.character;
-            player.GetComponent<PlayerChange>().Actualize();
+            if(enter.character != Options.Character.CURRENT) {
+            
+                if (enter.character == Options.Character.CIRCLE) {
+                    PlayerState.Character = PlayerState.MyCharacter.CIRCLE; 
+                }
+                else if (enter.character == Options.Character.SQUARE) {
+                    PlayerState.Character = PlayerState.MyCharacter.SQUARE;
+                }
+
+                player.GetComponent<PlayerChange>().Actualize();
+            }
+            
+
         }
     }
 
@@ -70,8 +82,17 @@ public class ControllerCollider : MonoBehaviour {
             player.GetComponent<PlayerBounce>().K = exit.elasticConstant;
             player.GetComponent<PlayerJump>().JumpForce = exit.jumpForce;
 
-            PlayerState.Character = exit.character;
-            player.GetComponent<PlayerChange>().Actualize();
+            if (exit.character != Options.Character.CURRENT) {
+
+                if (exit.character == Options.Character.CIRCLE) {
+                    PlayerState.Character = PlayerState.MyCharacter.CIRCLE;
+                }
+                else if (exit.character == Options.Character.SQUARE) {
+                    PlayerState.Character = PlayerState.MyCharacter.SQUARE;
+                }
+
+                player.GetComponent<PlayerChange>().Actualize();
+            }
         }
     }
 }
