@@ -1,11 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class PlayerState : MonoBehaviour {
 
     private GameObject player;
     private bool stop;
+
+    // Audio Clips.
+    private AudioClip jumpSound;
+    private AudioClip dashSound;
+    private AudioClip smackSound;
+    private AudioSource source;
 
     // Particle Systems Prefabs.
     public GameObject dustParticles;
@@ -47,6 +54,12 @@ public class PlayerState : MonoBehaviour {
         StopBounce = false;
         StopWallBounce = false;
 
+        // Set up audio effects for use.
+        source = GetComponent<AudioSource>();
+        jumpSound = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Sounds/Effects/jump_sound.mp3", typeof(AudioClip));
+        dashSound = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Sounds/Effects/dash_sound.mp3", typeof(AudioClip));
+        smackSound = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Sounds/Effects/smack_sound.mp3", typeof(AudioClip));
+
         // Initialize RICK into a Circle
         Character = MyCharacter.CIRCLE;
         GetComponent<PlayerChange>().Actualize();
@@ -85,7 +98,8 @@ public class PlayerState : MonoBehaviour {
                 InputManager.ButtonX = false;
 
                 if (GetComponent<PlayerDash>().CheckDash()) {
-                    GetComponent<PlayerDash>().Dash();                                           //Initializes Rick's dash
+                    GetComponent<PlayerDash>().Dash();
+                    source.PlayOneShot(dashSound, DefaultValues.Volume.Dash);
                     LastState = State;
                     State = MyState.Dashing;
                 }
@@ -144,6 +158,7 @@ public class PlayerState : MonoBehaviour {
             if (GetComponent<PlayerBounce>().CheckBounce()) {
                 if (!StopBounce) {
                     StartCoroutine(GetComponent<PlayerBounce>().NormalBounce());
+                    source.PlayOneShot(jumpSound, DefaultValues.Volume.Bounce);
                     LastState = State;
                     StartCoroutine(ActiveBouncing());
                 }
@@ -153,7 +168,10 @@ public class PlayerState : MonoBehaviour {
             #region Wall Bouncing
             //Checks if the player can bounce in a wall in both sides
             if (GetComponent<PlayerBounce>().CheckWallBounce()) {
-                if(!StopWallBounce) StartCoroutine(GetComponent<PlayerBounce>().WalledBounce());
+                if (!StopWallBounce) {
+                    StartCoroutine(GetComponent<PlayerBounce>().WalledBounce());
+                    source.PlayOneShot(jumpSound, DefaultValues.Volume.Bounce);
+                }
             }
             #endregion        
 
@@ -169,12 +187,14 @@ public class PlayerState : MonoBehaviour {
                        
                         case MyState.Grounding:
                             GetComponent<PlayerJump>().Jump();
+                            source.PlayOneShot(jumpSound, DefaultValues.Volume.Jump);
                             LastState = State;
                             State = MyState.Jumping;
                             break;
 
                         case MyState.Jumping:
                             GetComponent<PlayerJump>().DoubleJump();
+                            source.PlayOneShot(jumpSound, DefaultValues.Volume.Jump);
                             LastState = State;
                             State = MyState.DoubleJumping;
                             break;
@@ -204,6 +224,7 @@ public class PlayerState : MonoBehaviour {
                         case MyState.Grounding:
                         case MyState.Climbing:
                             GetComponent<PlayerJump>().Jump();
+                            source.PlayOneShot(jumpSound, DefaultValues.Volume.Jump);
                             LastState = State;
                             State = MyState.Jumping;
                             break;
@@ -279,6 +300,8 @@ public class PlayerState : MonoBehaviour {
         // Spawn dust particles after falling.
         GameObject dust = Instantiate(dustParticles, transform);
         Destroy(dust, 1);
+
+        source.PlayOneShot(smackSound, DefaultValues.Volume.Smack);
     }
 
     public void LogState() {

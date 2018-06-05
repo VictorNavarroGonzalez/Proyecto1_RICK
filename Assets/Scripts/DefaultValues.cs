@@ -19,6 +19,13 @@ namespace DefaultValues {
         public const float DashForce = 100f;
     }
 
+    public class Volume {
+        public const float Jump = 0.2f;
+        public const float Dash = 0.35f;
+        public const float Smack = 1f;
+        public const float Bounce = 0.2f;
+    }
+
 }
 
 
