@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class PlayerGhost : MonoBehaviour {
 
@@ -23,8 +22,8 @@ public class PlayerGhost : MonoBehaviour {
     void Start() {
         camera = GameObject.Find("Camera");
 
-        circle = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Player/ghost_circle.png", typeof(Sprite));
-        square = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Player/ghost_square.png", typeof(Sprite));
+        circle = Resources.Load<Sprite>("Sprites/Player/ghost_circle");
+        square = Resources.Load<Sprite>("Sprites/Player/ghost_square");
     }
 
     // Kills the ghost if is not visible in camera.

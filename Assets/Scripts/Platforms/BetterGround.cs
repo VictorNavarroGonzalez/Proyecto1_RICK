@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class BetterGround : MonoBehaviour {
 
@@ -17,30 +16,26 @@ public class BetterGround : MonoBehaviour {
 
         // Load the assets from the asset's folder.
         switch (gameObject.tag) {
+            case "Platform":
             case "Ground":
-                white = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Map/white_ground.png", typeof(Sprite));
-                black = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Map/black_ground.png", typeof(Sprite));
+                white = Resources.Load<Sprite>("Sprites/Map/white_ground");
+                black = Resources.Load<Sprite>("Sprites/Map/black_ground");
                 break;
 
             case "Edge":
-                white = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Map/white_edge.png", typeof(Sprite));
-                black = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Map/black_edge.png", typeof(Sprite));
+                white = Resources.Load<Sprite>("Sprites/Map/white_edge");
+                black = Resources.Load<Sprite>("Sprites/Map/black_edge");
                 break;
 
             case "Cliff":
-                white = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Map/white_cliff.png", typeof(Sprite));
-                black = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Map/black_cliff.png", typeof(Sprite));
-                break;
-
-            case "Platform":
-                white = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Map/white_ground.png", typeof(Sprite));
-                black = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Map/black_ground.png", typeof(Sprite));
+                white = Resources.Load<Sprite>("Sprites/Map/white_cliff");
+                black = Resources.Load<Sprite>("Sprites/Map/black_cliff");
                 break;
 
             default:
                 Debug.LogError("Ground type not existing." + gameObject.name);
-                white = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Map/white_ground.png", typeof(Sprite));
-                black = (Sprite)AssetDatabase.LoadAssetAtPath("Assets/Sprites/Map/black_ground.png", typeof(Sprite));
+                white = Resources.Load<Sprite>("Sprites/Map/white_ground");
+                black = Resources.Load<Sprite>("Sprites/Map/black_ground");
                 break;
         }
 

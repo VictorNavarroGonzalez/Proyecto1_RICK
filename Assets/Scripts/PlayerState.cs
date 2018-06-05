@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class PlayerState : MonoBehaviour {
 
@@ -56,9 +55,9 @@ public class PlayerState : MonoBehaviour {
 
         // Set up audio effects for use.
         source = GetComponent<AudioSource>();
-        jumpSound = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Sounds/Effects/jump_sound.mp3", typeof(AudioClip));
-        dashSound = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Sounds/Effects/dash_sound.mp3", typeof(AudioClip));
-        smackSound = (AudioClip)AssetDatabase.LoadAssetAtPath("Assets/Sounds/Effects/smack_sound.mp3", typeof(AudioClip));
+        jumpSound = Resources.Load<AudioClip>("Sounds/Effects/jump_sound");
+        smackSound = Resources.Load<AudioClip>("Sounds/Effects/smack_sound");
+        dashSound = Resources.Load<AudioClip>("Sounds/Effects/dash_sound");
 
         // Initialize RICK into a Circle
         Character = MyCharacter.CIRCLE;
