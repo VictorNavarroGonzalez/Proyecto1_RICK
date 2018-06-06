@@ -9,7 +9,6 @@ public class MusicCollider : MonoBehaviour {
     public float fadeTime;
 
 
-
     void Start() {
         player = GameObject.Find("Player");
         fadeTime = 5;
