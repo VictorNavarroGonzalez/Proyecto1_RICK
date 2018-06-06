@@ -12,9 +12,11 @@ public class MenuManager : MonoBehaviour {
     public GameObject newGameMenu;
     public GameObject rickText;
 
+    public bool initial;
+
     void Start() {
         // To start without the menu.
-        Resume();
+        if(!initial) Resume();
 
         GameObject player = GameObject.Find("Player");
         player.transform.position = Levels.Current;

@@ -33,9 +33,8 @@ namespace DefaultValues {
             set { _current = value; }
         }
 
-        
 
-        public static Vector3 C01 { get { return new Vector3(-40, 1); } }
+        public static Vector3 C01 { get { return new Vector3(-84, -2.75f); } }
         public static Vector3 C02 { get { return new Vector3(782, 204); } }
         public static Vector3 C03 { get { return new Vector3(1030, 324); } }
 
@@ -45,7 +44,7 @@ namespace DefaultValues {
 
         public static Vector3 B01 { get { return new Vector3(-295, -15); } }
         public static Vector3 B02 { get { return new Vector3(47, 20); } }
-        public static Vector3 B03 { get { return new Vector3(184, 107); } }
+        public static Vector3 B03 { get { return new Vector3(171, 107); } }
     }
 
 }
